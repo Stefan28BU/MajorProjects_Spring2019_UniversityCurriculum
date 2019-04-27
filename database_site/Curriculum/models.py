@@ -14,7 +14,6 @@ class Curriculum(models.Model):
     Cur_name = models.CharField(max_length=255, primary_key=True)
     Head_ID = models.ForeignKey(Person, on_delete=models.CASCADE)
     Min_Hours = models.PositiveIntegerField(default=0)
-    Topic_Category = models.CharField(max_length=255)
 
     extensive = 'EX'
     inclusive = 'IN'
@@ -22,6 +21,17 @@ class Curriculum(models.Model):
     basic = 'BC'
     unsatisfactory = 'US'
     substandard = 'SB'
+
+    topicCategories = (
+        (extensive, 'Extensive'),
+        (inclusive, 'Inclusive'),
+        (basicPlus, 'BasicPlus'),
+        (basic, 'Basic'),
+        (unsatisfactory, 'Unsatisfactory'),
+        (substandard, 'Substandard'),
+    )
+
+    Topic_Category = models.CharField(max_length=255, choices=topicCategories, default=basic)
 
     class Meta:
         db_table = 'Curriculum'
@@ -64,9 +74,20 @@ class CourseTopics(models.Model):
 
 
 class CurriculumTopic(models.Model):
+
+    lv1 = 1
+    lv2 = 2
+    lv3 = 3
+
+    levels = (
+        (lv1, 'Level 1'),
+        (lv2, 'Level 2'),
+        (lv3, 'Level 3'),
+    )
+
     Cur_name = models.ForeignKey(Curriculum, on_delete=models.CASCADE)
     ID = models.ForeignKey(CourseTopics, on_delete=models.CASCADE)
-    Level = models.PositiveIntegerField(default=0)
+    Level = models.PositiveIntegerField(choices=levels, default=lv1)
     Subject_Area = models.CharField(max_length=255)
     Units = models.PositiveIntegerField(default=0)
 
@@ -78,8 +99,43 @@ class CurriculumTopic(models.Model):
 
 
 class Grade(models.Model):
+
+    AP = 'A+'
+    A = 'A'
+    AM = 'A-'
+    BP = 'B+'
+    B = 'B'
+    BM = 'B-'
+    CP = 'C+'
+    C = 'C'
+    CM = 'C-'
+    DP = 'D+'
+    D = 'D'
+    DM = 'D-'
+    F = 'F'
+    W = 'W'
+    I = 'I'
+
+    grades = (
+        (AP, 'A+'),
+        (A, 'A'),
+        (AM, 'A-'),
+        (BP, 'B+'),
+        (B, 'B'),
+        (BM, 'B-'),
+        (CP, 'C+'),
+        (C, 'C'),
+        (CM, 'C-'),
+        (DP, 'D+'),
+        (D, 'D'),
+        (DM, 'D-'),
+        (F, 'Fail'),
+        (W, 'Withdraw'),
+        (I, 'Incomplete')
+    )
+
     Grade_Distribution_ID = models.AutoField(primary_key=True)
-    Grade = models.CharField(max_length=255)
+    Grade = models.CharField(max_length=255, choices=grades)
     Person_ID = models.ForeignKey(Person, on_delete=models.CASCADE)
 
     class Meta:
@@ -90,10 +146,22 @@ class Grade(models.Model):
 
 
 class CourseSection(models.Model):
+    spring = 'SP'
+    summer = 'SM'
+    fall = 'FA'
+    winter = 'WI'
+
+    semesters = (
+        (spring, 'Spring semester'),
+        (summer, 'Summer semester'),
+        (fall, 'fall semester'),
+        (winter, 'winter semester')
+    )
+
     Section_ID = models.AutoField(primary_key=True)
     Course_Name = models.ForeignKey(Course, on_delete=models.CASCADE)
     Year = models.PositiveIntegerField(default=0)
-    Semester = models.CharField(max_length=255)
+    Semester = models.CharField(max_length=255, choices=semesters)
     Enrollment = models.CharField(max_length=255)
     Grade_Distribution_ID = models.ForeignKey(Grade, on_delete=models.CASCADE)
     Comment1 = models.CharField(max_length=255)
