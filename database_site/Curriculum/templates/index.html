@@ -20,22 +20,66 @@
         .titleMid {
             text-align: center;
             position: center;
-            padding: 15px 15px 15px 15px;
+            padding: 15px 15px 0 15px;
             border-radius: 3px;
-            background-color: #c7ffd4;
+            background-color: whitesmoke;
         }
 
         body {
-            background: #355C7D; /* fallback for old browsers */
-            background: -webkit-linear-gradient(to right, #C06C84, #6C5B7B, #355C7D); /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to right, #C06C84, #6C5B7B, #355C7D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background: #232526; /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #414345, #232526); /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+        }
+
+        .customNav {
+            background-color: whitesmoke;
         }
 
     </style>
 </head>
 <body>
+
 <div class="titleMid">
     <h4>University Curriculum Management System</h4>
+
+    <div class="customNav">
+        <nav class="navbar navbar-expand-lg navbar-light ">
+            <a class="navbar-brand" href="#">UCMS</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+    </div>
 </div>
 <div class="">
     <button class="btn btn-outline-info" type="button" name="button">click me</button>

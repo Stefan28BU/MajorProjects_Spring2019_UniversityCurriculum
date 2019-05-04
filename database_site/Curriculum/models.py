@@ -69,7 +69,7 @@ class CourseTopics(models.Model):
         db_table = 'CourseTopics'
 
         constraints = [
-            models.UniqueConstraint(fields=['Course_Name', 'Topic_ID'], name='courseTopics_unique')
+            models.UniqueConstraint(fields=['Associated_Course', 'Associated_Topic'], name='courseTopics_unique')
         ]
 
 
@@ -94,7 +94,7 @@ class CurriculumTopic(models.Model):
     class Meta:
         db_table = 'CurriculumTopic'
         constraints = [
-            models.UniqueConstraint(fields=['ID', 'Cur_name'], name='currTopic_unique')
+            models.UniqueConstraint(fields=['Associated_Curriculum', 'Associated_Topic'], name='currTopic_unique')
         ]
 
 
@@ -141,7 +141,7 @@ class Grade(models.Model):
     class Meta:
         db_table = 'Grade'
         constraints = [
-            models.UniqueConstraint(fields=['Grade_Distribution_ID', 'Person_ID'], name='grade_unique')
+            models.UniqueConstraint(fields=['Grade_Distribution_ID', 'Student'], name='grade_unique')
         ]
 
 
@@ -170,7 +170,7 @@ class CourseSection(models.Model):
     class Meta:
         db_table = 'CourseSection'
         constraints = [
-            models.UniqueConstraint(fields=['Section_ID', 'Course_Name', 'Year', 'Semester'],
+            models.UniqueConstraint(fields=['Section_ID', 'Associated_Course', 'Year', 'Semester'],
                                     name='courseSection_unique')
         ]
 
@@ -192,7 +192,7 @@ class CourseGoal(models.Model):
     class Meta:
         db_table = 'CourseGoal'
         constraints = [
-            models.UniqueConstraint(fields=['Goal_ID', 'Course_Name'],
+            models.UniqueConstraint(fields=['Associated_Goal', 'Associated_Course'],
                                     name='courseGoal_unique')
         ]
 
@@ -205,6 +205,6 @@ class CurriculumCourse(models.Model):
     class Meta:
         db_table = 'CurriculumCourse'
         constraints = [
-            models.UniqueConstraint(fields=['Cur_name', 'Course_Name'],
+            models.UniqueConstraint(fields=['Associated_Curriculum', 'Associated_Course'],
                                     name='curriculumCourse_unique')
         ]
