@@ -36,3 +36,31 @@ def add_course_curriculum(curriculum, course, required):
 		return True
 	except IntegrityError:
 		return False
+
+
+def add_topic(name):
+	t = Topic(Name=name)
+	try:
+		t.save()
+		return True
+	except IntegrityError:
+		return False
+
+
+def add_course_topic(course, topic, units):
+	ct = CourseTopics(Associated_Course=course, Associated_Topic=topic, Units=units)
+	try:
+		ct.save()
+		return True
+	except IntegrityError:
+		return False
+
+
+def add_curriculum_topic(curriculum, topic, level, subject, units):
+	ct = CurriculumTopic(Associated_Curriculum=curriculum, Associated_Topic=topic, Level=level,
+	                     Subject_Area=subject, Units=units)
+	try:
+		ct.save()
+		return True
+	except IntegrityError:
+		return False
