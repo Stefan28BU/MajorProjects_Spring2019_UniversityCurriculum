@@ -10,8 +10,8 @@ def add_person(person_name):
 		return False
 
 
-def add_curriculum(cur_name, head_id, min_hours):
-	c = Curriculum(Cur_name=cur_name, Head_ID=head_id, Min_Hours=min_hours)
+def add_curriculum(cur_name, head, min_hours):
+	c = Curriculum(Cur_name=cur_name, Head=head, Min_Hours=min_hours)
 	try:
 		c.save()
 		return True
@@ -30,7 +30,7 @@ def add_course(subject_code, course_number, course_name, credit_hours, descripti
 
 
 def add_course_curriculum(curriculum, course, required):
-	cc = CurriculumCourse(Required=required, Cur_name=curriculum, Course_Num=course)
+	cc = CurriculumCourse(Required=required, Associated_Curriculum=curriculum, Associated_Course=course)
 	try:
 		cc.save()
 		return True
@@ -61,6 +61,15 @@ def add_curriculum_topic(curriculum, topic, level, subject, units):
 	                     Subject_Area=subject, Units=units)
 	try:
 		ct.save()
+		return True
+	except IntegrityError:
+		return False
+
+
+def add_grade_to_course_section(course_section, grade):
+	grade = Grade(Letter_Grade=grade, Associated_Course_Section=course_section)
+	try:
+		grade.save()
 		return True
 	except IntegrityError:
 		return False
