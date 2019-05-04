@@ -12,7 +12,7 @@ class Person(models.Model):
 class Curriculum(models.Model):
 
     Cur_name = models.CharField(max_length=255, primary_key=True)
-    Head_ID = models.ForeignKey(Person, on_delete=models.CASCADE)
+    Head = models.ForeignKey(Person, on_delete=models.CASCADE)
     Min_Hours = models.PositiveIntegerField(default=0)
 
     extensive = 'EX'
@@ -61,8 +61,8 @@ class Topic(models.Model):
 
 
 class CourseTopics(models.Model):
-    Course_Name = models.ForeignKey(Course, on_delete=models.CASCADE)
-    Topic_ID = models.ForeignKey(Topic, on_delete=models.CASCADE)
+    Associated_Course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    Associated_Topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
     Units = models.PositiveIntegerField(default=0)
 
     class Meta:
@@ -85,8 +85,8 @@ class CurriculumTopic(models.Model):
         (lv3, 'Level 3'),
     )
 
-    Cur_name = models.ForeignKey(Curriculum, on_delete=models.CASCADE)
-    ID = models.ForeignKey(CourseTopics, on_delete=models.CASCADE)
+    Associated_Curriculum = models.ForeignKey(Curriculum, on_delete=models.CASCADE)
+    Associated_Topic = models.ForeignKey(CourseTopics, on_delete=models.CASCADE)
     Level = models.PositiveIntegerField(choices=levels, default=lv1)
     Subject_Area = models.CharField(max_length=255)
     Units = models.PositiveIntegerField(default=0)
@@ -136,7 +136,7 @@ class Grade(models.Model):
 
     Grade_Distribution_ID = models.AutoField(primary_key=True)
     Grade = models.CharField(max_length=255, choices=grades)
-    Person_ID = models.ForeignKey(Person, on_delete=models.CASCADE)
+    Student = models.ForeignKey(Person, on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'Grade'
@@ -159,11 +159,11 @@ class CourseSection(models.Model):
     )
 
     Section_ID = models.AutoField(primary_key=True)
-    Course_Name = models.ForeignKey(Course, on_delete=models.CASCADE)
+    Associated_Course = models.ForeignKey(Course, on_delete=models.CASCADE)
     Year = models.PositiveIntegerField(default=0)
     Semester = models.CharField(max_length=255, choices=semesters)
     Enrollment = models.CharField(max_length=255)
-    Grade_Distribution_ID = models.ForeignKey(Grade, on_delete=models.CASCADE)
+    Associated_Grade_Distribution = models.ForeignKey(Grade, on_delete=models.CASCADE)
     Comment1 = models.CharField(max_length=255)
     Comment2 = models.CharField(max_length=255)
 
@@ -177,17 +177,17 @@ class CourseSection(models.Model):
 
 class Goal(models.Model):
     ID = models.AutoField(primary_key=True)
-    Cur_Name = models.ForeignKey(Curriculum, on_delete=models.CASCADE)
+    Associated_Curriculum = models.ForeignKey(Curriculum, on_delete=models.CASCADE)
     Description = models.CharField(max_length=255)
-    Grade_Dist_ID = models.ForeignKey(Grade, on_delete=models.CASCADE)
+    Associated_Grade_Dist = models.ForeignKey(Grade, on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'Goal'
 
 
 class CourseGoal(models.Model):
-    Goal_ID = models.ForeignKey(Goal, on_delete=models.CASCADE)
-    Course_Name = models.ForeignKey(Course, on_delete=models.CASCADE)
+    Associated_Goal = models.ForeignKey(Goal, on_delete=models.CASCADE)
+    Associated_Course = models.ForeignKey(Course, on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'CourseGoal'
@@ -198,8 +198,8 @@ class CourseGoal(models.Model):
 
 
 class CurriculumCourse(models.Model):
-    Cur_name = models.ForeignKey(Curriculum, on_delete=models.CASCADE)
-    Course_Name = models.ForeignKey(Course, on_delete=models.CASCADE)
+    Associated_Curriculum = models.ForeignKey(Curriculum, on_delete=models.CASCADE)
+    Associated_Course = models.ForeignKey(Course, on_delete=models.CASCADE)
     Required = models.BooleanField()
 
     class Meta:
