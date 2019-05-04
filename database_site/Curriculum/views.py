@@ -6,7 +6,7 @@ from .models import *
 
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
+    return render(request=request, template_name="index.html")
 
 
 def dashboard(request):

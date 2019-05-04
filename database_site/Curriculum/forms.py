@@ -7,3 +7,4 @@ class CurriculumForm:
         model = Curriculum
         fields = "__all__"
 
+
