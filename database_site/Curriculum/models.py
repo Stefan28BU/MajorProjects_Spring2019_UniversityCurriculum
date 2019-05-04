@@ -208,4 +208,3 @@ class CurriculumCourse(models.Model):
             models.UniqueConstraint(fields=['Cur_name', 'Course_Name'],
                                     name='curriculumCourse_unique')
         ]
-
