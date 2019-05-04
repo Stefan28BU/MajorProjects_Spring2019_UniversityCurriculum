@@ -136,13 +136,10 @@ class Grade(models.Model):
 
     Grade_Distribution_ID = models.AutoField(primary_key=True)
     Grade = models.CharField(max_length=255, choices=grades)
-    Student = models.ForeignKey(Person, on_delete=models.CASCADE)
+    Association_ID = models.PositiveIntegerField(default=0)
 
     class Meta:
         db_table = 'Grade'
-        constraints = [
-            models.UniqueConstraint(fields=['Grade_Distribution_ID', 'Student'], name='grade_unique')
-        ]
 
 
 class CourseSection(models.Model):
