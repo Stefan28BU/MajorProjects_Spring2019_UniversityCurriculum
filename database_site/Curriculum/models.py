@@ -196,3 +196,16 @@ class CourseGoal(models.Model):
                                     name='courseGoal_unique')
         ]
 
+
+class CurriculumCourse(models.Model):
+    Cur_name = models.ForeignKey(Curriculum, on_delete=models.CASCADE)
+    Course_Name = models.ForeignKey(Course, on_delete=models.CASCADE)
+    Required = models.BooleanField()
+
+    class Meta:
+        db_table = 'CurriculumCourse'
+        constraints = [
+            models.UniqueConstraint(fields=['Cur_name', 'Course_Name'],
+                                    name='curriculumCourse_unique')
+        ]
+
