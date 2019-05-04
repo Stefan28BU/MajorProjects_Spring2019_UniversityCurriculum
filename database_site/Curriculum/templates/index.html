@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Curriculum System</title>
-    <link rel="stylesheet" href="style/style.scss" media="screen"/>
+
+    {% load static %}
+    <link rel="stylesheet" , href="{% static 'styles/style.scss' %}">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -21,11 +23,11 @@
             text-align: center;
             position: center;
             padding: 15px 15px 0 15px;
-            border-radius: 3px;
             background-color: whitesmoke;
         }
 
         body {
+            text-align: center;
             background: #232526; /* fallback for old browsers */
             background: -webkit-linear-gradient(to right, #414345, #232526); /* Chrome 10-25, Safari 5.1-6 */
             background: linear-gradient(to right, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -36,6 +38,17 @@
             background-color: whitesmoke;
         }
 
+        .myModal {
+            margin-top: 100px;
+            width: 50%;
+            display: inline-block;
+        }
+
+        .mybtn1 {
+            padding: 10px 60px 10px 60px;
+            margin: 10px 10px 10px 10px;
+            width: 400px;
+        }
     </style>
 </head>
 <body>
@@ -57,7 +70,7 @@
                         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                        <a class="nav-link" href="#">All Curriculums</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -81,8 +94,15 @@
         </nav>
     </div>
 </div>
-<div class="">
-    <button class="btn btn-outline-info" type="button" name="button">click me</button>
+<div class="myModal">
+    <button class="btn btn-outline-light mybtn1" type="button" name="button">New Curriculum</button>
+    <button class="btn btn-outline-light mybtn1" type="button" name="button">New Course</button>
+    <button class="btn btn-outline-light mybtn1" type="button" name="button">New Section</button>
+
+    <button class="btn btn-outline-light mybtn1" type="button" name="button">New Topic</button>
+    <button class="btn btn-outline-light mybtn1" type="button" name="button">New Goal</button>
+
 </div>
+
 </body>
 </html>

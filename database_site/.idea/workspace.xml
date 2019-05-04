@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="39b86957-530d-4e0f-9df0-5c492219cd0d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Curriculum/migrations/0005_auto_20190504_1411.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Curriculum/migrations/0006_auto_20190504_1600.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Curriculum/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Curriculum/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Curriculum/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Curriculum/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Curriculum/templates/style/style.scss" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,10 +20,15 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/database_site/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="20">
+            <state relative-caret-position="-410">
               <caret line="78" column="16" selection-start-line="78" selection-start-column="16" selection-end-line="78" selection-end-column="16" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Curriculum/static/styles/style.scss">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -52,11 +55,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Curriculum/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
-              <caret line="143" column="28" lean-forward="true" selection-start-line="143" selection-start-column="28" selection-end-line="143" selection-end-column="28" />
+            <state relative-caret-position="-363">
+              <caret line="167" column="38" lean-forward="true" selection-start-line="167" selection-start-column="38" selection-end-line="167" selection-end-column="38" />
             </state>
           </provider>
         </entry>
@@ -85,20 +88,22 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Curriculum/templates/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+            <state relative-caret-position="153">
+              <caret line="45" lean-forward="true" selection-start-line="45" selection-end-line="45" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Curriculum/templates/style/style.scss">
+        <entry file="file://$PROJECT_DIR$/Curriculum/dbPages/addInfo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret selection-end-line="4" selection-end-column="1" />
+            <state relative-caret-position="-260">
+              <folding>
+                <element signature="e#0#45#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -110,6 +115,8 @@
       <list>
         <option value="Python Script" />
         <option value="HTML File" />
+        <option value="CSS File" />
+        <option value="Sass File" />
         <option value="SCSS File" />
       </list>
     </option>
@@ -117,6 +124,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>home</find>
+      <find>grade</find>
       <find>disab</find>
     </findStrings>
   </component>
@@ -133,8 +141,11 @@
         <option value="$PROJECT_DIR$/Curriculum/urls.py" />
         <option value="$PROJECT_DIR$/Curriculum/views.py" />
         <option value="$PROJECT_DIR$/Curriculum/templates/style/style.scss" />
-        <option value="$PROJECT_DIR$/Curriculum/templates/index.html" />
         <option value="$PROJECT_DIR$/Curriculum/models.py" />
+        <option value="$PROJECT_DIR$/Curriculum/static/styles/style.css" />
+        <option value="$PROJECT_DIR$/Curriculum/static/styles/style.sass" />
+        <option value="$PROJECT_DIR$/Curriculum/static/styles/style.scss" />
+        <option value="$PROJECT_DIR$/Curriculum/templates/index.html" />
       </list>
     </option>
   </component>
@@ -166,14 +177,32 @@
               <item name="database_site" type="b2602c69:ProjectViewProjectNode" />
               <item name="database_site" type="462c0819:PsiDirectoryNode" />
               <item name="Curriculum" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="dbPages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="database_site" type="b2602c69:ProjectViewProjectNode" />
+              <item name="database_site" type="462c0819:PsiDirectoryNode" />
+              <item name="Curriculum" type="462c0819:PsiDirectoryNode" />
+              <item name="migrations" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="database_site" type="b2602c69:ProjectViewProjectNode" />
+              <item name="database_site" type="462c0819:PsiDirectoryNode" />
+              <item name="Curriculum" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="database_site" type="b2602c69:ProjectViewProjectNode" />
+              <item name="database_site" type="462c0819:PsiDirectoryNode" />
+              <item name="Curriculum" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="styles" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="database_site" type="b2602c69:ProjectViewProjectNode" />
               <item name="database_site" type="462c0819:PsiDirectoryNode" />
               <item name="Curriculum" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="style" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="database_site" type="b2602c69:ProjectViewProjectNode" />
@@ -253,17 +282,17 @@
       <updated>1555190477147</updated>
       <workItem from="1555190480663" duration="271000" />
       <workItem from="1555191629154" duration="6706000" />
-      <workItem from="1555206887272" duration="23582000" />
+      <workItem from="1555206887272" duration="26583000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30559000" />
+    <option name="totallyTimeSpent" value="33560000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25767368" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25767368" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -277,7 +306,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.38767123" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.38767123" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -345,13 +374,6 @@
     <entry file="file://$PROJECT_DIR$/Curriculum/migrations/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/database_site/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="78" column="16" selection-start-line="78" selection-start-column="16" selection-end-line="78" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Curriculum/migrations/0004_auto_20190427_2258.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
@@ -414,17 +436,46 @@
         <state relative-caret-position="-453" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Curriculum/templates/index.html">
+    <entry file="file://$PROJECT_DIR$/Curriculum/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+        <state relative-caret-position="-363">
+          <caret line="167" column="38" lean-forward="true" selection-start-line="167" selection-start-column="38" selection-end-line="167" selection-end-column="38" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Curriculum/models.py">
+    <entry file="file://$PROJECT_DIR$/Curriculum/dbPages/addInfo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="143" column="28" lean-forward="true" selection-start-line="143" selection-start-column="28" selection-end-line="143" selection-end-column="28" />
+        <state relative-caret-position="-260">
+          <folding>
+            <element signature="e#0#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Curriculum/static/styles/style.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Curriculum/static/styles/style.sass">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="55" lean-forward="true" selection-start-line="9" selection-start-column="55" selection-end-line="9" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database_site/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-410">
+          <caret line="78" column="16" selection-start-line="78" selection-start-column="16" selection-end-line="78" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Curriculum/static/styles/style.scss">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Curriculum/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="45" lean-forward="true" selection-start-line="45" selection-end-line="45" />
         </state>
       </provider>
     </entry>
