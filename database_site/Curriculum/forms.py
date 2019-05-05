@@ -1,6 +1,6 @@
 from django import forms
 
-from Curriculum.models import *
+from .models import *
 
 from django import forms
 
@@ -20,6 +20,11 @@ class headForm(forms.ModelForm):
 
 
 class newCurriculumForm(forms.ModelForm):
+    pTupleArray = []
+    for p in Person.objects.all():
+        pTupleArray.append((p, p.Name + ' ' + str(p.ID)))
+    pChoices = tuple(pTupleArray)
+
     extensive = 'EX'
     inclusive = 'IN'
     basicPlus = 'BP'
@@ -36,15 +41,14 @@ class newCurriculumForm(forms.ModelForm):
         (substandard, 'Substandard'),
     )
 
-    tpc = forms.ChoiceField(choices=topicCategories, label='Topic Category')
+    leader = forms.ChoiceField(choices=pChoices, label='Curriculum Head')
 
     class Meta:
         model = Curriculum
 
-        fields = ['tpc', 'Cur_name', 'Head', 'Min_Hours']
+        fields = ['Cur_name', 'Head', 'Min_Hours']
 
         labels = {
-            'tpc': 'Topic Category',
             'Cur_name': 'Curriculum Name',
             'Head': 'Your ID',
             'Min_Hours': 'Minimum Hours'

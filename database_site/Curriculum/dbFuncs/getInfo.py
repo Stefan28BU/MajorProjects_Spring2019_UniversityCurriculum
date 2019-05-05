@@ -12,4 +12,3 @@ def get_curricula_heads():
 def get_courses_in_curricula(cur_name):
 	course_names = CurriculumCourse.objects.filter(Cur_name=cur_name)
 	return Course.objects.filter(Course_Name__in=course_names)
-
