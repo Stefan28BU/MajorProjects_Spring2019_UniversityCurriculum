@@ -124,4 +124,3 @@ class newTopicForm(forms.ModelForm):
         widgets = {
             'Name': forms.TextInput(attrs={'class': 'form-control'}),
         }
->>>>>>> 46d315f9b0d75ece99c303428675ef870cb2820b
