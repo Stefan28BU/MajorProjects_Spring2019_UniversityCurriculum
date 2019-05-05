@@ -12,10 +12,6 @@ class Person(models.Model):
 	    db_table = 'Person'
 
 
-
-
-
-
 class Curriculum(models.Model):
     Cur_name = models.CharField(max_length=255, primary_key=True)
     Head = models.ForeignKey(Person, on_delete=models.CASCADE)
@@ -71,7 +67,6 @@ class Topic(models.Model):
 class CourseTopics(models.Model):
     Associated_Course = models.ForeignKey(Course, on_delete=models.CASCADE)
     Associated_Topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
-    Units = models.PositiveIntegerField(default=0)
 
     class Meta:
         db_table = 'CourseTopics'
@@ -209,4 +204,19 @@ class CurriculumCourse(models.Model):
         constraints = [
             models.UniqueConstraint(fields=['Associated_Curriculum', 'Associated_Course'],
                                     name='curriculumCourse_unique')
+        ]
+
+
+# Curriculum Course Topic
+class CurriculumCT(models.Model):
+    Associated_Curriculum = models.ForeignKey(Curriculum, on_delete=models.CASCADE)
+    Associated_CT = models.ForeignKey(CourseTopics, on_delete=models.CASCADE)
+    Units = models.PositiveIntegerField(default=0)
+
+
+    class Meta:
+        db_table = 'CurriculumCT'
+        constraints = [
+            models.UniqueConstraint(fields=['Associated_Curriculum', 'Associated_CT'],
+                                    name='CCT_Unique')
         ]
