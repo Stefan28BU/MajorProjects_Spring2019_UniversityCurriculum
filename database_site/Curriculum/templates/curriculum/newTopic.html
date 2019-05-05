@@ -69,18 +69,16 @@
         </div>
     </div>
     <div class="myModal formCustom">
-        <form>
-            <h4 class="title">New Topic</h4>
+        <form method="post">
+            {% csrf_token %}
+            <h4 class="title">Create New Topic</h4>
             <div class="form-group">
-                <label>Topic Name</label>
-                <input class="form-control" placeholder="Enter name of topic">
+                {{ form.as_p }}
             </div>
-
-
             <button type="submit" class="btn btn-outline-light mybtn2">Confirm</button>
         </form>
-
     </div>
+
 
 </section>
 

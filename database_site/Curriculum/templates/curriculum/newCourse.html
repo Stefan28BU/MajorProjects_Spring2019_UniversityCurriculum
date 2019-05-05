@@ -69,34 +69,14 @@
         </div>
     </div>
     <div class="myModal formCustom">
-        <form>
-            <h4 class="title">New Course</h4>
+        <form method="post">
+            {% csrf_token %}
+            <h4 class="title">Create New Goal</h4>
             <div class="form-group">
-                <label>Subject Code</label>
-                <input class="form-control" placeholder="Enter subject code">
+                {{ form.as_p }}
             </div>
-            <div class="form-group">
-                <label>Course Number</label>
-                <input class="form-control" placeholder="Enter course number">
-            </div>
-            <div class="form-group">
-                <label>Course Name</label>
-                <input class="form-control" placeholder="Enter course name">
-            </div>
-
-            <div class="form-group">
-                <label>Credit</label>
-                <input class="form-control" placeholder="Enter number of hours">
-            </div>
-
-            <div class="form-group">
-                <label>Description</label>
-                <input class="form-control" placeholder="Enter description of course">
-            </div>
-
             <button type="submit" class="btn btn-outline-light mybtn2">Confirm</button>
         </form>
-
     </div>
 
 </section>

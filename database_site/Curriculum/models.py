@@ -36,8 +36,10 @@ class Curriculum(models.Model):
         (unsatisfactory, 'Unsatisfactory'),
         (substandard, 'Substandard'),
     )
-
     Topic_Category = models.CharField(max_length=255, choices=topicCategories, default=basic)
+
+    def __str__(self):
+        return self.Cur_name
 
     class Meta:
         db_table = 'Curriculum'
