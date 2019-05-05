@@ -56,3 +56,47 @@ def dashboard(request):
     curricula = Curriculum.objects.order_by('-Cur_name')[:5]
     output = ', '.join([c.Cur_name for c in curricula])
     return HttpResponse(output)
+
+
+def editPerson(request):
+    if request.method == 'POST':
+        form = editPersonForm(request.POST)
+
+        if form.is_valid():
+            temp = Person.objects.get(ID=form['curr'].value())
+
+            temp.Name = form['name'].value()
+            temp.save()
+
+            print("person ", temp.Name)
+
+        else:
+            print('Invalid')
+            return HttpResponseRedirect('/Curriculum')
+    else:
+        form = editPersonForm()
+
+    return render(request=request, template_name="Edit/editPerson.html", context={"form": form})
+
+
+def editCurriculum(request):
+    if request.method == 'POST':
+        form = editCurriculumFrom(request.POST)
+
+        if form.is_valid():
+            temp = Curriculum.objects.get(Cur_name=form['curr'].value())
+            tempPerson = Person.objects.get(ID=form['newHead'].value())
+
+            temp.Head = tempPerson
+            temp.Min_Hours = form['newHours'].value()
+
+            temp.save()
+
+
+        else:
+            print('Invalid')
+            return HttpResponseRedirect('/Curriculum')
+    else:
+        form = editCurriculumFrom()
+
+    return render(request=request, template_name="Edit/editCurriculum.html", context={"form": form})
