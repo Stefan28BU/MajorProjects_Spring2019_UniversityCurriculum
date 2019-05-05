@@ -182,6 +182,8 @@ class Grade(models.Model):
     Letter_Grade = models.CharField(max_length=255, choices=grades)
     Associated_Course_Section = models.ForeignKey(CourseSection, on_delete=models.CASCADE, null=True)
     Associated_Goal = models.ForeignKey(Goal, on_delete=models.CASCADE, null=True)
+    dist_number = models.IntegerField(default=0)
+
 
     class Meta:
         db_table = 'Grade'

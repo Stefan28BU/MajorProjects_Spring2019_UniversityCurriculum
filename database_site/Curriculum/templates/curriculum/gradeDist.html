@@ -1,12 +1,7 @@
-{% load static %}
-
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Curriculum System</title>
-
+    {% load static %}
     <link rel="stylesheet" href="{% static 'styles/style.css' %}">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -21,8 +16,12 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
 
+    <meta charset="UTF-8">
+
+    <title>Grade Distribution</title>
 </head>
 <body>
+
 
 <section class="wrapper">
     <div class="titleMid">
@@ -57,7 +56,7 @@
                                 <a class="dropdown-item" href="/Curriculum">Section</a>
                                 <a class="dropdown-item" href="/Curriculum">Goal</a>
                                 <a class="dropdown-item" href="/Curriculum">Topic</a>
-                                <a class="dropdown-item" href="/Curriculum/gradeDist">Grade</a>
+                                <a class="dropdown-item" href="/Curriculum">Grade</a>
 
 
                                 <div class="dropdown-divider"></div>
@@ -69,28 +68,15 @@
             </nav>
         </div>
     </div>
-    <div class="myModal">
-        <a href="/Curriculum/departmentHead">
-            <button class="btn btn-outline-light mybtn1" type="button" name="button">Create Department Head</button>
-        </a>
-
-        <a href="/Curriculum/newCurriculum">
-            <button class="btn btn-outline-light mybtn1" type="button" name="button">New Curriculum</button>
-        </a>
-
-        <a href="/Curriculum/newCourse">
-            <button class="btn btn-outline-light mybtn1" type="button" name="button">New Course</button>
-        </a>
-
-        <a href="/Curriculum/newTopic">
-
-            <button class="btn btn-outline-light mybtn1" type="button" name="button">New Topic</button>
-        </a>
-        <a href="/Curriculum/newGoal">
-
-            <button class="btn btn-outline-light mybtn1" type="button" name="button">New Goal</button>
-        </a>
-
+    <div class="myModal formCustom">
+        <form method="post">
+            {% csrf_token %}
+            <h4 class="title">Enter Grade Distribution</h4>
+            <div class="form-group">
+                {{ form.as_p }}
+            </div>
+            <button type="submit" class="btn btn-outline-light mybtn2">Confirm</button>
+        </form>
     </div>
 
 </section>
