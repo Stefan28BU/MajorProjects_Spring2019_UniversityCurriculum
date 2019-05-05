@@ -45,12 +45,51 @@ def newHead(request):
 
 
 def newCourse(request):
-    return render(request=request, template_name="curriculum/newCourse.html")
+    if request.method == 'POST':
+        form = newCourseForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+
+        else:
+            print('Invalid')
+            return HttpResponseRedirect('/Curriculum')
+    else:
+        form = newCourseForm()
+
+    return render(request=request, template_name="curriculum/newCourse.html", context={"form": form})
 
 
 def newTopic(request):
-    return render(request=request, template_name="curriculum/newTopic.html")
+    if request.method == 'POST':
+        form = newTopicForm(request.POST)
 
+        if form.is_valid():
+            form.save()
+
+        else:
+            print('Invalid')
+            return HttpResponseRedirect('/Curriculum')
+    else:
+        form = newTopicForm()
+
+    return render(request=request, template_name="curriculum/newTopic.html", context={"form": form})
+
+
+def newGoal(request):
+    if request.method == 'POST':
+        form = newGoalForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+
+        else:
+            print('Invalid')
+            return HttpResponseRedirect('/Curriculum')
+    else:
+        form = newGoalForm()
+
+    return render(request=request, template_name="curriculum/newGoal.html", context={"form": form})
 
 def dashboard(request):
     curricula = Curriculum.objects.order_by('-Cur_name')[:5]

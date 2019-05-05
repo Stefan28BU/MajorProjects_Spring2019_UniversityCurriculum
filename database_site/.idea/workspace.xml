@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="39b86957-530d-4e0f-9df0-5c492219cd0d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Curriculum/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/Curriculum/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Curriculum/templates/curriculum/newCurriculum.html" beforeDir="false" afterPath="$PROJECT_DIR$/Curriculum/templates/curriculum/newCurriculum.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Curriculum/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Curriculum/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Curriculum/templates/curriculum/newCourse.html" beforeDir="false" afterPath="$PROJECT_DIR$/Curriculum/templates/curriculum/newCourse.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Curriculum/templates/curriculum/newGoal.html" beforeDir="false" afterPath="$PROJECT_DIR$/Curriculum/templates/curriculum/newGoal.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Curriculum/templates/curriculum/newTopic.html" beforeDir="false" afterPath="$PROJECT_DIR$/Curriculum/templates/curriculum/newTopic.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Curriculum/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Curriculum/templates/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Curriculum/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Curriculum/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Curriculum/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Curriculum/views.py" afterDir="false" />
@@ -24,7 +26,7 @@
         <entry file="file://$PROJECT_DIR$/Curriculum/urls.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="195">
-              <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -45,7 +47,7 @@
         <entry file="file://$PROJECT_DIR$/Curriculum/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="303">
-              <caret line="101" column="28" selection-start-line="101" selection-start-column="28" selection-end-line="101" selection-end-column="28" />
+              <caret line="140" column="28" selection-start-line="140" selection-start-column="28" selection-end-line="140" selection-end-column="28" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -56,8 +58,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Curriculum/templates/curriculum/newTopic.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1125">
-              <caret line="75" column="46" selection-start-line="75" selection-start-column="46" selection-end-line="75" selection-end-column="46" />
+            <state relative-caret-position="1140">
+              <caret line="76" column="18" selection-start-line="76" selection-start-column="18" selection-end-line="76" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -110,8 +112,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Curriculum/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="163">
-              <caret line="69" lean-forward="true" selection-start-line="69" selection-end-line="69" />
+            <state relative-caret-position="-160">
+              <caret line="84" column="19" lean-forward="true" selection-start-line="84" selection-start-column="19" selection-end-line="84" selection-end-column="19" />
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
               </folding>
@@ -322,7 +324,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56983000" />
+    <option name="totallyTimeSpent" value="57629000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -335,6 +337,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25767368" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -350,7 +353,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.46575344" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.22054794" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32876712" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -487,8 +490,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Curriculum/templates/curriculum/newTopic.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1125">
-          <caret line="75" column="46" selection-start-line="75" selection-start-column="46" selection-end-line="75" selection-end-column="46" />
+        <state relative-caret-position="1140">
+          <caret line="76" column="18" selection-start-line="76" selection-start-column="18" selection-end-line="76" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -530,7 +533,7 @@
     <entry file="file://$PROJECT_DIR$/Curriculum/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
-          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
@@ -540,7 +543,7 @@
     <entry file="file://$PROJECT_DIR$/Curriculum/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="303">
-          <caret line="101" column="28" selection-start-line="101" selection-start-column="28" selection-end-line="101" selection-end-column="28" />
+          <caret line="140" column="28" selection-start-line="140" selection-start-column="28" selection-end-line="140" selection-end-column="28" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
@@ -556,8 +559,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Curriculum/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="69" lean-forward="true" selection-start-line="69" selection-end-line="69" />
+        <state relative-caret-position="-160">
+          <caret line="84" column="19" lean-forward="true" selection-start-line="84" selection-start-column="19" selection-end-line="84" selection-end-column="19" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
           </folding>
