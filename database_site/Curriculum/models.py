@@ -10,7 +10,6 @@ class Person(models.Model):
 
 
 class Curriculum(models.Model):
-
     Cur_name = models.CharField(max_length=255, primary_key=True)
     Head = models.ForeignKey(Person, on_delete=models.CASCADE)
     Min_Hours = models.PositiveIntegerField(default=0)
@@ -74,7 +73,6 @@ class CourseTopics(models.Model):
 
 
 class CurriculumTopic(models.Model):
-
     lv1 = 1
     lv2 = 2
     lv3 = 3
@@ -127,7 +125,6 @@ class CourseSection(models.Model):
         ]
 
 
-
 class Goal(models.Model):
     ID = models.AutoField(primary_key=True)
     Associated_Curriculum = models.ForeignKey(Curriculum, on_delete=models.CASCADE)
@@ -138,47 +135,47 @@ class Goal(models.Model):
 
 
 class Grade(models.Model):
-	AP = 'A+'
-	A = 'A'
-	AM = 'A-'
-	BP = 'B+'
-	B = 'B'
-	BM = 'B-'
-	CP = 'C+'
-	C = 'C'
-	CM = 'C-'
-	DP = 'D+'
-	D = 'D'
-	DM = 'D-'
-	F = 'F'
-	W = 'W'
-	I = 'I'
+    AP = 'A+'
+    A = 'A'
+    AM = 'A-'
+    BP = 'B+'
+    B = 'B'
+    BM = 'B-'
+    CP = 'C+'
+    C = 'C'
+    CM = 'C-'
+    DP = 'D+'
+    D = 'D'
+    DM = 'D-'
+    F = 'F'
+    W = 'W'
+    I = 'I'
 
-	grades = (
-		(AP, 'A+'),
-		(A, 'A'),
-		(AM, 'A-'),
-		(BP, 'B+'),
-		(B, 'B'),
-		(BM, 'B-'),
-		(CP, 'C+'),
-		(C, 'C'),
-		(CM, 'C-'),
-		(DP, 'D+'),
-		(D, 'D'),
-		(DM, 'D-'),
-		(F, 'Fail'),
-		(W, 'Withdraw'),
-		(I, 'Incomplete')
-	)
+    grades = (
+        (AP, 'A+'),
+        (A, 'A'),
+        (AM, 'A-'),
+        (BP, 'B+'),
+        (B, 'B'),
+        (BM, 'B-'),
+        (CP, 'C+'),
+        (C, 'C'),
+        (CM, 'C-'),
+        (DP, 'D+'),
+        (D, 'D'),
+        (DM, 'D-'),
+        (F, 'Fail'),
+        (W, 'Withdraw'),
+        (I, 'Incomplete')
+    )
 
-	Grade_Distribution_ID = models.AutoField(primary_key=True)
-	Letter_Grade = models.CharField(max_length=255, choices=grades)
-	Associated_Course_Section = models.ForeignKey(CourseSection, on_delete=models.CASCADE, null=True)
-	Associated_Goal = models.ForeignKey(Goal, on_delete=models.CASCADE, null=True)
+    Grade_Distribution_ID = models.AutoField(primary_key=True)
+    Letter_Grade = models.CharField(max_length=255, choices=grades)
+    Associated_Course_Section = models.ForeignKey(CourseSection, on_delete=models.CASCADE, null=True)
+    Associated_Goal = models.ForeignKey(Goal, on_delete=models.CASCADE, null=True)
 
-	class Meta:
-		db_table = 'Grade'
+    class Meta:
+        db_table = 'Grade'
 
 
 class CourseGoal(models.Model):
