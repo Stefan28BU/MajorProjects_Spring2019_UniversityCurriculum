@@ -22,40 +22,22 @@ class headForm(forms.ModelForm):
 class newCurriculumForm(forms.ModelForm):
     pTupleArray = []
     for p in Person.objects.all():
-        pTupleArray.append((p, p.Name + ' ' + str(p.ID)))
+        pTupleArray.append((p.ID, p.Name + ' ' + str(p.ID)))
     pChoices = tuple(pTupleArray)
 
-    extensive = 'EX'
-    inclusive = 'IN'
-    basicPlus = 'BP'
-    basic = 'BC'
-    unsatisfactory = 'US'
-    substandard = 'SB'
-
-    topicCategories = (
-        (extensive, 'Extensive'),
-        (inclusive, 'Inclusive'),
-        (basicPlus, 'BasicPlus'),
-        (basic, 'Basic'),
-        (unsatisfactory, 'Unsatisfactory'),
-        (substandard, 'Substandard'),
-    )
-
-    leader = forms.ChoiceField(choices=pChoices, label='Curriculum Head')
-
     class Meta:
+
         model = Curriculum
 
-        fields = ['Cur_name', 'Head', 'Min_Hours']
+        fields = ['Head', 'Cur_name', 'Min_Hours']
 
         labels = {
             'Cur_name': 'Curriculum Name',
-            'Head': 'Your ID',
-            'Min_Hours': 'Minimum Hours'
+            'Min_Hours': 'Minimum Hours',
+            'Head': 'Curriculum Head'
         }
 
         widgets = {
             'Cur_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'Head': forms.TextInput(attrs={'class': 'form-control'}),
             'Min_Hours': forms.TextInput(attrs={'class': 'form-control'}),
         }

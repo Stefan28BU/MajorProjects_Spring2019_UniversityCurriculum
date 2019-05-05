@@ -5,8 +5,15 @@ class Person(models.Model):
     ID = models.AutoField(primary_key=True)
     Name = models.CharField(max_length=255)
 
+    def __str__(self):
+	    return str(self.ID) + ' ' + self.Name
+
     class Meta:
-        db_table = 'Person'
+	    db_table = 'Person'
+
+
+
+
 
 
 class Curriculum(models.Model):
