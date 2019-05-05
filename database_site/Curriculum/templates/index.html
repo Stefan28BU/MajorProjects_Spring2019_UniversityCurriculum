@@ -1,11 +1,13 @@
+{% load static %}
+
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Curriculum System</title>
 
-    {% load static %}
-    <link rel="stylesheet" , href="{% static 'styles/style.scss' %}">
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -18,91 +20,67 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
-    <style>
-        .titleMid {
-            text-align: center;
-            position: center;
-            padding: 15px 15px 0 15px;
-            background-color: whitesmoke;
-        }
 
-        body {
-            text-align: center;
-            background: #232526; /* fallback for old browsers */
-            background: -webkit-linear-gradient(to right, #414345, #232526); /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to right, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-        }
-
-        .customNav {
-            background-color: whitesmoke;
-        }
-
-        .myModal {
-            margin-top: 100px;
-            width: 50%;
-            display: inline-block;
-        }
-
-        .mybtn1 {
-            padding: 10px 60px 10px 60px;
-            margin: 10px 10px 10px 10px;
-            width: 400px;
-        }
-    </style>
 </head>
 <body>
 
-<div class="titleMid">
-    <h4>University Curriculum Management System</h4>
+<section class="wrapper">
+    <div class="titleMid">
+        <h4>University Curriculum Management System</h4>
 
-    <div class="customNav">
-        <nav class="navbar navbar-expand-lg navbar-light ">
-            <a class="navbar-brand" href="#">UCMS</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <div class="customNav">
+            <nav class="navbar navbar-expand-lg navbar-light ">
+                <a class="navbar-brand" href="#">UCMS</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">All Curriculums</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/Curriculum">Home<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Curriculum">All Curriculums</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Dropdown
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li>
 
-                </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-            </div>
-        </nav>
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </div>
+            </nav>
+        </div>
     </div>
-</div>
-<div class="myModal">
-    <button class="btn btn-outline-light mybtn1" type="button" name="button">New Curriculum</button>
-    <button class="btn btn-outline-light mybtn1" type="button" name="button">New Course</button>
-    <button class="btn btn-outline-light mybtn1" type="button" name="button">New Section</button>
+    <div class="myModal">
+        <a href="/Curriculum/newCurriculum">
+            <button class="btn btn-outline-light mybtn1" type="button" name="button">New Curriculum</button>
+        </a>
 
-    <button class="btn btn-outline-light mybtn1" type="button" name="button">New Topic</button>
-    <button class="btn btn-outline-light mybtn1" type="button" name="button">New Goal</button>
+        <button class="btn btn-outline-light mybtn1" type="button" name="button">New Course</button>
+        <button class="btn btn-outline-light mybtn1" type="button" name="button">New Section</button>
 
-</div>
+        <button class="btn btn-outline-light mybtn1" type="button" name="button">New Topic</button>
+        <button class="btn btn-outline-light mybtn1" type="button" name="button">New Goal</button>
+
+    </div>
+
+</section>
 
 </body>
 </html>
