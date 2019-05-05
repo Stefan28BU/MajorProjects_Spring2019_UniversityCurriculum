@@ -98,50 +98,6 @@ class CurriculumTopic(models.Model):
         ]
 
 
-class Grade(models.Model):
-
-    AP = 'A+'
-    A = 'A'
-    AM = 'A-'
-    BP = 'B+'
-    B = 'B'
-    BM = 'B-'
-    CP = 'C+'
-    C = 'C'
-    CM = 'C-'
-    DP = 'D+'
-    D = 'D'
-    DM = 'D-'
-    F = 'F'
-    W = 'W'
-    I = 'I'
-
-    grades = (
-        (AP, 'A+'),
-        (A, 'A'),
-        (AM, 'A-'),
-        (BP, 'B+'),
-        (B, 'B'),
-        (BM, 'B-'),
-        (CP, 'C+'),
-        (C, 'C'),
-        (CM, 'C-'),
-        (DP, 'D+'),
-        (D, 'D'),
-        (DM, 'D-'),
-        (F, 'Fail'),
-        (W, 'Withdraw'),
-        (I, 'Incomplete')
-    )
-
-    Grade_Distribution_ID = models.AutoField(primary_key=True)
-    Grade = models.CharField(max_length=255, choices=grades)
-    Association_ID = models.PositiveIntegerField(default=0)
-
-    class Meta:
-        db_table = 'Grade'
-
-
 class CourseSection(models.Model):
     spring = 'SP'
     summer = 'SM'
@@ -160,7 +116,6 @@ class CourseSection(models.Model):
     Year = models.PositiveIntegerField(default=0)
     Semester = models.CharField(max_length=255, choices=semesters)
     Enrollment = models.CharField(max_length=255)
-    Associated_Grade_Distribution = models.ForeignKey(Grade, on_delete=models.CASCADE)
     Comment1 = models.CharField(max_length=255)
     Comment2 = models.CharField(max_length=255)
 
@@ -172,14 +127,58 @@ class CourseSection(models.Model):
         ]
 
 
+
 class Goal(models.Model):
     ID = models.AutoField(primary_key=True)
     Associated_Curriculum = models.ForeignKey(Curriculum, on_delete=models.CASCADE)
     Description = models.CharField(max_length=255)
-    Associated_Grade_Dist = models.ForeignKey(Grade, on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'Goal'
+
+
+class Grade(models.Model):
+	AP = 'A+'
+	A = 'A'
+	AM = 'A-'
+	BP = 'B+'
+	B = 'B'
+	BM = 'B-'
+	CP = 'C+'
+	C = 'C'
+	CM = 'C-'
+	DP = 'D+'
+	D = 'D'
+	DM = 'D-'
+	F = 'F'
+	W = 'W'
+	I = 'I'
+
+	grades = (
+		(AP, 'A+'),
+		(A, 'A'),
+		(AM, 'A-'),
+		(BP, 'B+'),
+		(B, 'B'),
+		(BM, 'B-'),
+		(CP, 'C+'),
+		(C, 'C'),
+		(CM, 'C-'),
+		(DP, 'D+'),
+		(D, 'D'),
+		(DM, 'D-'),
+		(F, 'Fail'),
+		(W, 'Withdraw'),
+		(I, 'Incomplete')
+	)
+
+	Grade_Distribution_ID = models.AutoField(primary_key=True)
+	Letter_Grade = models.CharField(max_length=255, choices=grades)
+	Associated_Course_Section = models.ForeignKey(CourseSection, on_delete=models.CASCADE, null=True)
+	Associated_Goal = models.ForeignKey(Goal, on_delete=models.CASCADE, null=True)
+
+	class Meta:
+		db_table = 'Grade'
 
 
 class CourseGoal(models.Model):
