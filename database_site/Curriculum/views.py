@@ -139,3 +139,27 @@ def editCurriculum(request):
         form = editCurriculumFrom()
 
     return render(request=request, template_name="Edit/editCurriculum.html", context={"form": form})
+
+
+def gradeDist(request):
+    if request.method == 'POST':
+        form = gradeDistForm(request.POST)
+
+        if form.is_valid():
+            temp = Grade()
+
+            temp.dist_number = form['dist'].value()
+            temp.Letter_Grade = form['letterGrade'].value()
+            temp.Associated_Goal = form['goal'].value()
+            temp.Associated_Course_Section = form['section'].value()
+
+            temp.save()
+
+
+        else:
+            print('Invalid')
+            return HttpResponseRedirect('/Curriculum')
+    else:
+        form = gradeDistForm()
+
+    return render(request=request, template_name="curriculum/gradeDist.html", context={"form": form})

@@ -124,3 +124,78 @@ class newTopicForm(forms.ModelForm):
         widgets = {
             'Name': forms.TextInput(attrs={'class': 'form-control'}),
         }
+
+
+class gradeDistForm(forms.Form):
+    AP = 'A+'
+    A = 'A'
+    AM = 'A-'
+    BP = 'B+'
+    B = 'B'
+    BM = 'B-'
+    CP = 'C+'
+    C = 'C'
+    CM = 'C-'
+    DP = 'D+'
+    D = 'D'
+    DM = 'D-'
+    F = 'F'
+    W = 'W'
+    I = 'I'
+
+    grades = (
+        (AP, 'A+'),
+        (A, 'A'),
+        (AM, 'A-'),
+        (BP, 'B+'),
+        (B, 'B'),
+        (BM, 'B-'),
+        (CP, 'C+'),
+        (C, 'C'),
+        (CM, 'C-'),
+        (DP, 'D+'),
+        (D, 'D'),
+        (DM, 'D-'),
+        (F, 'Fail'),
+        (W, 'Withdraw'),
+        (I, 'Incomplete')
+    )
+
+    letterGrade = forms.ChoiceField(choices=grades, label="Select a Grade")
+
+    dist = forms.IntegerField(initial=0, label="Enter Number of Students")
+
+    sTupleArray = []
+    for s in CourseSection.objects.all():
+        spring = 'SP'
+        summer = 'SM'
+        fall = 'FA'
+        winter = 'WI'
+        sem = ''
+
+        if s.semesters == spring:
+            sem = 'Spring'
+
+        if s.semesters == summer:
+            sem = 'Summer'
+
+        if s.semesters == fall:
+            sem = 'Fall'
+
+        if s.semesters == winter:
+            sem = 'Winter'
+
+        sTupleArray.append((s, 'Course: ' + s.Associated_Course + ', Section: ' + sem + ' ' + s.Year))
+
+    sChoice = tuple(sTupleArray)
+
+    section = forms.ChoiceField(choices=sChoice, label="Choose a Section")
+
+    TupleArray = []
+    for g in Goal.objects.all():
+        TupleArray.append((g, 'Goal: ' + g.Description))
+
+    gChoice = tuple(TupleArray)
+    print(gChoice)
+    goal = forms.ChoiceField(choices=gChoice, label="Choose a Goal")
+
