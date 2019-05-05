@@ -21,15 +21,6 @@
     <title>New Curriculum</title>
 </head>
 <body>
-{#{% if curriculum_list %}#}
-{#    <ul>#}
-{#        {% for curriculum in curriculum_list %}#}
-{#            <li><a href="#">{{ curriculum.curriculum_name }}</a></li>#}
-{#        {% endfor %}#}
-{#    </ul>#}
-{#{% else %}#}
-{#    <p>No curriculum are available.</p>#}
-{#{% endif %}#}
 
 
 <section class="wrapper">
@@ -59,8 +50,8 @@
                                 Manage
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="/Curriculum">My Information</a>
-                                <a class="dropdown-item" href="/Curriculum">Curriculum</a>
+                                <a class="dropdown-item" href="/Curriculum/editPerson">Head Information</a>
+                                <a class="dropdown-item" href="/Curriculum/editCurriculum">Curriculum</a>
                                 <a class="dropdown-item" href="/Curriculum">Course</a>
                                 <a class="dropdown-item" href="/Curriculum">Section</a>
                                 <a class="dropdown-item" href="/Curriculum">Goal</a>
@@ -86,41 +77,8 @@
             </div>
             <button type="submit" class="btn btn-outline-light mybtn2">Confirm</button>
         </form>
-{#                <form>#}
-{#                    <h4 class="title">New Curriculum</h4>#}
-{#                    <div class="form-group">#}
-{#                        <label>Faculty ID</label>#}
-{#                        <input class="form-control" placeholder="Enter your ID">#}
-{#                    </div>#}
-{#                    <div class="form-group">#}
-{#                        <label>Curriculum Name</label>#}
-{#                        <input class="form-control" placeholder="Enter a name for curriculum">#}
-{#                    </div>#}
-{#                    <div class="form-group">#}
-{#                        <label>Hours</label>#}
-{#                        <input class="form-control" placeholder="Enter minimum hours required for completion">#}
-{#                    </div>#}
-{##}
-{#                    <div class="form-group">#}
-{#                        <label>Topic Category</label>#}
-{#                        <input class="form-control" placeholder="Enter a topic category">#}
-{#                    </div>#}
-{##}
-{#                    <button type="submit" class="btn btn-outline-light mybtn2">Confirm</button>#}
-{#                </form>#}
-{#        <form method="post">#}
-{#            {% for field in form.visible_fields %}#}
-{#                <div class="form-group">#}
-{#                    {{ field.label_tag }}#}
-{#                    {{ field }}#}
-{#                    {% if field.help_text %}#}
-{#                        <small class="form-text text-muted">{{ field.help_text }}</small>#}
-{#                    {% endif %}#}
-{#                </div>#}
-{#            {% endfor %}#}
-{#        </form>#}
-    </div>
 
+    </div>
 </section>
 
 </body>

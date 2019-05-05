@@ -50,8 +50,8 @@
                                 Manage
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="/Curriculum">My Information</a>
-                                <a class="dropdown-item" href="/Curriculum">Curriculum</a>
+                                <a class="dropdown-item" href="/Curriculum/editPerson">Head Information</a>
+                                <a class="dropdown-item" href="/Curriculum/editCurriculum">Curriculum</a>
                                 <a class="dropdown-item" href="/Curriculum">Course</a>
                                 <a class="dropdown-item" href="/Curriculum">Section</a>
                                 <a class="dropdown-item" href="/Curriculum">Goal</a>
@@ -71,7 +71,7 @@
     <div class="myModal formCustom">
         <form method="post">
             {% csrf_token %}
-            <h4 class="title">Create New Goal</h4>
+            <h4 class="title">Create New Course</h4>
             <div class="form-group">
                 {{ form.as_p }}
             </div>
