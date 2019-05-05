@@ -150,8 +150,8 @@ def gradeDist(request):
 
             temp.dist_number = form['dist'].value()
             temp.Letter_Grade = form['letterGrade'].value()
-            temp.Associated_Goal = form['goal'].value()
-            temp.Associated_Course_Section = form['section'].value()
+            temp.Associated_Goal = Goal.objects.get(ID=form['goal'].value())
+            temp.Associated_Course_Section = CourseSection.objects.get(Section_ID=form['section'].value())
 
             temp.save()
 
@@ -163,3 +163,28 @@ def gradeDist(request):
         form = gradeDistForm()
 
     return render(request=request, template_name="curriculum/gradeDist.html", context={"form": form})
+
+
+def newSection(request):
+    if request.method == 'POST':
+        form = newSectionForm(request.POST)
+
+        if form.is_valid():
+            temp = CourseSection()
+
+            temp.Semester = form['seme'].value()
+            temp.Year = form['year'].value()
+            temp.Comment1 = form['com1'].value()
+            temp.Comment2 = form['com2'].value()
+            temp.Enrollment = form['enroll'].value()
+            temp.Associated_Course = Course.objects.get(pk=form['cName'].value())
+
+            temp.save()
+
+        else:
+            print('Invalid')
+            return HttpResponseRedirect('/Curriculum')
+    else:
+        form = newSectionForm()
+
+    return render(request=request, template_name="curriculum/newSection.html", context={"form": form})

@@ -165,7 +165,7 @@ class gradeDistForm(forms.Form):
 
     dist = forms.IntegerField(initial=0, label="Enter Number of Students")
 
-    sTupleArray = []
+    secTupleArray = []
     for s in CourseSection.objects.all():
         spring = 'SP'
         summer = 'SM'
@@ -185,17 +185,46 @@ class gradeDistForm(forms.Form):
         if s.semesters == winter:
             sem = 'Winter'
 
-        sTupleArray.append((s, 'Course: ' + s.Associated_Course + ', Section: ' + sem + ' ' + s.Year))
+        secTupleArray.append((s.Section_ID, 'Course: ' + s.Associated_Course.Course_Name + ', Section: ' + sem + ' ' + str(s.Year)))
 
-    sChoice = tuple(sTupleArray)
+    secChoice = tuple(secTupleArray)
 
-    section = forms.ChoiceField(choices=sChoice, label="Choose a Section")
+    section = forms.ChoiceField(choices=secChoice, label="Choose a Section")
 
     TupleArray = []
     for g in Goal.objects.all():
-        TupleArray.append((g, 'Goal: ' + g.Description))
+        TupleArray.append((g.ID, 'Goal: ' + g.Description))
 
     gChoice = tuple(TupleArray)
     print(gChoice)
     goal = forms.ChoiceField(choices=gChoice, label="Choose a Goal")
+
+
+class newSectionForm(forms.Form):
+    TupleArray = []
+    for g in Course.objects.all():
+        TupleArray.append((g.pk, 'Course: ' + g.Subject_Code + g.Course_Number + ' (' + g.Course_Name + ')'))
+
+    gChoice = tuple(TupleArray)
+
+    cName = forms.ChoiceField(choices=gChoice, label="Choose a Course")
+    year = forms.IntegerField(initial=0, label="Enter a Year")
+
+    spring = 'SP'
+    summer = 'SM'
+    fall = 'FA'
+    winter = 'WI'
+
+    semesters = (
+        (spring, 'Spring semester'),
+        (summer, 'Summer semester'),
+        (fall, 'Fall semester'),
+        (winter, 'Winter semester')
+    )
+
+    seme = forms.ChoiceField(choices=semesters, label="Choose a Semester")
+    enroll = forms.CharField(max_length=255, label="Enter Enrollment")
+
+    com1 = forms.CharField(max_length=255, label="Enter First Comment")
+    com2 = forms.CharField(max_length=255, label="Enter Second Comment")
 
