@@ -49,7 +49,18 @@ class editPersonForm(forms.Form):
     name = forms.CharField(max_length=255, widget=forms.TextInput(attrs={'class': 'form-control'}), label="New Name")
 
 
-class editCurriculumFrom(forms.Form):
+class pickCuricToEditForm(forms.Form):
+    cTupleArray = []
+    for c in Curriculum.objects.all():
+        cTupleArray.append((c.pk, 'Curriculum: ' + c.Cur_name + ', Head: ' + c.Head.Name + '(' + str(
+            c.Head.ID) + '), Minimum Hours: ' + str(c.Min_Hours) + ', Topic Category: ' + c.Topic_Category))
+    cChoices = tuple(cTupleArray)
+
+    curr = forms.ChoiceField(choices=cChoices, label="Select a Curriculum",widget= forms.Select(attrs={'class': 'selectpicker form-control'}))
+
+
+
+class editCurriculumForm(forms.Form):
     cTupleArray = []
     for c in Curriculum.objects.all():
         cTupleArray.append((c.Cur_name, 'Curriculum: ' + c.Cur_name + ', Head: ' + c.Head.Name + '(' + str(

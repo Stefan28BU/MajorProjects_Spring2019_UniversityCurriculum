@@ -11,11 +11,13 @@ urlpatterns = [
     path('newGoal/', views.newGoal, name='newGoal'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('editPerson/', views.editPerson, name='editPerson'),
-    path('editCurriculum/', views.editCurriculum, name='editCurriculum'),
+    path('editCurriculum/', views.pickCuricToEdit, name='editCurriculum'),
     path('gradeDist/', views.gradeDist, name='gradeDist'),
     path('newSection/', views.newSection, name='newSection'),
     path('editCourse/', views.editCourse, name='editCourse'),
-    # path('editSection/', views.editSection, name='editSection'),
+	path('editSpecificCurriculum/<int:curr_id>', views.editCurriculum, name='editSpecificCurriculum'),
+
+	# path('editSection/', views.editSection, name='editSection'),
     # path('editTopic/', views.editTopic, name='editTopic'),
     # path('editGoal/', views.editGoal, name='editGoal'),
 

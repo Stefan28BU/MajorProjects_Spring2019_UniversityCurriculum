@@ -27,7 +27,7 @@ class Person(models.Model):
 
 
 class Curriculum(models.Model):
-    Cur_name = models.CharField(max_length=255, primary_key=True)
+    Cur_name = models.CharField(max_length=255)
     Head = models.ForeignKey(Person, on_delete=models.CASCADE)
     Min_Hours = models.PositiveIntegerField(default=0)
 
@@ -53,6 +53,9 @@ class Curriculum(models.Model):
 
     class Meta:
         db_table = 'Curriculum'
+        constraints = [
+            models.UniqueConstraint(fields=['Cur_name'], name='curriculum_unique')
+        ]
 
 
 class Topic(models.Model):

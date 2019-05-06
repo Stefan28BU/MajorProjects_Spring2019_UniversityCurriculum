@@ -5,7 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from .models import *
 
 from .forms import *
-
+from pprint import pprint
 
 def index(request):
     return render(request=request, template_name="index.html")
@@ -117,10 +117,21 @@ def editPerson(request):
 
     return render(request=request, template_name="Edit/editPerson.html", context={"form": form})
 
-
-def editCurriculum(request):
+def pickCuricToEdit(request):
     if request.method == 'POST':
-        form = editCurriculumFrom(request.POST)
+        form = pickCuricToEditForm(request.POST)
+
+        return HttpResponseRedirect('/Curriculum/editSpecificCurriculum/' + str(form['curr'].value()))
+    else:
+        form = pickCuricToEditForm()
+
+    return render(request=request, template_name="Edit/pickCurriculumToEdit.html", context={"form": form})
+
+
+def editCurriculum(request, curr_id):
+    pprint(vars(request))
+    if request.method == 'POST':
+        form = editCurriculumForm(request.POST)
 
         if form.is_valid():
             temp = Curriculum.objects.get(Cur_name=form['curr'].value())
@@ -136,7 +147,7 @@ def editCurriculum(request):
             print('Invalid')
             return HttpResponseRedirect('/Curriculum')
     else:
-        form = editCurriculumFrom()
+        form = editCurriculumForm()
 
     return render(request=request, template_name="Edit/editCurriculum.html", context={"form": form})
 
