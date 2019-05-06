@@ -394,6 +394,8 @@ def editGoal(request):
 
 
 def editSection(request):
+    sec = CourseSection.objects.all()
+
     if request.method == 'POST':
         form = editSectionForm(request.POST)
 
