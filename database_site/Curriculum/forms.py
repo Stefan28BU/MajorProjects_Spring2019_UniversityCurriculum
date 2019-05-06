@@ -30,11 +30,13 @@ class newCurriculumForm(forms.ModelForm):
             'Min_Hours': 'Minimum Hours',
             'Head': 'Curriculum Head'
         }
-
         widgets = {
+            'Head': forms.Select(attrs={'class': 'selectpicker form-control'}),
+
             'Cur_name': forms.TextInput(attrs={'class': 'form-control'}),
             'Min_Hours': forms.TextInput(attrs={'class': 'form-control'}),
         }
+
 
 class editPersonForm(forms.Form):
     pTupleArray = []
@@ -42,9 +44,9 @@ class editPersonForm(forms.Form):
         pTupleArray.append((p.ID, p.Name + ' ' + str(p.ID)))
     pChoices = tuple(pTupleArray)
 
-    curr = forms.ChoiceField(choices=pChoices, label="Select a Department Head")
+    curr = forms.ChoiceField(choices=pChoices, label="Select a Department Head",widget= forms.Select(attrs={'class': 'selectpicker form-control'}))
 
-    name = forms.CharField(max_length=255)
+    name = forms.CharField(max_length=255, widget=forms.TextInput(attrs={'class': 'form-control'}), label="New Name")
 
 
 class editCurriculumFrom(forms.Form):
@@ -54,16 +56,16 @@ class editCurriculumFrom(forms.Form):
             c.Head.ID) + '), Minimum Hours: ' + str(c.Min_Hours) + ', Topic Category: ' + c.Topic_Category))
     cChoices = tuple(cTupleArray)
 
-    curr = forms.ChoiceField(choices=cChoices, label="Select a Curriculum")
+    curr = forms.ChoiceField(choices=cChoices, label="Select a Curriculum",widget= forms.Select(attrs={'class': 'selectpicker form-control'}))
 
     pTupleArray = []
     for p in Person.objects.all():
         pTupleArray.append((p.ID, p.Name + ' ' + str(p.ID)))
     pChoices = tuple(pTupleArray)
 
-    newHead = forms.ChoiceField(choices=pChoices, label="Select a New Head")
+    newHead = forms.ChoiceField(choices=pChoices, label="Select a New Head", widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
 
-    newHours = forms.IntegerField(initial=0, label="Enter New Credit Hours")
+    newHours = forms.IntegerField(initial=0, label="Enter New Credit Hours", widget= forms.Select(attrs={'class': 'selectpicker form-control'}))
 
 
 class newGoalForm(forms.ModelForm):
@@ -80,7 +82,9 @@ class newGoalForm(forms.ModelForm):
         }
 
         widgets = {
-            'Description': forms.TextInput(attrs={'class': 'form-control'}),
+            'Associated_Curriculum':  forms.Select(attrs={'class': 'selectpicker form-control'}),
+
+            'Description':  forms.Select(attrs={'class': 'selectpicker form-control'}),
         }
 
 
@@ -161,9 +165,9 @@ class gradeDistForm(forms.Form):
         (I, 'Incomplete')
     )
 
-    letterGrade = forms.ChoiceField(choices=grades, label="Select a Grade")
+    letterGrade = forms.ChoiceField(choices=grades, label="Select a Grade", widget= forms.Select(attrs={'class': 'selectpicker form-control'}))
 
-    dist = forms.IntegerField(initial=0, label="Enter Number of Students")
+    dist = forms.IntegerField(initial=0, label="Enter Number of Students", widget=forms.TextInput(attrs={'class': 'form-control'}))
 
     secTupleArray = []
     for s in CourseSection.objects.all():
@@ -189,7 +193,7 @@ class gradeDistForm(forms.Form):
 
     secChoice = tuple(secTupleArray)
 
-    section = forms.ChoiceField(choices=secChoice, label="Choose a Section")
+    section = forms.ChoiceField(choices=secChoice, label="Choose a Section",widget= forms.Select(attrs={'class': 'selectpicker form-control'}))
 
     TupleArray = []
     for g in Goal.objects.all():
@@ -197,7 +201,7 @@ class gradeDistForm(forms.Form):
 
     gChoice = tuple(TupleArray)
     print(gChoice)
-    goal = forms.ChoiceField(choices=gChoice, label="Choose a Goal")
+    goal = forms.ChoiceField(choices=gChoice, label="Choose a Goal",widget= forms.Select(attrs={'class': 'selectpicker form-control'}))
 
 
 class newSectionForm(forms.Form):
@@ -207,8 +211,8 @@ class newSectionForm(forms.Form):
 
     gChoice = tuple(TupleArray)
 
-    cName = forms.ChoiceField(choices=gChoice, label="Choose a Course")
-    year = forms.IntegerField(initial=0, label="Enter a Year")
+    cName = forms.ChoiceField(choices=gChoice, label="Choose a Course",widget= forms.Select(attrs={'class': 'selectpicker form-control'}))
+    year = forms.IntegerField(initial=0, label="Enter a Year", widget= forms.TextInput(attrs={'class': 'form-control'}))
 
     spring = 'SP'
     summer = 'SM'
@@ -222,9 +226,9 @@ class newSectionForm(forms.Form):
         (winter, 'Winter semester')
     )
 
-    seme = forms.ChoiceField(choices=semesters, label="Choose a Semester")
-    enroll = forms.CharField(max_length=255, label="Enter Enrollment")
+    seme = forms.ChoiceField(choices=semesters, label="Choose a Semester", widget= forms.Select(attrs={'class': 'selectpicker form-control'}))
+    enroll = forms.CharField(max_length=255, label="Enter Enrollment", widget=forms.TextInput(attrs={'class': 'form-control'}))
 
-    com1 = forms.CharField(max_length=255, label="Enter First Comment")
-    com2 = forms.CharField(max_length=255, label="Enter Second Comment")
+    com1 = forms.CharField(max_length=255, label="Enter First Comment",widget=forms.TextInput(attrs={'class': 'form-control'}))
+    com2 = forms.CharField(max_length=255, label="Enter Second Comment",widget=forms.TextInput(attrs={'class': 'form-control'}))
 

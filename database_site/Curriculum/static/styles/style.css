@@ -115,3 +115,7 @@ body {
 
 
 }
+
+.selectpicker{
+    display: inline-list-item;
+}
