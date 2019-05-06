@@ -15,7 +15,12 @@ urlpatterns = [
     path('gradeDist/', views.gradeDist, name='gradeDist'),
     path('newSection/', views.newSection, name='newSection'),
     path('editCourse/', views.editCourse, name='editCourse'),
-	path('editSpecificCurriculum/<int:curr_id>', views.editCurriculum, name='editSpecificCurriculum'),
+    path('editSpecificCurriculum/<int:curr_id>', views.editCurriculum, name='editSpecificCurriculum'),
+    path('addCourseToCurric/<int:curr_pk>', views.addCourseToCurriculum, name='addCourseToCurriculum'),
+    path('selectCourseForCurricEdit/<int:curr_pk>', views.pickCourseInCurriculumForEditing,
+         name='selectCourseForCurricEdit'),
+    path('editCCT/<int:curr_pk>/<int:course_pk>', views.editCCT, name='editCCT'),
+	path('editCG/<int:curr_pk>/<int:course_pk>', views.editCCT, name='editCCT'),
 
 	# path('editSection/', views.editSection, name='editSection'),
     path('editTopic/', views.editTopic, name='editTopic'),

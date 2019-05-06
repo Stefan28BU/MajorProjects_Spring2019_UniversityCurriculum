@@ -121,20 +121,132 @@ def pickCuricToEdit(request):
     if request.method == 'POST':
         form = pickCuricToEditForm(request.POST)
 
-        return HttpResponseRedirect('/Curriculum/editSpecificCurriculum/' + str(form['curr'].value()))
+        editMethod = form['editMethod'].value()
+        print(editMethod)
+
+        if editMethod == "edit":
+            return HttpResponseRedirect('/Curriculum/editSpecificCurriculum/' + str(form['curr'].value()))
+        elif editMethod == 'removeCourse':
+            return HttpResponseRedirect('/Curriculum/editSpecificCurriculum/' + str(form['curr'].value()))
+        elif editMethod == 'addCourse':
+            return HttpResponseRedirect('/Curriculum/addCourseToCurric/' + str(form['curr'].value()))
+        elif editMethod == 'editCourses':
+            return HttpResponseRedirect('/Curriculum/selectCourseForCurricEdit/' + str(form['curr'].value()))
+
     else:
         form = pickCuricToEditForm()
-
     return render(request=request, template_name="Edit/pickCurriculumToEdit.html", context={"form": form})
 
 
+def pickCourseInCurriculumForEditing(request, curr_pk):
+    if request.method == 'POST':
+        form = pickCourseForCurricToEditForm(request.POST, curr_pk=curr_pk)
+
+        if form.is_valid():
+            course_pk = form['courseToEdit'].value()
+            editType = form['editType'].value()
+            if editType == 'cct':
+                return HttpResponseRedirect('/Curriculum/editCCT/'
+                                            + str(curr_pk) + '/' + str(course_pk))
+            else:
+                return HttpResponseRedirect('/Curriculum/editCG/'
+                                            + str(curr_pk) + '/' + str(course_pk))
+        else:
+            print('Invalid')
+            return HttpResponseRedirect('/Curriculum')
+    else:
+        form = pickCourseForCurricToEditForm(curr_pk=curr_pk)
+
+    return render(request=request, template_name="Edit/editCurriculum.html", context={"form": form})
+
+
+def editCCT(request, curr_pk, course_pk):
+    if request.method == 'POST':
+        form = editCCTForm(request.POST, curr_pk=curr_pk, course_pk=course_pk)
+
+        if form.is_valid():
+            units = form['units'].value()
+            topic_pk = form['topic'].value()
+
+            curric = Curriculum.objects.get(pk=curr_pk)
+            course = Course.objects.get(pk=course_pk)
+            topic = Topic.objects.get(pk=topic_pk)
+
+            ct = CourseTopics.objects.get(Associated_Course=course, Associated_Topic=topic)
+            cct = CurriculumCT(Associated_CT=ct, Associated_Curriculum=curric)
+            cct.Units = abs(units)
+            cct.save()
+
+            return HttpResponseRedirect('/Curriculum/editCurriculum')
+        else:
+            print('Invalid')
+            return HttpResponseRedirect('/Curriculum')
+    else:
+        form = editCCTForm(curr_pk=curr_pk, course_pk=course_pk)
+
+    return render(request=request, template_name="Edit/editCourseInCurriculum.html", context={"form": form})
+
+
+def editCG(request, curr_pk, course_pk):
+    if request.method == 'POST':
+        form = editCCTForm(request.POST, curr_pk=curr_pk, course_pk=course_pk)
+
+        if form.is_valid():
+            units = form['units'].value()
+            topic_pk = form['topic'].value()
+
+            curric = Curriculum.objects.get(pk=curr_pk)
+            course = Course.objects.get(pk=course_pk)
+            topic = Topic.objects.get(pk=topic_pk)
+
+            ct = CourseTopics.objects.get(Associated_Course=course, Associated_Topic=topic)
+            cct = CurriculumCT(Associated_CT=ct, Associated_Curriculum=curric)
+            cct.Units = abs(units)
+            cct.save()
+
+            return HttpResponseRedirect('/Curriculum/editCurriculum')
+        else:
+            print('Invalid')
+            return HttpResponseRedirect('/Curriculum')
+    else:
+        form = editCCTForm(curr_pk=curr_pk, course_pk=course_pk)
+
+    return render(request=request, template_name="Edit/editCourseInCurriculum.html", context={"form": form})
+
+
+def addCourseToCurriculum(request, curr_pk):
+    if request.method == 'POST':
+        form = addCourseToCurricForm(request.POST, curr_pk=curr_pk)
+
+        if form.is_valid():
+
+            course_pk = form['courseToAdd'].value()    # Get the course Primary Key from the page
+            course = Course.objects.get(pk=course_pk)    # Get the course using the primary key
+            course_topics = CourseTopics.objects.filter(Associated_Course=course)    # Get the CourseTopics of that course
+            curric = Curriculum.objects.get(pk=curr_pk)    # Get the curriculum
+
+            for ct in course_topics:
+                cct = CurriculumCT(Associated_Curriculum=curric,
+                                   Associated_CT=ct,
+                                   Units=0)
+                cct.save()
+            # Create the necessary curriculum course topics
+
+            curric_course = CurriculumCourse(Associated_Curriculum=curric,
+                                             Associated_Course=course,
+                                             Required=form['req'].value())
+            curric_course.save()
+            return HttpResponseRedirect('/Curriculum/editCurriculum/')
+    else:
+        form = addCourseToCurricForm(curr_pk=curr_pk)
+    return render(request=request, template_name="Edit/addCourseToCurriculum.html", context={"form": form})
+
 def editCurriculum(request, curr_id):
-    pprint(vars(request))
     if request.method == 'POST':
         form = editCurriculumForm(request.POST)
 
         if form.is_valid():
-            temp = Curriculum.objects.get(Cur_name=form['curr'].value())
+            temp = Curriculum.objects.get(pk=curr_id)
             tempPerson = Person.objects.get(ID=form['newHead'].value())
 
             temp.Head = tempPerson
