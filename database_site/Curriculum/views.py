@@ -483,4 +483,3 @@ def gradeGoal(request, curr_pk, course_pk):
         form = gradeGoal(curr_pk=curr_pk, course_pk=course_pk)
 
     return render(request=request, template_name="Edit/forkForEditGoalsInCurriculum.html", context={"form": form})
->>>>>>> a62b3ecf55245f1411ac26fefb2a7fc70ef71bc7
