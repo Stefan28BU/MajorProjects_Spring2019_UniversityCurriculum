@@ -11,7 +11,23 @@ urlpatterns = [
     path('newGoal/', views.newGoal, name='newGoal'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('editPerson/', views.editPerson, name='editPerson'),
-    path('editCurriculum/', views.editCurriculum, name='editCurriculum'),
+    path('editCurriculum/', views.pickCuricToEdit, name='editCurriculum'),
     path('gradeDist/', views.gradeDist, name='gradeDist'),
+    path('newSection/', views.newSection, name='newSection'),
+    path('editCourse/', views.editCourse, name='editCourse'),
+    path('editSpecificCurriculum/<int:curr_id>', views.editCurriculum, name='editSpecificCurriculum'),
+    path('addCourseToCurric/<int:curr_pk>', views.addCourseToCurriculum, name='addCourseToCurriculum'),
+    path('selectCourseForCurricEdit/<int:curr_pk>', views.pickCourseInCurriculumForEditing,
+         name='selectCourseForCurricEdit'),
+    path('editCCT/<int:curr_pk>/<int:course_pk>', views.editCCT, name='editCCT'),
+    path('forkAddGradeCourseGoal/<int:curr_pk>/<int:course_pk>', views.forkGoal, name='forkAddGradeCourseGoal'),
+    path('addGoalToCourse/<int:curr_pk>/<int:course_pk>', views.addGoalToCourse, name='addGoalToCourse'),
+
+
+	path('editSection/', views.editSection, name='editSection'),
+    path('editTopic/', views.editTopic, name='editTopic'),
+    path('editGoal/', views.editGoal, name='editGoal'),
+    path('qPage/', views.qPage, name='qPage'),
+    path('q1/', views.q1, name='q1'),
 
 ]

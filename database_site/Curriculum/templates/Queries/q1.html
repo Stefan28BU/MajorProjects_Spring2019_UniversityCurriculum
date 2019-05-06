@@ -22,7 +22,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
     <meta charset="UTF-8">
 
-    <title>New Curriculum</title>
+    <title>Edit Course</title>
+
+    <meta charset="UTF-8">
+
+    <title>Query Page</title>
 </head>
 <body>
 
@@ -73,9 +77,43 @@
         </div>
     </div>
     <div class="myModal formCustom">
-        <form method="post">
+        <div> Courses:
+            {% if course_list %}
+                <ul>
+                    {% for course in course_list %}
+                        <li>
+                            <a>
+                                {{ course }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>
+                    No Course
+                </p>
+            {% endif %}
+        </div>
+        <div> Topics:
+            {% if topic_list %}
+                <ul>
+                    {% for topic in topic_list %}
+                        <li>
+                            <a>
+                                {{ topic }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>
+                    No Topic
+                </p>
+            {% endif %}
+        </div>
+        <form method="get">
             {% csrf_token %}
-            <h4 class="title">Edit Department Head</h4>
+            <h4 class="title">Query One</h4>
             <div class="form-group">
                 {{ form.as_p }}
             </div>

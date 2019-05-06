@@ -1,5 +1,19 @@
 from django.db import models
 
+class Course(models.Model):
+    Subject_Code = models.CharField(max_length=255)
+    Course_Number = models.CharField(max_length=255)
+    Course_Name = models.CharField(max_length=255)
+    Credit_Hours = models.PositiveIntegerField(default=0)
+    Description = models.CharField(max_length=255)
+
+    class Meta:
+        db_table = 'Course'
+
+        constraints = [
+            models.UniqueConstraint(fields=['Subject_Code', 'Course_Number'], name='course_unique')
+        ]
+
 
 class Person(models.Model):
     ID = models.AutoField(primary_key=True)
@@ -12,12 +26,8 @@ class Person(models.Model):
 	    db_table = 'Person'
 
 
-
-
-
-
 class Curriculum(models.Model):
-    Cur_name = models.CharField(max_length=255, primary_key=True)
+    Cur_name = models.CharField(max_length=255)
     Head = models.ForeignKey(Person, on_delete=models.CASCADE)
     Min_Hours = models.PositiveIntegerField(default=0)
 
@@ -43,20 +53,8 @@ class Curriculum(models.Model):
 
     class Meta:
         db_table = 'Curriculum'
-
-
-class Course(models.Model):
-    Subject_Code = models.CharField(max_length=255)
-    Course_Number = models.CharField(max_length=255)
-    Course_Name = models.CharField(max_length=255)
-    Credit_Hours = models.PositiveIntegerField(default=0)
-    Description = models.CharField(max_length=255)
-
-    class Meta:
-        db_table = 'Course'
-
         constraints = [
-            models.UniqueConstraint(fields=['Subject_Code', 'Course_Number'], name='course_unique')
+            models.UniqueConstraint(fields=['Cur_name'], name='curriculum_unique')
         ]
 
 
@@ -71,7 +69,6 @@ class Topic(models.Model):
 class CourseTopics(models.Model):
     Associated_Course = models.ForeignKey(Course, on_delete=models.CASCADE)
     Associated_Topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
-    Units = models.PositiveIntegerField(default=0)
 
     class Meta:
         db_table = 'CourseTopics'
@@ -211,4 +208,19 @@ class CurriculumCourse(models.Model):
         constraints = [
             models.UniqueConstraint(fields=['Associated_Curriculum', 'Associated_Course'],
                                     name='curriculumCourse_unique')
+        ]
+
+
+# Curriculum Course Topic
+class CurriculumCT(models.Model):
+    Associated_Curriculum = models.ForeignKey(Curriculum, on_delete=models.CASCADE)
+    Associated_CT = models.ForeignKey(CourseTopics, on_delete=models.CASCADE)
+    Units = models.PositiveIntegerField(default=0)
+
+
+    class Meta:
+        db_table = 'CurriculumCT'
+        constraints = [
+            models.UniqueConstraint(fields=['Associated_Curriculum', 'Associated_CT'],
+                                    name='CCT_Unique')
         ]
