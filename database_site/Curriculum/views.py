@@ -1,5 +1,6 @@
 from django.shortcuts import render
 
+# Create your views here.
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import *
 
@@ -150,7 +151,7 @@ def pickCourseInCurriculumForEditing(request, curr_pk):
                 return HttpResponseRedirect('/Curriculum/editCCT/'
                                             + str(curr_pk) + '/' + str(course_pk))
             else:
-                return HttpResponseRedirect('/Curriculum/editCG/'
+                return HttpResponseRedirect('/Curriculum/forkAddGradeCourseGoal/'
                                             + str(curr_pk) + '/' + str(course_pk))
         else:
             print('Invalid')
@@ -162,33 +163,6 @@ def pickCourseInCurriculumForEditing(request, curr_pk):
 
 
 def editCCT(request, curr_pk, course_pk):
-    if request.method == 'POST':
-        form = editCCTForm(request.POST, curr_pk=curr_pk, course_pk=course_pk)
-
-        if form.is_valid():
-            units = form['units'].value()
-            topic_pk = form['topic'].value()
-
-            curric = Curriculum.objects.get(pk=curr_pk)
-            course = Course.objects.get(pk=course_pk)
-            topic = Topic.objects.get(pk=topic_pk)
-
-            ct = CourseTopics.objects.get(Associated_Course=course, Associated_Topic=topic)
-            cct = CurriculumCT(Associated_CT=ct, Associated_Curriculum=curric)
-            cct.Units = abs(units)
-            cct.save()
-
-            return HttpResponseRedirect('/Curriculum/editCurriculum')
-        else:
-            print('Invalid')
-            return HttpResponseRedirect('/Curriculum')
-    else:
-        form = editCCTForm(curr_pk=curr_pk, course_pk=course_pk)
-
-    return render(request=request, template_name="Edit/editCourseInCurriculum.html", context={"form": form})
-
-
-def editCG(request, curr_pk, course_pk):
     if request.method == 'POST':
         form = editCCTForm(request.POST, curr_pk=curr_pk, course_pk=course_pk)
 
@@ -442,3 +416,71 @@ def q1(request):
         form = queryOneForm()
 
     return render(request=request, template_name="Queries/q1.html", context={"form": form, "course_list": course_list, "topic_list": topic_list})
+
+
+def forkGoal(request, curr_pk, course_pk):
+    if request.method == 'POST':
+        form = forkGoalForm(request.POST)
+
+        if form.is_valid():
+            editMethod = form['editMethod'].value()
+            if editMethod == 'grade':
+                return HttpResponseRedirect('/Curriculum')
+            elif editMethod == 'add':
+                return HttpResponseRedirect('/Curriculum/addGoalToCourse/' + str(curr_pk) + '/'
+                                            + str(course_pk))
+
+        else:
+            print('Invalid')
+            return HttpResponseRedirect('/Curriculum')
+    else:
+        form = forkGoalForm()
+
+    return render(request=request, template_name="Edit/forkForEditGoalsInCurriculum.html", context={"form": form})
+
+
+def addGoalToCourse(request, curr_pk, course_pk):
+    if request.method == 'POST':
+        form = addGoalToCourseForm(request.POST, curr_pk=curr_pk, course_pk=course_pk)
+
+        if form.is_valid():
+            course = Course.objects.get(pk=course_pk)
+            curric = Curriculum.objects.get(pk=curr_pk)
+            goal_pk = form['goal'].value()
+            goal = Goal.objects.get(pk=goal_pk)
+
+            cg = CourseGoal(Associated_Goal=goal, Associated_Course=course)
+            cg.save()
+            return HttpResponseRedirect('/Curriculum/editCurriculum')
+
+        else:
+            print('Invalid')
+            return HttpResponseRedirect('/Curriculum')
+    else:
+        form = addGoalToCourseForm(curr_pk=curr_pk, course_pk=course_pk)
+
+    return render(request=request, template_name="Edit/forkForEditGoalsInCurriculum.html", context={"form": form})
+
+
+def gradeGoal(request, curr_pk, course_pk):
+    if request.method == 'POST':
+        form = gradeGoal(request.POST, curr_pk=curr_pk, course_pk=course_pk)
+
+        if form.is_valid():
+            course = Course.objects.get(pk=course_pk)
+            curric = Curriculum.objects.get(pk=curr_pk)
+            goal_pk = form['goal'].value()
+            goal = Goal.objects.get(pk=goal_pk)
+
+            cg = CourseGoal(Associated_Goal=goal, Associated_Course=course)
+            cg.save()
+            return HttpResponseRedirect('/Curriculum/editCurriculum')
+
+        else:
+            print('Invalid')
+            return HttpResponseRedirect('/Curriculum')
+    else:
+        form = gradeGoal(curr_pk=curr_pk, course_pk=course_pk)
+
+    return render(request=request, template_name="Edit/forkForEditGoalsInCurriculum.html", context={"form": form})
+>>>>>>> a62b3ecf55245f1411ac26fefb2a7fc70ef71bc7

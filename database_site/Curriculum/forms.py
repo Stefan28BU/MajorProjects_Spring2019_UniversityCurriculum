@@ -70,6 +70,7 @@ class pickCuricToEditForm(forms.Form):
 
 
 class editCurriculumForm(forms.Form):
+
     pTupleArray = []
     for p in Person.objects.all():
         pTupleArray.append((p.ID, p.Name + ' ' + str(p.ID)))
@@ -107,7 +108,6 @@ class addCourseToCurricForm(forms.Form):
                                                            attrs={'class': 'selectpicker form-control'}))
         self.fields['req'] = forms.BooleanField(label="Required")
 
-
 # At this point, just have a drop down to pick the course
 # Have that automatically create the CC and whatever CCT's are needed
 # In the pick... form, add an option to edit course info
@@ -132,15 +132,12 @@ class pickCourseForCurricToEditForm(forms.Form):
         self.fields['courseToEdit'] = forms.ChoiceField(choices=course_choices, label="Select the course to edit",
                                                         widget=forms.Select(
                                                             attrs={'class': 'selectpicker form-control'}))
-
         edit_choices = (
             ('cct', "Topics in the Course"),
             ('goal', "Goals for the Course"),
         )
-
         self.fields['editType'] = forms.ChoiceField(choices=edit_choices, label="What to edit",
-                                                    widget=forms.Select(
-                                                        attrs={'class': 'selectpicker form-control'}))
+		                                            widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
 
 
 class editCCTForm(forms.Form):
@@ -413,6 +410,45 @@ class editGoalForm(forms.Form):
     curr = forms.ChoiceField(choices=currChoice, label="Choose a Curriculum",
                              widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
 
+# Get Grade or add
+class forkGoalForm(forms.Form):
+	def __init__(self, *args, **kwargs):
+		super(forkGoalForm, self).__init__(*args, **kwargs)
+
+		choices = (
+			('grade', 'Grade a Goal'),
+			('add', 'Add a new Goal to the Course')
+		)
+
+		self.fields['editMethod'] = forms.ChoiceField(choices=choices, label="Topic to edit",
+		                                         widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
+
+
+class addGoalToCourseForm(forms.Form):
+	def __init__(self, *args, **kwargs):
+		curr_pk = kwargs.pop('curr_pk')
+		course_pk = kwargs.pop('course_pk')
+
+		super(addGoalToCourseForm, self).__init__(*args, **kwargs)
+
+		# Display Goals associated with curriculum, not associated with course
+
+		curric = Curriculum.objects.get(pk=curr_pk)
+		course = Course.objects.get(pk=course_pk)
+		curr_goals = Goal.objects.filter(Associated_Curriculum=curric)
+		course_cg = CourseGoal.objects.filter(Associated_Course=course)
+		already_goals = set()
+		for cg in course_cg:
+			already_goals.add(cg.Associated_Goal)
+
+		new_goals = set(curr_goals) - already_goals
+
+		choices = set()
+		for g in new_goals:
+			choices.add((g.pk, g.Description))
+
+		self.fields['goal'] = forms.ChoiceField(choices=choices, label="Goal to add",
+		                                         widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
 
 class editSectionForm(forms.Form):
     secTupleArray = []

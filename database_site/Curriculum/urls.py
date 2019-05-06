@@ -20,7 +20,9 @@ urlpatterns = [
     path('selectCourseForCurricEdit/<int:curr_pk>', views.pickCourseInCurriculumForEditing,
          name='selectCourseForCurricEdit'),
     path('editCCT/<int:curr_pk>/<int:course_pk>', views.editCCT, name='editCCT'),
-	path('editCG/<int:curr_pk>/<int:course_pk>', views.editCCT, name='editCCT'),
+    path('forkAddGradeCourseGoal/<int:curr_pk>/<int:course_pk>', views.forkGoal, name='forkAddGradeCourseGoal'),
+    path('addGoalToCourse/<int:curr_pk>/<int:course_pk>', views.addGoalToCourse, name='addGoalToCourse'),
+
 
 	path('editSection/', views.editSection, name='editSection'),
     path('editTopic/', views.editTopic, name='editTopic'),
