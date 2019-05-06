@@ -51,22 +51,22 @@ class editPersonForm(forms.Form):
 
 
 class pickCuricToEditForm(forms.Form):
-	cTupleArray = []
-	for c in Curriculum.objects.all():
-		cTupleArray.append((c.pk, 'Curriculum: ' + c.Cur_name + ', Head: ' + c.Head.Name + '(' + str(
-			c.Head.ID) + '), Minimum Hours: ' + str(c.Min_Hours) + ', Topic Category: ' + c.Topic_Category))
-	cChoices = tuple(cTupleArray)
+    cTupleArray = []
+    for c in Curriculum.objects.all():
+        cTupleArray.append((c.pk, 'Curriculum: ' + c.Cur_name + ', Head: ' + c.Head.Name + '(' + str(
+            c.Head.ID) + '), Minimum Hours: ' + str(c.Min_Hours) + ', Topic Category: ' + c.Topic_Category))
+    cChoices = tuple(cTupleArray)
 
-	curr = forms.ChoiceField(choices=cChoices, label="Select a Curriculum",
-								widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
-	editChoices = (
-		('edit', 'Edit the general info'),
-		('removeCourse', 'Remove a Course'),
-		('addCourse', 'Add a Course'),
-		('editCourses', 'Manage Courses'),
-	)
-	editMethod = forms.ChoiceField(choices=editChoices, label="What would you like to do",
-									widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
+    curr = forms.ChoiceField(choices=cChoices, label="Select a Curriculum",
+                             widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
+    editChoices = (
+        ('edit', 'Edit the general info'),
+        ('removeCourse', 'Remove a Course'),
+        ('addCourse', 'Add a Course'),
+        ('editCourses', 'Manage Courses'),
+    )
+    editMethod = forms.ChoiceField(choices=editChoices, label="What would you like to do",
+                                   widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
 
 
 class editCurriculumForm(forms.Form):
@@ -85,28 +85,28 @@ class editCurriculumForm(forms.Form):
 
 class addCourseToCurricForm(forms.Form):
 
+    def __init__(self, *args, **kwargs):
+        self.curr_pk = kwargs.pop('curr_pk')
+        super(addCourseToCurricForm, self).__init__(*args, **kwargs)
 
-	def __init__(self, *args, **kwargs):
-		self.curr_pk = kwargs.pop('curr_pk')
-		super(addCourseToCurricForm, self).__init__(*args, **kwargs)
+        courses = Course.objects.all()
 
-		courses = Course.objects.all()
+        curric = Curriculum.objects.get(pk=self.curr_pk)
+        course_already_added = set()
+        for cc in CurriculumCourse.objects.filter(Associated_Curriculum=curric):
+            course_already_added.add(cc.Associated_Course)
 
-		curric = Curriculum.objects.get(pk=self.curr_pk)
-		course_already_added = set()
-		for cc in CurriculumCourse.objects.filter(Associated_Curriculum=curric):
-			course_already_added.add(cc.Associated_Course)
+        coursesSet = set(courses) - course_already_added
 
-		coursesSet = set(courses) - course_already_added
+        cTupleArray = set()
+        for c in coursesSet:
+            cTupleArray.add((c.pk, c.Subject_Code + ' ' + c.Course_Number + ': ' + c.Course_Name))
+        cChoices = tuple(cTupleArray)
 
-		cTupleArray = set()
-		for c in coursesSet:
-			cTupleArray.add((c.pk, c.Subject_Code + ' ' + c.Course_Number + ': ' + c.Course_Name))
-		cChoices = tuple(cTupleArray)
-
-		self.fields['courseToAdd'] = forms.ChoiceField(choices=cChoices, label="Select the course to add",
-									widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
-		self.fields['req'] = forms.BooleanField(label="Required")
+        self.fields['courseToAdd'] = forms.ChoiceField(choices=cChoices, label="Select the course to add",
+                                                       widget=forms.Select(
+                                                           attrs={'class': 'selectpicker form-control'}))
+        self.fields['req'] = forms.BooleanField(label="Required")
 
 # At this point, just have a drop down to pick the course
 # Have that automatically create the CC and whatever CCT's are needed
@@ -117,54 +117,53 @@ class addCourseToCurricForm(forms.Form):
 
 
 class pickCourseForCurricToEditForm(forms.Form):
-	def __init__(self, *args, **kwargs):
-		self.curr_pk = kwargs.pop('curr_pk')
-		super(pickCourseForCurricToEditForm, self).__init__(*args, **kwargs)
+    def __init__(self, *args, **kwargs):
+        self.curr_pk = kwargs.pop('curr_pk')
+        super(pickCourseForCurricToEditForm, self).__init__(*args, **kwargs)
 
-		curric = Curriculum.objects.get(pk=self.curr_pk)
-		curric_courses = CurriculumCourse.objects.filter(Associated_Curriculum=curric)
-		course_choices = set()
-		for cc in curric_courses:
-			course_choices.add((cc.Associated_Course.pk,
-			            cc.Associated_Course.Subject_Code + ' '
-			            + str(cc.Associated_Course.Course_Number)))
+        curric = Curriculum.objects.get(pk=self.curr_pk)
+        curric_courses = CurriculumCourse.objects.filter(Associated_Curriculum=curric)
+        course_choices = set()
+        for cc in curric_courses:
+            course_choices.add((cc.Associated_Course.pk,
+                                cc.Associated_Course.Subject_Code + ' '
+                                + str(cc.Associated_Course.Course_Number)))
 
-		self.fields['courseToEdit'] = forms.ChoiceField(choices=course_choices, label="Select the course to edit",
-									widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
-
-		edit_choices = (
+        self.fields['courseToEdit'] = forms.ChoiceField(choices=course_choices, label="Select the course to edit",
+                                                        widget=forms.Select(
+                                                            attrs={'class': 'selectpicker form-control'}))
+        edit_choices = (
 			('cct', 'Topics in the Course'),
 			('goal', 'Goals for the Course'),
 		)
-
-		self.fields['editType'] = forms.ChoiceField(choices=edit_choices, label="What to edit",
+        self.fields['editType'] = forms.ChoiceField(choices=edit_choices, label="What to edit",
 		                                            widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
 
 
 class editCCTForm(forms.Form):
-	def __init__(self, *args, **kwargs):
-		curr_pk = kwargs.pop('curr_pk')
-		course_pk = kwargs.pop('course_pk')
-		super(editCCTForm, self).__init__(*args, **kwargs)
+    def __init__(self, *args, **kwargs):
+        curr_pk = kwargs.pop('curr_pk')
+        course_pk = kwargs.pop('course_pk')
+        super(editCCTForm, self).__init__(*args, **kwargs)
 
-		course = Course.objects.get(pk=course_pk)
-		curric = Curriculum.objects.get(pk=curr_pk)
-		ct_of_course = CourseTopics.objects.filter(Associated_Course=course)
-		cct_of_curriculum = CurriculumCT.objects.filter(Associated_Curriculum=curric,
-		                                                Associated_CT__in=ct_of_course)
+        course = Course.objects.get(pk=course_pk)
+        curric = Curriculum.objects.get(pk=curr_pk)
+        ct_of_course = CourseTopics.objects.filter(Associated_Course=course)
+        cct_of_curriculum = CurriculumCT.objects.filter(Associated_Curriculum=curric,
+                                                        Associated_CT__in=ct_of_course)
 
-		# Get course, curriculum
-		# Get the courseTopics of the course
-		# Get the curricCT of the curriculum, where they point to a ct of the course
+        # Get course, curriculum
+        # Get the courseTopics of the course
+        # Get the curricCT of the curriculum, where they point to a ct of the course
 
-		topic_choices = set()
-		for cct in cct_of_curriculum:
-			t = cct.Associated_CT.Associated_Topic
-			topic_choices.add((t.pk, t.Name))
+        topic_choices = set()
+        for cct in cct_of_curriculum:
+            t = cct.Associated_CT.Associated_Topic
+            topic_choices.add((t.pk, t.Name))
 
-		self.fields['topic'] = forms.ChoiceField(choices=topic_choices, label="Topic to edit",
-									widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
-		self.fields['units'] = forms.IntegerField(label="Units", min_value=0)
+        self.fields['topic'] = forms.ChoiceField(choices=topic_choices, label="Topic to edit",
+                                                 widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
+        self.fields['units'] = forms.IntegerField(label="Units", min_value=0)
 
 
 class newGoalForm(forms.ModelForm):
@@ -272,16 +271,16 @@ class gradeDistForm(forms.Form):
         winter = 'WI'
         sem = ''
 
-        if s.semesters == spring:
+        if s.Semester == spring:
             sem = 'Spring'
 
-        if s.semesters == summer:
+        elif s.Semester == summer:
             sem = 'Summer'
 
-        if s.semesters == fall:
+        elif s.Semester == fall:
             sem = 'Fall'
 
-        if s.semesters == winter:
+        elif s.Semester == winter:
             sem = 'Winter'
 
         secTupleArray.append(
@@ -297,7 +296,6 @@ class gradeDistForm(forms.Form):
         TupleArray.append((g.ID, 'Goal: ' + g.Description))
 
     gChoice = tuple(TupleArray)
-    print(gChoice)
     goal = forms.ChoiceField(choices=gChoice, label="Choose a Goal",
                              widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
 
@@ -327,8 +325,8 @@ class newSectionForm(forms.Form):
 
     seme = forms.ChoiceField(choices=semesters, label="Choose a Semester",
                              widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
-    enroll = forms.CharField(max_length=255, label="Enter Enrollment",
-                             widget=forms.TextInput(attrs={'class': 'form-control'}))
+    enroll = forms.IntegerField(initial=0, label="Enter Number of Enrollment",
+                                widget=forms.TextInput(attrs={'class': 'form-control'}))
 
     com1 = forms.CharField(max_length=255, label="Enter First Comment",
                            widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -451,3 +449,57 @@ class addGoalToCourseForm(forms.Form):
 
 		self.fields['goal'] = forms.ChoiceField(choices=choices, label="Goal to add",
 		                                         widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
+
+class editSectionForm(forms.Form):
+    secTupleArray = []
+    for s in CourseSection.objects.all():
+        spring = 'SP'
+        summer = 'SM'
+        fall = 'FA'
+        winter = 'WI'
+        sem = ''
+
+        if s.Semester == spring:
+            sem = 'Spring'
+
+        elif s.Semester == summer:
+            sem = 'Summer'
+
+        elif s.Semester == fall:
+            sem = 'Fall'
+
+        elif s.Semester == winter:
+            sem = 'Winter'
+
+        secTupleArray.append((s.Section_ID, 'Section: ' + s.Associated_Course.Course_Name + ' (' + sem + ' ' + str(s.Year) + ')'))
+
+    secChoice = tuple(secTupleArray)
+
+    currSection = forms.ChoiceField(choices=secChoice, label="Choose a Curriculum",
+                                    widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
+
+    year = forms.IntegerField(initial=0, label="Enter New Year",
+                              widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+    spring = 'SP'
+    summer = 'SM'
+    fall = 'FA'
+    winter = 'WI'
+
+    semesters = (
+        (spring, 'Spring'),
+        (summer, 'Summer'),
+        (fall, 'Fall'),
+        (winter, 'Winter')
+    )
+
+    seme = forms.ChoiceField(choices=semesters, label="Choose a New Semester",
+                             widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
+
+    enroll = forms.IntegerField(initial=0, label="Enter New Enrollment Number",
+                                widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+    com1 = forms.CharField(max_length=255, label="Enter First Comment",
+                           widget=forms.TextInput(attrs={'class': 'form-control'}))
+    com2 = forms.CharField(max_length=255, label="Enter Second Comment",
+                           widget=forms.TextInput(attrs={'class': 'form-control'}))
