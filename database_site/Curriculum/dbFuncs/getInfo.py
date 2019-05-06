@@ -135,7 +135,7 @@ def get_courses_in_a_cur(cur_name):
 	return CurriculumCourse.objects.filter(Associated_Curriculum=cur_name).values('Associated_Course')
 
 
-def get_sections_in_a_cur_with_time_range(cur_name, start_semester, start_year,end_semester, end_year):
+def get_sections_in_a_cur_with_time_range(cur_name, start_semester, start_year, end_semester, end_year):
 	courses_in_a_cur = get_courses_in_a_cur(cur_name)
 	res = []
 
@@ -145,14 +145,31 @@ def get_sections_in_a_cur_with_time_range(cur_name, start_semester, start_year,e
 	res2 = []
 
 	for i in res:
-		if (i.Year >= start_year )and (i.Year <= end_year):
+		if (i.Year >= start_year) and (i.Year <= end_year):
 			res2.append(i)
 
 	for i in res:
 		if i.Year == start_year:
 			if start_semester == spring:
+				res2.append(i)
+			else:
+				if i.Semester >= start_semester:
+					res2.append(i)
+		elif i.Year == end_year:
+			if end_year == winter:
+				res2.append(i)
+			else:
+				if i.Semester <= end_semester:
+					res2.append(i)
+		else:
+			res2.append(i)
 
+	res3 = [] 
 
+	for i in res2:
+		res3.append(Grade.objects.filter(Associated_Course_Section=i))
+
+	return res3
 
 
 
