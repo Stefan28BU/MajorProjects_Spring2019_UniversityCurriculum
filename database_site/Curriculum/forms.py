@@ -134,8 +134,8 @@ class pickCourseForCurricToEditForm(forms.Form):
                                                             attrs={'class': 'selectpicker form-control'}))
 
         edit_choices = (
-            ('cct', "Topics in the Course")
-            ('goal', "Goals for the Course")
+            ('cct', "Topics in the Course"),
+            ('goal', "Goals for the Course"),
         )
 
         self.fields['editType'] = forms.ChoiceField(choices=edit_choices, label="What to edit",
@@ -467,3 +467,15 @@ class editSectionForm(forms.Form):
                            widget=forms.TextInput(attrs={'class': 'form-control'}))
     com2 = forms.CharField(max_length=255, label="Enter Second Comment",
                            widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+
+class queryOneForm(forms.Form):
+    pTupleArray = []
+    for p in Curriculum.objects.all():
+        pTupleArray.append((p.Cur_name, p.Cur_name))
+    pChoices = tuple(pTupleArray)
+
+    curr = forms.ChoiceField(choices=pChoices, label="Select a Curriculum",
+                           widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
+
+

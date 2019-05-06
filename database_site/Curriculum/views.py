@@ -6,6 +6,8 @@ from .models import *
 from .forms import *
 from pprint import pprint
 
+from .dbFuncs.getInfo import *
+
 def index(request):
     return render(request=request, template_name="index.html")
 
@@ -417,3 +419,26 @@ def editSection(request):
 
     return render(request=request, template_name="Edit/editSection.html", context={"form": form})
 
+
+def qPage(request):
+    return render(request=request, template_name="Queries/queryPage.html")
+
+def q1(request):
+    course_list = []
+    topic_list = []
+    if request.method == 'GET':
+        form = queryOneForm(request.GET)
+
+        if form.is_valid():
+            curricula = form['curr'].value()
+
+            course_list = get_courses_in_curricula(curricula)
+            topic_list = get_topics_in_curricula(curricula)
+
+        else:
+            print('Invalid')
+            # return HttpResponseRedirect('/Curriculum')
+    else:
+        form = queryOneForm()
+
+    return render(request=request, template_name="Queries/q1.html", context={"form": form, "course_list": course_list, "topic_list": topic_list})

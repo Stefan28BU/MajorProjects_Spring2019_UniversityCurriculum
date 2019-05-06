@@ -1,4 +1,4 @@
-from database_site.Curriculum.models import *
+from Curriculum.models import *
 
 
 spring = 1
@@ -16,11 +16,20 @@ def get_curricula_heads():
 
 
 def get_courses_in_curricula(cur_name):
-	return CurriculumCourse.objects.filter(Associated_Curriculum=cur_name).values('Associated_Course')
+
+	cc =  CurriculumCourse.objects.filter(Associated_Curriculum__Cur_name=cur_name)
+	cName = set()
+	for c in cc:
+		cName.add(str(c.Associated_Course.Course_Name))
+	return cName
 
 
-def get_topics_in_curricula(cur):
-	return CurriculumTopic.objects.filter(Associated_Curriculum=cur).values('Associated_Topic')
+def get_topics_in_curricula(cur_name):
+	cc = CurriculumTopic.objects.filter(Associated_Curriculum__Cur_name=cur_name)
+	cName = set()
+	for c in cc:
+		cName.add(str(c.Associated_Course.Course_Name))
+	return cName
 
 
 def get_info_on_curriculum(cur_name):

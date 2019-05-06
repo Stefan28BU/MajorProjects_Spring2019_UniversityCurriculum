@@ -25,5 +25,7 @@ urlpatterns = [
 	path('editSection/', views.editSection, name='editSection'),
     path('editTopic/', views.editTopic, name='editTopic'),
     path('editGoal/', views.editGoal, name='editGoal'),
+    path('qPage/', views.qPage, name='qPage'),
+    path('q1/', views.q1, name='q1'),
 
 ]
