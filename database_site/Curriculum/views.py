@@ -1,6 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import *
 
@@ -392,4 +391,27 @@ def editGoal(request):
         form = editGoalForm()
 
     return render(request=request, template_name="Edit/editGoal.html", context={"form": form})
+
+
+def editSection(request):
+    if request.method == 'POST':
+        form = editSectionForm(request.POST)
+
+        if form.is_valid():
+            tempSec = CourseSection.objects.get(Section_ID=form['currSection'].value())
+
+            tempSec.Year = form['year'].value()
+            tempSec.Semester = form['seme'].value()
+            tempSec.Enrollment = form['enroll'].value()
+            tempSec.Comment1 = form['com1'].value()
+            tempSec.Comment2 = form['com2'].value()
+            tempSec.save()
+
+        else:
+            print('Invalid')
+            return HttpResponseRedirect('/Curriculum')
+    else:
+        form = editSectionForm()
+
+    return render(request=request, template_name="Edit/editSection.html", context={"form": form})
 
