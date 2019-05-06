@@ -55,8 +55,6 @@ class Curriculum(models.Model):
         db_table = 'Curriculum'
 
 
-
-
 class Topic(models.Model):
     ID = models.AutoField(primary_key=True)
     Name = models.CharField(max_length=255)
