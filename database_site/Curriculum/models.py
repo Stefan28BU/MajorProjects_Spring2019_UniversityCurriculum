@@ -1,5 +1,19 @@
 from django.db import models
 
+class Course(models.Model):
+    Subject_Code = models.CharField(max_length=255)
+    Course_Number = models.CharField(max_length=255)
+    Course_Name = models.CharField(max_length=255)
+    Credit_Hours = models.PositiveIntegerField(default=0)
+    Description = models.CharField(max_length=255)
+
+    class Meta:
+        db_table = 'Course'
+
+        constraints = [
+            models.UniqueConstraint(fields=['Subject_Code', 'Course_Number'], name='course_unique')
+        ]
+
 
 class Person(models.Model):
     ID = models.AutoField(primary_key=True)
@@ -41,19 +55,6 @@ class Curriculum(models.Model):
         db_table = 'Curriculum'
 
 
-class Course(models.Model):
-    Subject_Code = models.CharField(max_length=255)
-    Course_Number = models.CharField(max_length=255)
-    Course_Name = models.CharField(max_length=255)
-    Credit_Hours = models.PositiveIntegerField(default=0)
-    Description = models.CharField(max_length=255)
-
-    class Meta:
-        db_table = 'Course'
-
-        constraints = [
-            models.UniqueConstraint(fields=['Subject_Code', 'Course_Number'], name='course_unique')
-        ]
 
 
 class Topic(models.Model):
