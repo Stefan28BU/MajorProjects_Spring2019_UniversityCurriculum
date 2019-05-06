@@ -207,11 +207,21 @@ def editCourse(request):
 
             tempCourseTopic = CourseTopics()
             tempCourseTopic.Associated_Course = temp
-
             tempCourseTopic.Associated_Topic = tempTopic
 
-            tempCourseTopic.save()
+            try:
+                tempCourseTopic.save()
+            except:
+                print("Already Exists")
 
+            tempGoal = Goal.objects.get(ID=form['goal'].value())
+            tempCourseGoal  = CourseGoal()
+            tempCourseGoal.Associated_Course = temp
+            tempCourseGoal.Associated_Goal = tempGoal
+            try:
+                tempCourseGoal.save()
+            except:
+                print("Already Exists")
         else:
             print('Invalid')
             return HttpResponseRedirect('/Curriculum')
@@ -219,3 +229,44 @@ def editCourse(request):
         form = editCourseForm()
 
     return render(request=request, template_name="Edit/editCourse.html", context={"form": form})
+
+
+def editTopic(request):
+    if request.method == 'POST':
+        form = editTopicForm(request.POST)
+
+        if form.is_valid():
+            temp = Topic.objects.get(ID=form['topic'].value())
+            temp.Name = form['name'].value()
+
+            temp.save()
+
+        else:
+            print('Invalid')
+            return HttpResponseRedirect('/Curriculum')
+    else:
+        form = editTopicForm()
+
+    return render(request=request, template_name="Edit/editTopic.html", context={"form": form})
+
+
+def editGoal(request):
+    if request.method == 'POST':
+        form = editGoalForm(request.POST)
+
+        if form.is_valid():
+            tempGoal = Goal.objects.get(ID=form['goal'].value())
+            tempGoal.Description = form['des'].value()
+
+            tempCurr = Curriculum.objects.get(Cur_name=form['curr'].value())
+            tempGoal.Associated_Curriculum = tempCurr
+            tempGoal.save()
+
+        else:
+            print('Invalid')
+            return HttpResponseRedirect('/Curriculum')
+    else:
+        form = editGoalForm()
+
+    return render(request=request, template_name="Edit/editGoal.html", context={"form": form})
+
