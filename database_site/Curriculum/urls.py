@@ -18,7 +18,7 @@ urlpatterns = [
 	path('editSpecificCurriculum/<int:curr_id>', views.editCurriculum, name='editSpecificCurriculum'),
 
 	# path('editSection/', views.editSection, name='editSection'),
-    # path('editTopic/', views.editTopic, name='editTopic'),
-    # path('editGoal/', views.editGoal, name='editGoal'),
+    path('editTopic/', views.editTopic, name='editTopic'),
+    path('editGoal/', views.editGoal, name='editGoal'),
 
 ]
