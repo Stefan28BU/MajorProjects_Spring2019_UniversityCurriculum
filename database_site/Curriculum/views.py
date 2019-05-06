@@ -411,7 +411,7 @@ def q1(request):
 
         else:
             print('Invalid')
-            # return HttpResponseRedirect('/Curriculum')
+            return HttpResponseRedirect('/Curriculum')
     else:
         form = queryOneForm()
 
@@ -483,3 +483,28 @@ def gradeGoal(request, curr_pk, course_pk):
         form = gradeGoal(curr_pk=curr_pk, course_pk=course_pk)
 
     return render(request=request, template_name="Edit/forkForEditGoalsInCurriculum.html", context={"form": form})
+
+
+def q2(request):
+    course_list = []
+    curr_list = []
+    if request.method == 'GET':
+        form = queryTwoForm(request.GET)
+
+        if form.is_valid():
+            course = form['course'].value()
+
+            q2obj = get_info_on_course_with_name(course)
+
+            print(q2obj)
+
+
+        else:
+            print('Invalid')
+            return HttpResponseRedirect('/Curriculum')
+    else:
+        form = queryTwoForm()
+
+    return render(request=request, template_name="Queries/q2.html",
+                  context={"form": form, "course_list": course_list, "curr_list": curr_list})
+

@@ -43,11 +43,11 @@ def get_basic_info_on_course(subject_code, course_number):
 
 def get_basic_info_on_course_with_name(course_name):
 	res = Course.objects.filter(Course_Name=course_name)
-	return res.values('Subject_Code', 'Course_Number', 'Credit_Hours', 'Description')
+	return res
 
 
 def get_curricula_info_on_course_with_name(course_name):
-	return CurriculumCourse.objects.filter(Associated_Course=course_name).values('Associated_Curriculum')
+	return CurriculumCourse.objects.filter(Associated_Course__Course_Name=course_name)
 
 
 def get_course_name_from_code(subject_code, course_number):

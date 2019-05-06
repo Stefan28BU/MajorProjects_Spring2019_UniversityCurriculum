@@ -511,7 +511,18 @@ class queryOneForm(forms.Form):
         pTupleArray.append((p.Cur_name, p.Cur_name))
     pChoices = tuple(pTupleArray)
 
-    curr = forms.ChoiceField(choices=pChoices, label="Select a Curriculum",
-                           widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
+    curr = forms.ChoiceField(choices=pChoices, label="Select a Curriculum", required=False,
+                           widget=forms.Select(attrs={'class': 'selectpicker form-control'}) )
+
+
+class queryTwoForm(forms.Form):
+    pTupleArray = []
+    for p in Course.objects.all():
+        pTupleArray.append((p.Course_Name, p.Subject_Code + ' ' + p.Course_Number + ' (' + p.Course_Name + ')'))
+    pChoices = tuple(pTupleArray)
+
+    course = forms.ChoiceField(choices=pChoices, label="Select a Course", required=False,
+                           widget=forms.Select(attrs={'class': 'selectpicker form-control'}) )
+
 
 
