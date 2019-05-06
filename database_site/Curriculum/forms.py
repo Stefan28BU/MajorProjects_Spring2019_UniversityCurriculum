@@ -65,7 +65,7 @@ class editCurriculumFrom(forms.Form):
 
     newHead = forms.ChoiceField(choices=pChoices, label="Select a New Head", widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
 
-    newHours = forms.IntegerField(initial=0, label="Enter New Credit Hours", widget= forms.Select(attrs={'class': 'selectpicker form-control'}))
+    newHours = forms.IntegerField(initial=0, label="Enter New Credit Hours", widget= forms.TextInput(attrs={'class': 'form-control'}))
 
 
 class newGoalForm(forms.ModelForm):
