@@ -13,5 +13,6 @@ urlpatterns = [
     path('editPerson/', views.editPerson, name='editPerson'),
     path('editCurriculum/', views.editCurriculum, name='editCurriculum'),
     path('gradeDist/', views.gradeDist, name='gradeDist'),
+    path('newSection/', views.newSection, name='newSection'),
 
 ]
