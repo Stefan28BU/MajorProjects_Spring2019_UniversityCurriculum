@@ -84,7 +84,7 @@ class newGoalForm(forms.ModelForm):
         widgets = {
             'Associated_Curriculum':  forms.Select(attrs={'class': 'selectpicker form-control'}),
 
-            'Description':  forms.Select(attrs={'class': 'selectpicker form-control'}),
+            'Description':  forms.TextInput(attrs={'class': 'form-control'}),
         }
 
 
@@ -220,15 +220,38 @@ class newSectionForm(forms.Form):
     winter = 'WI'
 
     semesters = (
-        (spring, 'Spring semester'),
-        (summer, 'Summer semester'),
-        (fall, 'Fall semester'),
-        (winter, 'Winter semester')
+        (spring, 'Spring'),
+        (summer, 'Summer'),
+        (fall, 'Fall'),
+        (winter, 'Winter')
     )
 
-    seme = forms.ChoiceField(choices=semesters, label="Choose a Semester", widget= forms.Select(attrs={'class': 'selectpicker form-control'}))
+    seme = forms.ChoiceField(choices=semesters, label="Choose a Semester", widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
     enroll = forms.CharField(max_length=255, label="Enter Enrollment", widget=forms.TextInput(attrs={'class': 'form-control'}))
 
     com1 = forms.CharField(max_length=255, label="Enter First Comment",widget=forms.TextInput(attrs={'class': 'form-control'}))
     com2 = forms.CharField(max_length=255, label="Enter Second Comment",widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+
+class editCourseForm(forms.Form):
+    eCTupleArray = []
+    for g in Course.objects.all():
+        eCTupleArray.append((g.pk, 'Course: ' + g.Subject_Code + g.Course_Number + ' (' + g.Course_Name + ')'))
+
+    ecChoice = tuple(eCTupleArray)
+
+    course = forms.ChoiceField(choices=ecChoice, label="Choose a Course",widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
+    newName = forms.CharField(max_length=255, label="Enter New Name",widget=forms.TextInput(attrs={'class': 'form-control'}))
+    newCode = forms.CharField(max_length=255, label="Enter New Subject Code",widget=forms.TextInput(attrs={'class': 'form-control'}))
+    newNum = forms.CharField(max_length=255, label="Enter New Course Number",widget=forms.TextInput(attrs={'class': 'form-control'}))
+    newCred = forms.IntegerField(initial=0, label="Enter New Hours",widget=forms.TextInput(attrs={'class': 'form-control'}))
+    newDes = forms.CharField(max_length=255, label="Enter New Description",widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+    tpTupleArray = []
+    for g in Topic.objects.all():
+        tpTupleArray.append((g.ID, g.Name))
+
+    tpChoice = tuple(tpTupleArray)
+
+    topic = forms.ChoiceField(choices=tpChoice, label="Choose a Topic", widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
 

@@ -188,3 +188,34 @@ def newSection(request):
         form = newSectionForm()
 
     return render(request=request, template_name="curriculum/newSection.html", context={"form": form})
+
+
+def editCourse(request):
+    if request.method == 'POST':
+        form = editCourseForm(request.POST)
+
+        if form.is_valid():
+            temp = Course.objects.get(pk=form['course'].value())
+            temp.Course_Number = form['newNum'].value()
+            temp.Credit_Hours = form['newCred'].value()
+            temp.Description = form['newDes'].value()
+            temp.Course_Name = form['newName'].value()
+            temp.Subject_Code = form['newCode'].value()
+            temp.save()
+
+            tempTopic = Topic.objects.get(ID=form['topic'].value())
+
+            tempCourseTopic = CourseTopics()
+            tempCourseTopic.Associated_Course = temp
+
+            tempCourseTopic.Associated_Topic = tempTopic
+
+            tempCourseTopic.save()
+
+        else:
+            print('Invalid')
+            return HttpResponseRedirect('/Curriculum')
+    else:
+        form = editCourseForm()
+
+    return render(request=request, template_name="Edit/editCourse.html", context={"form": form})

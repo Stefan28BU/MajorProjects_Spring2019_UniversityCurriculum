@@ -14,5 +14,9 @@ urlpatterns = [
     path('editCurriculum/', views.editCurriculum, name='editCurriculum'),
     path('gradeDist/', views.gradeDist, name='gradeDist'),
     path('newSection/', views.newSection, name='newSection'),
+    path('editCourse/', views.editCourse, name='editCourse'),
+    # path('editSection/', views.editSection, name='editSection'),
+    # path('editTopic/', views.editTopic, name='editTopic'),
+    # path('editGoal/', views.editGoal, name='editGoal'),
 
 ]
