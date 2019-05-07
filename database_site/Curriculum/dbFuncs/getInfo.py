@@ -168,7 +168,7 @@ def get_sections_grades_of_a_course_with_range(course_name, cur_name, start_seme
 	for i in res:
 		res2 = get_sections_grades_of_a_course(i.Associated_Course)
 
-	return res2
+	return res2, res
 
 
 def get_courses_in_a_cur(cur_name):

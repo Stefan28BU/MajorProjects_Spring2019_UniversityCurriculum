@@ -574,7 +574,8 @@ def q3(request):
 
             q3obj = get_info_on_course_no_range(course, curr)
 
-            print(q3obj, ' sdadsadasdasdadaddas')
+            grade_dist = q3obj[0]
+            sec_list = q3obj[1]
 
         else:
             print('Invalid')
@@ -607,3 +608,23 @@ def addTopicToCurric(request, curr_pk):
     else:
         form = addTopicToCurricForm(curr_pk=curr_pk)
     return render(request=request, template_name="Edit/createCurriculumTopic.html", context={"form": form})
+
+
+def q4(request):
+    sec_list = []
+    grade_dist = []
+    if request.method == 'GET':
+        form = queryFourForm(request.GET)
+
+        if form.is_valid():
+            curr = form['curr'].value()
+
+
+        else:
+            print('Invalid')
+            return HttpResponseRedirect('/Curriculum')
+    else:
+        form = queryFourForm()
+
+    return render(request=request, template_name="Queries/q4.html",
+                  context={"form": form, "sec_list": sec_list, "grade_dist": grade_dist})

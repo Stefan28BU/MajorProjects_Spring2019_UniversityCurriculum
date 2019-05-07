@@ -138,7 +138,7 @@ class pickCourseForCurricToEditForm(forms.Form):
             ('goal', "Goals for the Course"),
         )
         self.fields['editType'] = forms.ChoiceField(choices=edit_choices, label="What to edit",
-		                                            widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
+                                                    widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
 
 
 class editCCTForm(forms.Form):
@@ -284,14 +284,12 @@ class gradeDistForm(forms.Form):
         elif s.Semester == winter:
             sem = 'Winter'
 
-        secTupleArray.append(
-            (s.Section_ID, 'Course: ' + s.Associated_Course.Course_Name + ', Section: ' + sem + ' ' + str(s.Year)))
+        secTupleArray.append((s.Section_ID, 'Course: ' + s.Associated_Course.Course_Name + ', Section: ' + sem + ' ' + str(s.Year) + 'Section ID: ' + str(s.Section_ID)))
 
     secChoice = tuple(secTupleArray)
 
     section = forms.ChoiceField(choices=secChoice, label="Choose a Section",
                                 widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
-
 
 
 class newSectionForm(forms.Form):
@@ -329,7 +327,6 @@ class newSectionForm(forms.Form):
 
 
 class editCourseForm(forms.Form):
-
     newName = forms.CharField(max_length=255, label="Enter New Name",
                               widget=forms.TextInput(attrs={'class': 'form-control'}))
     newCode = forms.CharField(max_length=255, label="Enter New Subject Code",
@@ -447,7 +444,7 @@ class editSectionForm(forms.Form):
 
     secChoice = tuple(secTupleArray)
 
-    currSection = forms.ChoiceField(choices=secChoice, label="Choose a Curriculum",
+    currSection = forms.ChoiceField(choices=secChoice, label="Choose a Section",
                                     widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
 
     year = forms.IntegerField(initial=0, label="Enter New Year",
@@ -537,6 +534,42 @@ class queryThreeForm(forms.Form):
 
     endSem = forms.ChoiceField(choices=semesters, label="Choose a Semester",
                                widget=forms.Select(attrs={'class': 'selectpicker form-control'}), required=False)
+
+
+class queryFourForm(forms.Form):
+    curTupleArray = []
+    for p in Curriculum.objects.all():
+        curTupleArray.append((p.Cur_name, p.Cur_name))
+    currChoices = tuple(curTupleArray)
+
+    curr = forms.ChoiceField(choices=currChoices, label="Select a Curriculum", required=False,
+                             widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
+
+    spring = 'SP'
+    summer = 'SM'
+    fall = 'FA'
+    winter = 'WI'
+
+    semesters = (
+        (spring, 'Spring'),
+        (summer, 'Summer'),
+        (fall, 'Fall'),
+        (winter, 'Winter')
+    )
+
+    startYear = forms.IntegerField(initial=0, label="From",
+                                   widget=forms.TextInput(attrs={'class': 'form-control'}), required=False)
+
+    startSem = forms.ChoiceField(choices=semesters, label="Choose a Semester",
+                                 widget=forms.Select(attrs={'class': 'selectpicker form-control'}), required=False)
+
+    endYear = forms.IntegerField(initial=0, label="To",
+                                 widget=forms.TextInput(attrs={'class': 'form-control'}), required=False)
+
+    endSem = forms.ChoiceField(choices=semesters, label="Choose a Semester",
+                               widget=forms.Select(attrs={'class': 'selectpicker form-control'}), required=False)
+
+
 class pickCourseToManageForm(forms.Form):
     cTupleArray = []
     for c in Course.objects.all():
@@ -544,7 +577,7 @@ class pickCourseToManageForm(forms.Form):
     cChoices = tuple(cTupleArray)
 
     course = forms.ChoiceField(choices=cChoices, label="Select a Course",
-                             widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
+                               widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
     editChoices = (
         ('edit', 'Edit the general info'),
         ('addTopic', 'Add a Topic'),
@@ -611,4 +644,3 @@ class addTopicToCurricForm(forms.Form):
 
         self.fields['subject_area'] = forms.CharField(label="Enter the subject area")
         self.fields['units'] = forms.IntegerField(label="Units", min_value=0)
-
