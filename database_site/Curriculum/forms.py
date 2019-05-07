@@ -542,7 +542,7 @@ class queryFourForm(forms.Form):
         curTupleArray.append((p.Cur_name, p.Cur_name))
     currChoices = tuple(curTupleArray)
 
-    curr = forms.ChoiceField(choices=currChoices, label="Select a Curriculum", required=False,
+    curr = forms.ChoiceField(choices=currChoices, label="Select a Curriculum",required=False,
                              widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
 
     spring = 'SP'
@@ -557,17 +557,17 @@ class queryFourForm(forms.Form):
         (winter, 'Winter')
     )
 
-    startYear = forms.IntegerField(initial=0, label="From",
-                                   widget=forms.TextInput(attrs={'class': 'form-control'}), required=False)
+    startYear = forms.IntegerField(initial=0, label="From",required=False,
+                                   widget=forms.TextInput(attrs={'class': 'form-control'}))
 
-    startSem = forms.ChoiceField(choices=semesters, label="Choose a Semester",
-                                 widget=forms.Select(attrs={'class': 'selectpicker form-control'}), required=False)
+    startSem = forms.ChoiceField(choices=semesters, label="Choose a Semester",required=False,
+                                 widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
 
-    endYear = forms.IntegerField(initial=0, label="To",
-                                 widget=forms.TextInput(attrs={'class': 'form-control'}), required=False)
+    endYear = forms.IntegerField(initial=0, label="To",required=False,
+                                 widget=forms.TextInput(attrs={'class': 'form-control'}))
 
-    endSem = forms.ChoiceField(choices=semesters, label="Choose a Semester",
-                               widget=forms.Select(attrs={'class': 'selectpicker form-control'}), required=False)
+    endSem = forms.ChoiceField(choices=semesters, label="Choose a Semester",required=False,
+                               widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
 
 
 class pickCourseToManageForm(forms.Form):

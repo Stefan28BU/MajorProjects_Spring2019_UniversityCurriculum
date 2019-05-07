@@ -29,6 +29,14 @@ def get_courses_in_curricula(cur_name):
     return cName
 
 
+def get_courses_in_curricula2(cur_name):
+    cc = CurriculumCourse.objects.filter(Associated_Curriculum__Cur_name=cur_name)
+    cName = set()
+    for c in cc:
+        cName.add(c.Associated_Course)
+    return cName
+
+
 def get_topics_in_curricula(cur_name):
     cc = CurriculumTopic.objects.filter(Associated_Curriculum__Cur_name=cur_name)
     cName = set()
@@ -192,37 +200,43 @@ def get_courses_in_a_cur(cur_name):
 
 
 def get_sections_in_a_cur_with_time_range(cur_name, start_semester, start_year, end_semester, end_year):
-    courses_in_a_cur = get_courses_in_a_cur(cur_name)
-    res = []
+    courses = get_courses_in_curricula2(cur_name)
+    course_section_set = set()
 
-    for i in courses_in_a_cur:
-        res.append(get_all_sections(i))
+    for i in courses:
+        obj = get_info_on_course_no_range(i.Course_Name, cur_name)
+        course_section_set.add(tuple(obj[1]))
 
-    res2 = []
+    course_sections = []
 
-    for i in res:
-        if (i.Year >= start_year) and (i.Year <= end_year):
-            res2.append(i)
+    for i in course_section_set:
+        course_sections.append(get_all_sections_with_range(i, start_semester, start_year, end_semester, end_year))
 
-    for i in res:
-        if i.Year == start_year:
-            if start_semester == spring:
-                res2.append(i)
-            else:
-                if i.Semester >= start_semester:
-                    res2.append(i)
-        elif i.Year == end_year:
-            if end_year == winter:
-                res2.append(i)
-            else:
-                if i.Semester <= end_semester:
-                    res2.append(i)
-        else:
-            res2.append(i)
+    overallDict = dict()
 
-    res3 = []
+    for csList in course_sections:
 
-    for i in res2:
-        res3.append(Grade.objects.filter(Associated_Course_Section=i))
+        for cs in csList:
+            gradeDict = {
+                'A+': 0,
+                'A': 0,
+                'A-': 0,
+                'B+': 0,
+                'B': 0,
+                'B-': 0,
+                'C+': 0,
+                'C': 0,
+                'C-': 0,
+                'D+': 0,
+                'D': 0,
+                'D-': 0,
+                'F': 0,
+                'I': 0,
+                'W': 0,
+            }
 
-    return res3
+            for g in Grade.objects.filter(Associated_Course_Section__Section_ID=cs.Section_ID):
+                gradeDict[g.Letter_Grade] += g.dist_number
+            overallDict[str(cs.pk)] = gradeDict
+
+    return overallDict, course_sections

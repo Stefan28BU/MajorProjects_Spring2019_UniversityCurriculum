@@ -599,8 +599,8 @@ def q3(request):
                     list_list.append(('Without range: ', sec, gList))
             else:
                 q3obj = get_sections_grades_of_a_course_with_range(course, curr, startSem, startYear,
-                                                                 endSem,
-                                                                 endYear)
+                                                                   endSem,
+                                                                   endYear)
                 sec_list = q3obj[1]
                 grade_dist = q3obj[0]
 
@@ -610,17 +610,6 @@ def q3(request):
                     for g, count in grade_dist[str(sec.pk)].items():
                         gList.append(str(g) + ': ' + str(count) + ' students')
                     list_list.append(('With range: ', sec, gList))
-
-            # sec_list1 = q3obj_2[1]
-            # grade_dist1 = q3obj_2[0]
-            # for sec in sec_list1:
-            #     gList = []
-            #
-            #     for g, count in grade_dist1[str(sec.pk)].items():
-            #         gList.append(str(g) + ': ' + str(count) + ' students')
-            #     list_list.append((sec, gList))
-
-
 
         else:
             print('Invalid')
@@ -655,14 +644,58 @@ def addTopicToCurric(request, curr_pk):
 
 
 def q4(request):
-    sec_list = []
     grade_dist = []
+    sec_list = []
+    list_list = []
+
     if request.method == 'GET':
         form = queryFourForm(request.GET)
 
         if form.is_valid():
             curr = form['curr'].value()
+            startSem = form['startSem'].value()
+            endSem = form['endSem'].value()
+            startYear = form['startYear'].value()
+            endYear = form['endYear'].value()
 
+            q4obj = get_sections_in_a_cur_with_time_range(curr, startSem, startYear, endSem, endYear)
+
+            grade_dist = q4obj[0]
+            sec_list = q4obj[1]
+
+            for secL in sec_list:
+                for sec in secL:
+                    gList = []
+
+                    for g, count in grade_dist[str(sec.pk)].items():
+                        gList.append((g, count))
+                    list_list.append(('Without range: ', sec, gList))
+
+            gradeDict = {
+                'A+': 0,
+                'A': 0,
+                'A-': 0,
+                'B+': 0,
+                'B': 0,
+                'B-': 0,
+                'C+': 0,
+                'C': 0,
+                'C-': 0,
+                'D+': 0,
+                'D': 0,
+                'D-': 0,
+                'F': 0,
+                'I': 0,
+                'W': 0,
+            }
+
+            for a, b, gList in list_list:
+                for grade, count in gList:
+                    gradeDict[grade] += count
+
+            tot_grade_list = []
+            for grade, count in gradeDict.items():
+                tot_grade_list.append( grade + ': ' + str(count) )
 
         else:
             print('Invalid')
@@ -671,4 +704,5 @@ def q4(request):
         form = queryFourForm()
 
     return render(request=request, template_name="Queries/q4.html",
-                  context={"form": form, "sec_list": sec_list, "grade_dist": grade_dist})
+                  context={"form": form, "sec_list": sec_list, "list_list": list_list,
+                           "tot_grade_list": tot_grade_list})

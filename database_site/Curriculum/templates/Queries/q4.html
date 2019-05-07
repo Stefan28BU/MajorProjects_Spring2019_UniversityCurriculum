@@ -77,48 +77,57 @@
         </div>
     </div>
     <div class="myModal formCustom">
-        <div> Courses:
-            {% if course_list %}
+        <div>Grade Distribution for Curriculum:
+            {% if list_list %}
                 <ul>
-                    {% for course in course_list %}
-                        <li>
-                            <a>
-                                {{ course.Course_Name }}
-                                {{ '(' }}
-                                {{ course.Subject_Code }}
-                                {{ course.Course_Number }}
-                                {{ '), Credit Hours: ' }}
-                                {{ course.Credit_Hours }}
-                                {{ ', Description: ' }}
-                                {{ course.Description }}
+                    {% for status, section, gList in list_list %}
+                        {{ section.Associated_Course.Course_Name }}
+                        {{ '(' }}
+                        {{ section.Associated_Course.Subject_Code }}
+                        {{ section.Associated_Course.Course_Number }}
+                        {{ '), Section: ' }}
+                        {{ section.Semester }}
+                        {{ ' ' }}
+                        {{ section.Year }}
+                        {{ ', Section ID: ' }}
+                        {{ section.Section_ID }}
 
-                            </a>
-                        </li>
+                        <br>
                     {% endfor %}
+
                 </ul>
             {% else %}
                 <p>
-                    No Course
+                    No Grade Distribution
                 </p>
             {% endif %}
         </div>
-        <div> Curriculum:
-            {% if curr_list %}
-                <ul>
-                    {% for curr in curr_list %}
-                        <li>
-                            <a>
-                                {{ curr.Associated_Curriculum.Cur_name }}
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <p>
-                    No Curriculum
-                </p>
-            {% endif %}
-        </div>
+        {#        <div> Curriculum:#}
+        {#            {% if curr_list %}#}
+        {#                <ul>#}
+        {#                    {% for curr in curr_list %}#}
+        {#                        <li>#}
+        {#                            <a>#}
+        {#                                {{ curr.Associated_Curriculum.Cur_name }}#}
+        {#                            </a>#}
+        {#                        </li>#}
+        {#                    {% endfor %}#}
+        {#                </ul>#}
+        {#            {% else %}#}
+        {#                <p>#}
+        {#                    No Curriculum#}
+        {#                </p>#}
+        {#            {% endif %}#}
+        {#        </div>#}
+                    {% if list_list %}
+                        {% for str in tot_grade_list %}
+                            <li>
+                                <a>
+                                    {{ str }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    {%  endif  %}
         <form method="get">
             {% csrf_token %}
             <h4 class="title">Query Four</h4>
