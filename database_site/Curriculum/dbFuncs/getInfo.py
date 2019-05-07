@@ -6,6 +6,12 @@ summer = 2
 fall = 3
 winter = 4
 
+semDict = {
+	'SP': 1,
+	'SM': 2,
+	'FA': 3,
+	'WI': 4,
+}
 
 def get_curricula():
 	return Curriculum.objects.order_by('Cur_name')
@@ -89,21 +95,27 @@ def get_cur_from_course_name_and_cur(course_name, cur_name):
 def get_info_on_course_no_range(course_name, cur_name):
 
 	course_sections = get_all_sections(course_name)
-
+	print('Get all sections result: ', course_sections)
 	cur = get_cur_from_course_name_and_cur(course_name, cur_name)
+
 	res = []
 	for i in course_sections:
 		for j in cur:
 			if j.Associated_Course.Course_Name == i.Associated_Course.Course_Name:
 				res.append(i)
-				print(i)
 	res2 = []
 
 	for i in res:
-		grade = get_sections_grades_of_a_course(i.Associated_Course)
+		print('Grade loop')
+		grade = Grade.objects.filter(Associated_Course_Section=i)
+		# grade = get_sections_grades_of_a_course(i.Associated_Course)
 		res2.append(grade)
 		print(grade)
 
+	for gList in res2:
+		for g in gList:
+			print('Grade: ' + g.Letter_Grade)
+	# Res2 is List of grades by course section
 	return res2
 
 
@@ -112,20 +124,17 @@ def get_all_sections_with_range(course_name, start_sem, start_year, end_sem, end
 
 	res2 = []
 	for i in res:
+		#For every course section
 		if i.Year == start_year:
-			if start_sem == spring:
+			#If its the start year and after the first semester, add
+			if semDict[i.Semester] >= start_sem:
 				res2.append(i)
-			else:
-				if i.Semester >= start_sem:
-					res2.append(i)
-
+		# If its the last year and before the end semester, add
 		elif i.Year == end_year:
-			if end_year == winter:
+			if end_sem >= semDict[i.Semester]:
 				res2.append(i)
-			else:
-				if i.Semester <= end_sem:
-					res2.append(i)
-		else:
+		# If its between the years, add
+		elif i.Year > start_year and i.Year < end_year:
 			res2.append(i)
 
 	return res2

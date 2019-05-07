@@ -248,7 +248,6 @@ def gradeDist(request):
 
             temp.dist_number = form['dist'].value()
             temp.Letter_Grade = form['letterGrade'].value()
-            temp.Associated_Goal = Goal.objects.get(ID=form['goal'].value())
             temp.Associated_Course_Section = CourseSection.objects.get(Section_ID=form['section'].value())
 
             temp.save()
@@ -288,12 +287,12 @@ def newSection(request):
     return render(request=request, template_name="curriculum/newSection.html", context={"form": form})
 
 
-def editCourse(request):
+def editCourse(request, course_pk):
     if request.method == 'POST':
         form = editCourseForm(request.POST)
 
         if form.is_valid():
-            temp = Course.objects.get(pk=form['course'].value())
+            temp = Course.objects.get(pk=course_pk)
             temp.Course_Number = form['newNum'].value()
             temp.Credit_Hours = form['newCred'].value()
             temp.Description = form['newDes'].value()
@@ -301,25 +300,6 @@ def editCourse(request):
             temp.Subject_Code = form['newCode'].value()
             temp.save()
 
-            tempTopic = Topic.objects.get(ID=form['topic'].value())
-
-            tempCourseTopic = CourseTopics()
-            tempCourseTopic.Associated_Course = temp
-            tempCourseTopic.Associated_Topic = tempTopic
-
-            try:
-                tempCourseTopic.save()
-            except:
-                print("Already Exists")
-
-            tempGoal = Goal.objects.get(ID=form['goal'].value())
-            tempCourseGoal  = CourseGoal()
-            tempCourseGoal.Associated_Course = temp
-            tempCourseGoal.Associated_Goal = tempGoal
-            try:
-                tempCourseGoal.save()
-            except:
-                print("Already Exists")
         else:
             print('Invalid')
             return HttpResponseRedirect('/Curriculum')
@@ -483,6 +463,77 @@ def gradeGoal(request, curr_pk, course_pk):
         form = gradeGoal(curr_pk=curr_pk, course_pk=course_pk)
 
     return render(request=request, template_name="Edit/forkForEditGoalsInCurriculum.html", context={"form": form})
+
+def forkCourseManagement(request):
+    if request.method == 'POST':
+        form = pickCourseToManageForm(request.POST)
+
+        editMethod = form['editMethod'].value()
+        print(editMethod)
+
+        if editMethod == 'edit':
+            return HttpResponseRedirect('/Curriculum/editSpecificCourse/' + str(form['course'].value()))
+        elif editMethod == 'addTopic':
+            return HttpResponseRedirect('/Curriculum/addTopicToCourse/' + str(form['course'].value()))
+
+    else:
+        form = pickCourseToManageForm()
+    return render(request=request, template_name="Edit/pickCurriculumToEdit.html", context={"form": form})
+
+def gradeGoal(request, curr_pk, course_pk):
+    if request.method == 'POST':
+        form = gradeGoal(request.POST, curr_pk=curr_pk, course_pk=course_pk)
+
+        if form.is_valid():
+            course = Course.objects.get(pk=course_pk)
+            curric = Curriculum.objects.get(pk=curr_pk)
+            goal_pk = form['goal'].value()
+            goal = Goal.objects.get(pk=goal_pk)
+
+            cg = CourseGoal(Associated_Goal=goal, Associated_Course=course)
+            cg.save()
+            return HttpResponseRedirect('/Curriculum/editCurriculum')
+
+        else:
+            print('Invalid')
+            return HttpResponseRedirect('/Curriculum')
+    else:
+        form = gradeGoal(curr_pk=curr_pk, course_pk=course_pk)
+
+    return render(request=request, template_name="Edit/forkForEditGoalsInCurriculum.html", context={"form": form})
+
+
+def addTopicToCourse(request, course_pk):
+    if request.method == 'POST':
+        form = addTopicToCourseForm(request.POST, course_pk=course_pk)
+
+        if form.is_valid():
+            course = Course.objects.get(pk=course_pk)
+            topic_pk = form['topic'].value()
+
+            topic = Topic.objects.get(pk=topic_pk)
+            ct = CourseTopics(Associated_Course=course, Associated_Topic=topic)
+            ct.save()
+            ct = CourseTopics.objects.get(Associated_Course=ct.Associated_Course,
+                                          Associated_Topic=ct.Associated_Topic)
+
+            course_curric = CurriculumCourse.objects.filter(Associated_Course=course)
+            for cc in course_curric:
+                cct = CurriculumCT(
+                    Associated_CT=ct,
+                    Associated_Curriculum=cc.Associated_Curriculum
+                )
+                cct.save()
+
+            return HttpResponseRedirect('/Curriculum/editCourse')
+
+        else:
+            print('Invalid')
+            return HttpResponseRedirect('/Curriculum')
+    else:
+        form = addTopicToCourseForm(course_pk=course_pk)
+
+    return render(request=request, template_name="Edit/Course/addTopicToCourse.html", context={"form": form})
 
 
 def q2(request):

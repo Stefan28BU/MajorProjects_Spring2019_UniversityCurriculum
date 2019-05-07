@@ -5,15 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="39b86957-530d-4e0f-9df0-5c492219cd0d" name="Default Changelist" comment="">
-<<<<<<< HEAD
-      <change beforePath="$PROJECT_DIR$/Curriculum/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/Curriculum/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Curriculum/templates/Queries/queryPage.html" beforeDir="false" afterPath="$PROJECT_DIR$/Curriculum/templates/Queries/queryPage.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Curriculum/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Curriculum/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Curriculum/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Curriculum/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database_site/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/database_site/settings.py" afterDir="false" />
-=======
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
->>>>>>> becd115bf1ccbd1f3d2ff9348783e809b0c3d7b8
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,16 +21,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Curriculum/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-            <state relative-caret-position="260">
-              <caret line="95" column="6" lean-forward="true" selection-start-line="95" selection-start-column="6" selection-end-line="95" selection-end-column="6" />
-=======
             <state relative-caret-position="204">
               <caret line="14" column="35" selection-start-line="14" selection-start-column="35" selection-end-line="14" selection-end-column="35" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
->>>>>>> becd115bf1ccbd1f3d2ff9348783e809b0c3d7b8
             </state>
           </provider>
         </entry>
@@ -46,53 +33,25 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Curriculum/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-            <state relative-caret-position="145">
-              <caret line="43" column="4" selection-start-line="43" selection-start-column="4" selection-end-line="43" selection-end-column="4" />
-=======
             <state relative-caret-position="3298">
               <caret line="198" column="17" selection-start-line="198" selection-start-column="17" selection-end-line="198" selection-end-column="17" />
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
               </folding>
->>>>>>> becd115bf1ccbd1f3d2ff9348783e809b0c3d7b8
             </state>
           </provider>
         </entry>
       </file>
-<<<<<<< HEAD
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Curriculum/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="221" column="17" lean-forward="true" selection-start-line="221" selection-start-column="17" selection-end-line="221" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Curriculum/templates/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-293">
-              <caret line="54" column="71" selection-start-line="54" selection-start-column="66" selection-end-line="54" selection-end-column="71" />
-=======
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/database_site/settings.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="75">
               <caret line="68" column="6" selection-start-line="68" selection-start-column="6" selection-end-line="68" selection-end-column="6" />
->>>>>>> becd115bf1ccbd1f3d2ff9348783e809b0c3d7b8
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-<<<<<<< HEAD
-        <entry file="file://$PROJECT_DIR$/Curriculum/templates/Queries/queryPage.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
-              <caret line="97" column="28" selection-start-line="97" selection-start-column="28" selection-end-line="97" selection-end-column="28" />
-=======
         <entry file="file://$PROJECT_DIR$/Curriculum/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2482">
@@ -109,7 +68,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1173">
               <caret line="69" column="10" selection-start-line="69" selection-start-column="10" selection-end-line="69" selection-end-column="10" />
->>>>>>> becd115bf1ccbd1f3d2ff9348783e809b0c3d7b8
             </state>
           </provider>
         </entry>
@@ -117,61 +75,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Curriculum/templates/curriculum/newCurriculum.html">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-            <state>
-              <caret selection-end-line="126" selection-end-column="7" />
-=======
             <state relative-caret-position="391">
               <caret line="23" selection-start-line="23" selection-end-line="23" />
->>>>>>> becd115bf1ccbd1f3d2ff9348783e809b0c3d7b8
             </state>
           </provider>
         </entry>
       </file>
-<<<<<<< HEAD
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Curriculum/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="263">
-              <caret line="498" column="23" selection-start-line="498" selection-start-column="23" selection-end-line="498" selection-end-column="23" />
-              <folding>
-                <element signature="e#0#35#0" expanded="true" />
-              </folding>
-=======
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Curriculum/templates/curriculum/newCourse.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1241">
               <caret line="73" column="52" selection-start-line="73" selection-start-column="52" selection-end-line="73" selection-end-column="52" />
->>>>>>> becd115bf1ccbd1f3d2ff9348783e809b0c3d7b8
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-<<<<<<< HEAD
-        <entry file="file://$PROJECT_DIR$/Curriculum/templates/Queries/q2.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1740">
-              <caret line="116" column="36" lean-forward="true" selection-start-line="116" selection-start-column="36" selection-end-line="116" selection-end-column="36" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Curriculum/forms.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="295">
-              <caret line="523" column="10" selection-start-line="523" selection-start-column="10" selection-end-line="523" selection-end-column="10" />
-              <folding>
-                <element signature="e#0#24#0" expanded="true" />
-              </folding>
-=======
         <entry file="file://$PROJECT_DIR$/Curriculum/models.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2754">
               <caret line="162" column="4" selection-start-line="162" selection-start-column="4" selection-end-line="162" selection-end-column="4" />
->>>>>>> becd115bf1ccbd1f3d2ff9348783e809b0c3d7b8
             </state>
           </provider>
         </entry>
@@ -179,17 +102,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Curriculum/templates/curriculum/departmentHead.html">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-            <state relative-caret-position="253">
-              <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
-              <folding>
-                <element signature="e#0#28#0" expanded="true" />
-                <marker date="1557180964026" expanded="true" signature="0:1741" ph="..." />
-              </folding>
-=======
             <state>
               <caret selection-end-line="84" selection-end-column="7" />
->>>>>>> becd115bf1ccbd1f3d2ff9348783e809b0c3d7b8
             </state>
           </provider>
         </entry>
@@ -215,26 +129,6 @@
       <find>confirm</find>
       <find>new go</find>
       <find>grade</find>
-<<<<<<< HEAD
-      <find>coursese</find>
-      <find>edit</find>
-      <find>choicef</find>
-      <find>course</find>
-      <find>coursegoa</find>
-      <find>coursetopics_</find>
-      <find>enter new</find>
-      <find>topic</find>
-      <find>curriculum.ob</find>
-      <find>semesters</find>
-      <find>print</find>
-      <find>editCu</find>
-      <find>associated_cur</find>
-      <find>courseto</find>
-      <find>&lt;&lt;</find>
-      <find>Curriculum.objects.all()</find>
-      <find>get</find>
-=======
->>>>>>> becd115bf1ccbd1f3d2ff9348783e809b0c3d7b8
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -243,6 +137,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/database_site/settings.py" />
         <option value="$PROJECT_DIR$/Curriculum/templates/login.html" />
         <option value="$PROJECT_DIR$/Curriculum/templates/style/style.scss" />
         <option value="$PROJECT_DIR$/Curriculum/static/styles/style.sass" />
@@ -258,22 +153,11 @@
         <option value="$PROJECT_DIR$/Curriculum/templates/curriculum/departmentHead.html" />
         <option value="$PROJECT_DIR$/Curriculum/templates/curriculum/newCourse.html" />
         <option value="$PROJECT_DIR$/Curriculum/templates/index.html" />
-<<<<<<< HEAD
-        <option value="$PROJECT_DIR$/Curriculum/templates/Queries/quiryPage.html" />
-        <option value="$PROJECT_DIR$/Curriculum/dbFuncs/getInfo.py" />
-        <option value="$PROJECT_DIR$/Curriculum/templates/Queries/q1.html" />
-        <option value="$PROJECT_DIR$/database_site/settings.py" />
-        <option value="$PROJECT_DIR$/Curriculum/templates/Queries/q2.html" />
-        <option value="$PROJECT_DIR$/Curriculum/templates/Queries/queryPage.html" />
-        <option value="$PROJECT_DIR$/Curriculum/urls.py" />
-=======
         <option value="$PROJECT_DIR$/Curriculum/urls.py" />
         <option value="$PROJECT_DIR$/Curriculum/models.py" />
         <option value="$PROJECT_DIR$/Curriculum/templates/curriculum/gradeDist.html" />
         <option value="$PROJECT_DIR$/Curriculum/views.py" />
->>>>>>> becd115bf1ccbd1f3d2ff9348783e809b0c3d7b8
         <option value="$PROJECT_DIR$/Curriculum/forms.py" />
-        <option value="$PROJECT_DIR$/Curriculum/views.py" />
       </list>
     </option>
   </component>
@@ -305,63 +189,34 @@
               <item name="database_site" type="b2602c69:ProjectViewProjectNode" />
               <item name="database_site" type="462c0819:PsiDirectoryNode" />
               <item name="Curriculum" type="462c0819:PsiDirectoryNode" />
-<<<<<<< HEAD
-              <item name="dbFuncs" type="462c0819:PsiDirectoryNode" />
-=======
               <item name="static" type="462c0819:PsiDirectoryNode" />
->>>>>>> becd115bf1ccbd1f3d2ff9348783e809b0c3d7b8
             </path>
             <path>
               <item name="database_site" type="b2602c69:ProjectViewProjectNode" />
               <item name="database_site" type="462c0819:PsiDirectoryNode" />
               <item name="Curriculum" type="462c0819:PsiDirectoryNode" />
-<<<<<<< HEAD
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-=======
               <item name="static" type="462c0819:PsiDirectoryNode" />
               <item name="styles" type="462c0819:PsiDirectoryNode" />
->>>>>>> becd115bf1ccbd1f3d2ff9348783e809b0c3d7b8
             </path>
             <path>
               <item name="database_site" type="b2602c69:ProjectViewProjectNode" />
               <item name="database_site" type="462c0819:PsiDirectoryNode" />
               <item name="Curriculum" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-<<<<<<< HEAD
-              <item name="curriculum" type="462c0819:PsiDirectoryNode" />
-=======
->>>>>>> becd115bf1ccbd1f3d2ff9348783e809b0c3d7b8
             </path>
             <path>
               <item name="database_site" type="b2602c69:ProjectViewProjectNode" />
               <item name="database_site" type="462c0819:PsiDirectoryNode" />
               <item name="Curriculum" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-<<<<<<< HEAD
-              <item name="Queries" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="database_site" type="b2602c69:ProjectViewProjectNode" />
-              <item name="database_site" type="462c0819:PsiDirectoryNode" />
-              <item name="database_site" type="462c0819:PsiDirectoryNode" />
-=======
               <item name="curriculum" type="462c0819:PsiDirectoryNode" />
->>>>>>> becd115bf1ccbd1f3d2ff9348783e809b0c3d7b8
             </path>
             <path>
               <item name="database_site" type="b2602c69:ProjectViewProjectNode" />
               <item name="database_site" type="462c0819:PsiDirectoryNode" />
-<<<<<<< HEAD
-              <item name="venv" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="database_site" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-=======
               <item name="Curriculum" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="Edit" type="462c0819:PsiDirectoryNode" />
->>>>>>> becd115bf1ccbd1f3d2ff9348783e809b0c3d7b8
             </path>
             <path>
               <item name="database_site" type="b2602c69:ProjectViewProjectNode" />
@@ -437,11 +292,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-<<<<<<< HEAD
-    <option name="totallyTimeSpent" value="87002000" />
-=======
     <option name="totallyTimeSpent" value="61523000" />
->>>>>>> becd115bf1ccbd1f3d2ff9348783e809b0c3d7b8
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -469,11 +320,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32902297" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-<<<<<<< HEAD
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.30136988" />
-=======
       <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.4844517" />
->>>>>>> becd115bf1ccbd1f3d2ff9348783e809b0c3d7b8
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32876712" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -606,54 +453,6 @@
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
-    <entry file="file://$PROJECT_DIR$/Curriculum/templates/Edit/editSection.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1170">
-          <caret line="92" column="7" selection-start-line="92" selection-start-column="7" selection-end-line="92" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Curriculum/templates/Edit/pickCurriculumToEdit.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="92" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Curriculum/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="221" column="17" lean-forward="true" selection-start-line="221" selection-start-column="17" selection-end-line="221" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database_site/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="95" column="6" lean-forward="true" selection-start-line="95" selection-start-column="6" selection-end-line="95" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Curriculum/templates/Queries/q1.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="126" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Curriculum/templates/Queries/q2.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1740">
-          <caret line="116" column="36" lean-forward="true" selection-start-line="116" selection-start-column="36" selection-end-line="116" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Curriculum/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-293">
-          <caret line="54" column="71" selection-start-line="54" selection-start-column="66" selection-end-line="54" selection-end-column="71" />
-=======
     <entry file="file://$PROJECT_DIR$/Curriculum/forms.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3298">
@@ -661,65 +460,21 @@
           <folding>
             <element signature="e#0#24#0" expanded="true" />
           </folding>
->>>>>>> becd115bf1ccbd1f3d2ff9348783e809b0c3d7b8
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Curriculum/views.py">
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-        <state relative-caret-position="311">
-          <caret line="97" column="28" selection-start-line="97" selection-start-column="28" selection-end-line="97" selection-end-column="28" />
-=======
         <state relative-caret-position="2482">
           <caret line="152" column="55" selection-start-line="152" selection-start-column="55" selection-end-line="152" selection-end-column="55" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
->>>>>>> becd115bf1ccbd1f3d2ff9348783e809b0c3d7b8
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Curriculum/templates/Edit/editCurriculum.html">
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-        <state relative-caret-position="253">
-          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-            <marker date="1557180964026" expanded="true" signature="0:1741" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Curriculum/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="523" column="10" selection-start-line="523" selection-start-column="10" selection-end-line="523" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Curriculum/dbFuncs/getInfo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="43" column="4" selection-start-line="43" selection-start-column="4" selection-end-line="43" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Curriculum/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="498" column="23" selection-start-line="498" selection-start-column="23" selection-end-line="498" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-=======
         <state relative-caret-position="1173">
           <caret line="69" column="10" selection-start-line="69" selection-start-column="10" selection-end-line="69" selection-end-column="10" />
         </state>
@@ -760,6 +515,5 @@
         </state>
       </provider>
     </entry>
->>>>>>> becd115bf1ccbd1f3d2ff9348783e809b0c3d7b8
   </component>
 </project>
