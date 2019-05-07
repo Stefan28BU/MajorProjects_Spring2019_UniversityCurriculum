@@ -90,6 +90,40 @@
                                 {{ section.Section_ID }}
                             </a>
                         </li>
+                        {% if grade_dist %}
+                            {{ grade_dist|length }}
+                            <ul>
+                                {% for gDict in grade_dist %}
+
+                                    {% for g in gDict %}
+                                        <li>
+                                            <a>
+                                                {{ g }}
+                                                {{ "wthat the fuck" }}
+                                                {#                                            {{ grade.Associated_Course_Sectoion.Associated_Course.Course_Name }}#}
+                                                {#                                            {{ ' (' }}#}
+                                                {##}
+                                                {#                                            {{ grade.Associated_Course_Sectoion.Associated_Course.Subject_Code }}#}
+                                                {#                                            {{ ' ' }}#}
+                                                {#                                            {{ grade.Associated_Course_Sectoion.Associated_Course.Course_Number }}#}
+                                                {#                                            {{ ') ' }}#}
+                                                {##}
+                                                {#                                            {{ grade.Associated_Course_Section.Semester }}#}
+                                                {#                                            {{ ' ' }}#}
+                                                {#                                            {{ grade.Associated_Section.Year }}#}
+                                                {#                                            {{ ', Section ID: ' }}#}
+                                                {#                                            {{ grade.Associated_Section.Section_ID }}#}
+
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p>
+                                No Grade Distribution
+                            </p>
+                        {% endif %}
                     {% endfor %}
                 </ul>
             {% else %}
