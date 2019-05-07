@@ -103,38 +103,34 @@ def get_info_on_course_no_range(course_name, cur_name):
 		for j in cur:
 			if j.Associated_Course.Course_Name == i.Associated_Course.Course_Name:
 				res.append(i)
-	res2 = []
 
-	for i in res:
-		print('Grade loop')
-		grade = Grade.objects.filter(Associated_Course_Section=i)
-		# grade = get_sections_grades_of_a_course(i.Associated_Course)
-		res2.append(grade)
-		print(grade)
+	overallDict = dict()
 
-	gradeDict = {
-		'A+': 0,
-		'A': 0,
-		'A-': 0,
-		'B+': 0,
-		'B': 0,
-		'B-': 0,
-		'C+': 0,
-		'C': 0,
-		'C-': 0,
-		'D+': 0,
-		'D': 0,
-		'D-': 0,
-		'F': 0,
-		'I': 0,
-		'W': 0,
-	}
-
-	for gList in res2:
-		for g in gList:
+	for cs in res:
+		gradeDict = {
+			'A+': 0,
+			'A': 0,
+			'A-': 0,
+			'B+': 0,
+			'B': 0,
+			'B-': 0,
+			'C+': 0,
+			'C': 0,
+			'C-': 0,
+			'D+': 0,
+			'D': 0,
+			'D-': 0,
+			'F': 0,
+			'I': 0,
+			'W': 0,
+		}
+		for g in Grade.objects.filter(Associated_Course_Section=cs):
 			gradeDict[g.Letter_Grade] += g.dist_number
+		overallDict[str(cs.pk)] = gradeDict
+
+	# to access a grade, q3obj[0][pk]['A+']
 	# Res2 is List of grades by course section
-	return gradeDict, res
+	return overallDict, res
 
 
 def get_all_sections_with_range(course_name, start_sem, start_year, end_sem, end_year):
