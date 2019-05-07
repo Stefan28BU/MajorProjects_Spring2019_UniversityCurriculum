@@ -28,7 +28,7 @@ def get_topics_in_curricula(cur_name):
 	cc = CurriculumTopic.objects.filter(Associated_Curriculum__Cur_name=cur_name)
 	cName = set()
 	for c in cc:
-		cName.add(str(c.Associated_Course.Course_Name))
+		cName.add(str(c.Associated_Topic.Name))
 	return cName
 
 
@@ -43,11 +43,11 @@ def get_basic_info_on_course(subject_code, course_number):
 
 def get_basic_info_on_course_with_name(course_name):
 	res = Course.objects.filter(Course_Name=course_name)
-	return res.values('Subject_Code', 'Course_Number', 'Credit_Hours', 'Description')
+	return res
 
 
 def get_curricula_info_on_course_with_name(course_name):
-	return CurriculumCourse.objects.filter(Associated_Course=course_name).values('Associated_Curriculum')
+	return CurriculumCourse.objects.filter(Associated_Course__Course_Name=course_name)
 
 
 def get_course_name_from_code(subject_code, course_number):
@@ -68,33 +68,41 @@ def get_info_on_course_with_name(course_name):
 
 
 def get_all_sections(course_name):
-	return CourseSection.objects.filter(Associated_Course=course_name)
+	return CourseSection.objects.filter(Associated_Course__Course_Name=course_name)
 
 
 def get_sections_grades_of_a_course(course_name):
 	course_sections = get_all_sections(course_name)
 	res = []
+	print(len(course_sections), "length")
 	for i in course_sections:
-		list.append(res, Grade.objects.filter(Associated_Course_Section=i))
+		print(i.Associated_Course.Course_Name + 'IIIIIIIII')
+		list.append(res, Grade.objects.filter(Associated_Course_Section__Section_ID=i.Section_ID))
 
 	return res
 
 
 def get_cur_from_course_name_and_cur(course_name, cur_name):
-	return CurriculumCourse.objects.filter(Associated_Curriculum=cur_name, Associated_Course=course_name)
+	return CurriculumCourse.objects.filter(Associated_Curriculum__Cur_name=cur_name, Associated_Course__Course_Name=course_name)
 
 
 def get_info_on_course_no_range(course_name, cur_name):
+
 	course_sections = get_all_sections(course_name)
+
 	cur = get_cur_from_course_name_and_cur(course_name, cur_name)
 	res = []
 	for i in course_sections:
-		list.append(res, cur.objects.filter(Associated_Course=i.Associated_Course))
-
+		for j in cur:
+			if j.Associated_Course.Course_Name == i.Associated_Course.Course_Name:
+				res.append(i)
+				print(i)
 	res2 = []
 
 	for i in res:
-		res2 = get_sections_grades_of_a_course(i.Associated_Course)
+		grade = get_sections_grades_of_a_course(i.Associated_Course)
+		res2.append(grade)
+		print(grade)
 
 	return res2
 
