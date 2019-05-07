@@ -134,7 +134,7 @@ def get_info_on_course_no_range(course_name, cur_name):
 		for g in gList:
 			gradeDict[g.Letter_Grade] += g.dist_number
 	# Res2 is List of grades by course section
-	return res2, res
+	return gradeDict, res
 
 
 def get_all_sections_with_range(course_name, start_sem, start_year, end_sem, end_year):
