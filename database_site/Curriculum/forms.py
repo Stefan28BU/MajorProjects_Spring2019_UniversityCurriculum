@@ -291,13 +291,6 @@ class gradeDistForm(forms.Form):
     section = forms.ChoiceField(choices=secChoice, label="Choose a Section",
                                 widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
 
-    TupleArray = []
-    for g in Goal.objects.all():
-        TupleArray.append((g.ID, 'Goal: ' + g.Description))
-
-    gChoice = tuple(TupleArray)
-    goal = forms.ChoiceField(choices=gChoice, label="Choose a Goal",
-                             widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
 
 
 class newSectionForm(forms.Form):

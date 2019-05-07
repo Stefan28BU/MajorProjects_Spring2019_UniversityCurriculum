@@ -248,7 +248,6 @@ def gradeDist(request):
 
             temp.dist_number = form['dist'].value()
             temp.Letter_Grade = form['letterGrade'].value()
-            temp.Associated_Goal = Goal.objects.get(ID=form['goal'].value())
             temp.Associated_Course_Section = CourseSection.objects.get(Section_ID=form['section'].value())
 
             temp.save()
