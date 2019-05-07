@@ -335,14 +335,7 @@ class newSectionForm(forms.Form):
 
 
 class editCourseForm(forms.Form):
-    eCTupleArray = []
-    for g in Course.objects.all():
-        eCTupleArray.append((g.pk, 'Course: ' + g.Subject_Code + g.Course_Number + ' (' + g.Course_Name + ')'))
 
-    ecChoice = tuple(eCTupleArray)
-
-    course = forms.ChoiceField(choices=ecChoice, label="Choose a Course",
-                               widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
     newName = forms.CharField(max_length=255, label="Enter New Name",
                               widget=forms.TextInput(attrs={'class': 'form-control'}))
     newCode = forms.CharField(max_length=255, label="Enter New Subject Code",
@@ -353,24 +346,6 @@ class editCourseForm(forms.Form):
                                  widget=forms.TextInput(attrs={'class': 'form-control'}))
     newDes = forms.CharField(max_length=255, label="Enter New Description",
                              widget=forms.TextInput(attrs={'class': 'form-control'}))
-
-    tpTupleArray = []
-    for g in Topic.objects.all():
-        tpTupleArray.append((g.ID, g.Name))
-
-    tpChoice = tuple(tpTupleArray)
-
-    topic = forms.ChoiceField(choices=tpChoice, label="Choose a Topic",
-                              widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
-
-    goalTupleArray = []
-    for g in Goal.objects.all():
-        goalTupleArray.append((g.ID, g.Description))
-
-    goalChoice = tuple(goalTupleArray)
-
-    goal = forms.ChoiceField(choices=goalChoice, label="Choose a Goal",
-                             widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
 
 
 class editTopicForm(forms.Form):
@@ -515,3 +490,41 @@ class queryOneForm(forms.Form):
                            widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
 
 
+class pickCourseToManageForm(forms.Form):
+    cTupleArray = []
+    for c in Course.objects.all():
+        cTupleArray.append((c.pk, c.Subject_Code + ' ' + c.Course_Number))
+    cChoices = tuple(cTupleArray)
+
+    course = forms.ChoiceField(choices=cChoices, label="Select a Course",
+                             widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
+    editChoices = (
+        ('edit', 'Edit the general info'),
+        ('addTopic', 'Add a Topic'),
+    )
+    editMethod = forms.ChoiceField(choices=editChoices, label="What would you like to do",
+                                   widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
+
+
+class addTopicToCourseForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        course_pk = kwargs.pop('course_pk')
+
+        super(addTopicToCourseForm, self).__init__(*args, **kwargs)
+
+        # Display Goals associated with curriculum, not associated with course
+
+        course = Course.objects.get(pk=course_pk)
+        all_topics = Topic.objects.all()
+        already_course_topics = CourseTopics.objects.filter(Associated_Course=course)
+        already_topics = set()
+        for ct in already_course_topics:
+            already_topics.add(ct.Associated_Topic)
+
+        new_topics = set(all_topics) - already_topics
+        choices = set()
+        for t in new_topics:
+            choices.add((t.pk, t.Name))
+
+        self.fields['topic'] = forms.ChoiceField(choices=choices, label="Topic to add",
+		                                         widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
