@@ -240,3 +240,66 @@ def get_sections_in_a_cur_with_time_range(cur_name, start_semester, start_year, 
             overallDict[str(cs.pk)] = gradeDict
 
     return overallDict, course_sections
+
+
+def q5_ryland_style(curriculum):
+	person = curriculum.Head.Name
+	req_courses = 0
+	opt_courses = 0
+	all_course_currics = CurriculumCourse.objects.filter(Associated_Curriculum=curriculum)
+	all_courses = set()
+	for cc in all_course_currics:
+		all_courses.add(cc.Associated_Course)
+	for c in all_courses:
+		if c.Required:
+			req_courses += 1
+		else:
+			opt_courses += 1
+
+	curric_topics = CurriculumTopic.objects.filter(Associated_Curriculum=curriculum)
+	curric_ct = CurriculumCT.objects.filters(Associated_Curriculum=curriculum)
+
+	topic_cct_list = set()
+	for ct in curric_topics:
+		list_of_cct = set()
+		for c_ct in curric_ct:
+			if c_ct.Associated_CT.Associated_Topic == ct.Associated_Topic:
+				list_of_cct.add(c_ct)
+		topic_cct_list.add((ct, list_of_cct))
+
+	completed_topics = set()
+	for tcct in topic_cct_list:
+		u = 0
+		ch = 0
+		for cct in tcct[1]:
+			u += cct.Units
+			ch += cct.Associated_CT.Associated_Course.Credit_Hours
+
+		if u >= tcct[0].Units:
+			completed_topics.add((tcct[0], ch))
+
+	curric_cg = set()
+	curric_g = Goal.objects.filter(Associated_Curriculum=curriculum)
+	for g in curric_g:
+		g_cg = CourseGoal.objects.filter(Associated_Goal=g)
+		for cg in g_cg:
+			curric_cg.add(cg)
+
+	course_cg = set()
+	for c in all_courses:
+		c_cg = CourseGoal.objects.filter(Associated_Course=c)
+		for cg in c_cg:
+			course_cg.add(cg)
+
+	leftover_course_goals = curric_cg - course_cg
+	leftover_goals = set()
+	for g in leftover_course_goals:
+		leftover_goals.add(g.Associated_Goal)
+
+
+	# Person is a Person object
+	# req_courses and opt_courses are required and optional
+	# completed_topics is a tuple of (<curriculumTopic>, <creditHoursSpentOnIt>)
+	# leftover goals is a set of Goal objects that are not completed
+		# If it is empty, then it is goal valid, otherwise it is invalid and you can display why
+	return person, (req_courses, opt_courses), completed_topics, leftover_goals
