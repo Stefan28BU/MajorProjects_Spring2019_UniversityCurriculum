@@ -9,12 +9,12 @@ from pprint import pprint
 
 from .dbFuncs.getInfo import *
 
+
 def index(request):
     return render(request=request, template_name="index.html")
 
 
 def newCurriculum(request):
-
     if request.method == 'POST':
         form = newCurriculumForm(request.POST)
 
@@ -93,6 +93,7 @@ def newGoal(request):
 
     return render(request=request, template_name="curriculum/newGoal.html", context={"form": form})
 
+
 def dashboard(request):
     curricula = Curriculum.objects.order_by('-Cur_name')[:5]
     output = ', '.join([c.Cur_name for c in curricula])
@@ -118,6 +119,7 @@ def editPerson(request):
         form = editPersonForm()
 
     return render(request=request, template_name="Edit/editPerson.html", context={"form": form})
+
 
 def pickCuricToEdit(request):
     if request.method == 'POST':
@@ -197,10 +199,10 @@ def addCourseToCurriculum(request, curr_pk):
 
         if form.is_valid():
 
-            course_pk = form['courseToAdd'].value()    # Get the course Primary Key from the page
-            course = Course.objects.get(pk=course_pk)    # Get the course using the primary key
-            course_topics = CourseTopics.objects.filter(Associated_Course=course)    # Get the CourseTopics of that course
-            curric = Curriculum.objects.get(pk=curr_pk)    # Get the curriculum
+            course_pk = form['courseToAdd'].value()  # Get the course Primary Key from the page
+            course = Course.objects.get(pk=course_pk)  # Get the course using the primary key
+            course_topics = CourseTopics.objects.filter(Associated_Course=course)  # Get the CourseTopics of that course
+            curric = Curriculum.objects.get(pk=curr_pk)  # Get the curriculum
 
             for ct in course_topics:
                 cct = CurriculumCT(Associated_Curriculum=curric,
@@ -217,6 +219,7 @@ def addCourseToCurriculum(request, curr_pk):
     else:
         form = addCourseToCurricForm(curr_pk=curr_pk)
     return render(request=request, template_name="Edit/addCourseToCurriculum.html", context={"form": form})
+
 
 def editCurriculum(request, curr_id):
     if request.method == 'POST':
@@ -379,6 +382,7 @@ def editSection(request):
 def qPage(request):
     return render(request=request, template_name="Queries/queryPage.html")
 
+
 def q1(request):
     course_list = []
     topic_list = []
@@ -397,7 +401,8 @@ def q1(request):
     else:
         form = queryOneForm()
 
-    return render(request=request, template_name="Queries/q1.html", context={"form": form, "course_list": course_list, "topic_list": topic_list})
+    return render(request=request, template_name="Queries/q1.html",
+                  context={"form": form, "course_list": course_list, "topic_list": topic_list})
 
 
 def forkGoal(request, curr_pk, course_pk):
@@ -466,6 +471,7 @@ def gradeGoal(request, curr_pk, course_pk):
 
     return render(request=request, template_name="Edit/forkForEditGoalsInCurriculum.html", context={"form": form})
 
+
 def forkCourseManagement(request):
     if request.method == 'POST':
         form = pickCourseToManageForm(request.POST)
@@ -481,6 +487,7 @@ def forkCourseManagement(request):
     else:
         form = pickCourseToManageForm()
     return render(request=request, template_name="Edit/course/forkCourseEditPaths.html", context={"form": form})
+
 
 def gradeGoal(request, curr_pk, course_pk):
     if request.method == 'POST':
@@ -564,18 +571,56 @@ def q2(request):
 
 def q3(request):
     sec_list = []
-    grade_dist = []
+    list_list = []
+    sec_list1 = []
+    list_list1 = []
+
     if request.method == 'GET':
         form = queryThreeForm(request.GET)
 
         if form.is_valid():
             course = form['course'].value()
             curr = form['curr'].value()
+            startSem = form['startSem'].value()
+            endSem = form['endSem'].value()
+            startYear = form['startYear'].value()
+            endYear = form['endYear'].value()
 
-            q3obj = get_info_on_course_no_range(course, curr)
+            if startYear == '' and endYear == '':
+                q3obj = get_info_on_course_no_range(course, curr)
+                sec_list = q3obj[1]
+                grade_dist = q3obj[0]
 
-            grade_dist = q3obj[0]
-            sec_list = q3obj[1]
+                for sec in sec_list:
+                    gList = []
+
+                    for g, count in grade_dist[str(sec.pk)].items():
+                        gList.append(str(g) + ': ' + str(count) + ' students')
+                    list_list.append(('Without range: ', sec, gList))
+            else:
+                q3obj = get_sections_grades_of_a_course_with_range(course, curr, startSem, startYear,
+                                                                 endSem,
+                                                                 endYear)
+                sec_list = q3obj[1]
+                grade_dist = q3obj[0]
+
+                for sec in sec_list:
+                    gList = []
+
+                    for g, count in grade_dist[str(sec.pk)].items():
+                        gList.append(str(g) + ': ' + str(count) + ' students')
+                    list_list.append(('With range: ', sec, gList))
+
+            # sec_list1 = q3obj_2[1]
+            # grade_dist1 = q3obj_2[0]
+            # for sec in sec_list1:
+            #     gList = []
+            #
+            #     for g, count in grade_dist1[str(sec.pk)].items():
+            #         gList.append(str(g) + ': ' + str(count) + ' students')
+            #     list_list.append((sec, gList))
+
+
 
         else:
             print('Invalid')
@@ -584,7 +629,7 @@ def q3(request):
         form = queryThreeForm()
 
     return render(request=request, template_name="Queries/q3.html",
-                  context={"form": form, "sec_list": sec_list, "grade_dist": grade_dist})
+                  context={"form": form, "sec_list": sec_list, "list_list": list_list})
 
 
 def addTopicToCurric(request, curr_pk):
@@ -592,7 +637,6 @@ def addTopicToCurric(request, curr_pk):
         form = addTopicToCurricForm(request.POST, curr_pk=curr_pk)
 
         if form.is_valid():
-
             topic_pk = form['topic'].value()
             topic = Topic.objects.get(pk=topic_pk)
             curric = Curriculum.objects.get(pk=curr_pk)

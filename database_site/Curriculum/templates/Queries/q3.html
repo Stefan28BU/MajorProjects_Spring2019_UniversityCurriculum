@@ -90,40 +90,7 @@
                                 {{ section.Section_ID }}
                             </a>
                         </li>
-                        {% if grade_dist %}
-                            {{ grade_dist|length }}
-                            <ul>
-                                {% for gDict in grade_dist %}
 
-                                    {% for g in gDict %}
-                                        <li>
-                                            <a>
-                                                {{ g }}
-                                                {{ "wthat the fuck" }}
-                                                {#                                            {{ grade.Associated_Course_Sectoion.Associated_Course.Course_Name }}#}
-                                                {#                                            {{ ' (' }}#}
-                                                {##}
-                                                {#                                            {{ grade.Associated_Course_Sectoion.Associated_Course.Subject_Code }}#}
-                                                {#                                            {{ ' ' }}#}
-                                                {#                                            {{ grade.Associated_Course_Sectoion.Associated_Course.Course_Number }}#}
-                                                {#                                            {{ ') ' }}#}
-                                                {##}
-                                                {#                                            {{ grade.Associated_Course_Section.Semester }}#}
-                                                {#                                            {{ ' ' }}#}
-                                                {#                                            {{ grade.Associated_Section.Year }}#}
-                                                {#                                            {{ ', Section ID: ' }}#}
-                                                {#                                            {{ grade.Associated_Section.Section_ID }}#}
-
-                                            </a>
-                                        </li>
-                                    {% endfor %}
-                                {% endfor %}
-                            </ul>
-                        {% else %}
-                            <p>
-                                No Grade Distribution
-                            </p>
-                        {% endif %}
                     {% endfor %}
                 </ul>
             {% else %}
@@ -132,28 +99,24 @@
                 </p>
             {% endif %}
         </div>
-        <div> Grade Distribution:
-            {% if grade_dist %}
+        <div> Sections with Grade Distribution:
+            {% if list_list %}
                 <ul>
-                    {% for grade in grade_dist %}
-                        <li>
-                            <a>
-                                {{ grade.Associated_Course_Sectoion.Associated_Course.Course_Name }}
-                                {{ ' (' }}
-
-                                {{ grade.Associated_Course_Sectoion.Associated_Course.Subject_Code }}
-                                {{ ' ' }}
-                                {{ grade.Associated_Course_Sectoion.Associated_Course.Course_Number }}
-                                {{ ') ' }}
-
-                                {{ grade.Associated_Course_Section.Semester }}
-                                {{ ' ' }}
-                                {{ grade.Associated_Section.Year }}
-                                {{ ', Section ID: ' }}
-                                {{ grade.Associated_Section.Section_ID }}
-
-                            </a>
-                        </li>
+                    {% for status, section, gList in list_list %}
+                        {{ status }}
+                        {{ section.Semester }}
+                        {{ ' ' }}
+                        {{ section.Year }}
+                        {{ ', Section ID: ' }}
+                        {{ section.Section_ID }}
+                        {% for grade in gList %}
+                            <li>
+                                <a>
+                                    {{ grade }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                        <br>
                     {% endfor %}
                 </ul>
             {% else %}
