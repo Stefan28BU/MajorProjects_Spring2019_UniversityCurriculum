@@ -5,7 +5,6 @@ from django.http import HttpResponse, HttpResponseRedirect
 from .models import *
 
 from .forms import *
-from pprint import pprint
 
 from .dbFuncs.getInfo import *
 
@@ -232,8 +231,10 @@ def editCurriculum(request, curr_id):
             temp.Head = tempPerson
             temp.Min_Hours = form['newHours'].value()
 
-            temp.save()
+            temp.Percent_Level_2 = form['new_percent_2'].value()
+            temp.Percent_Level_3 = form['new_percent_3'].value()
 
+            temp.save()
 
         else:
             print('Invalid')
@@ -433,11 +434,10 @@ def addGoalToCourse(request, curr_pk, course_pk):
 
         if form.is_valid():
             course = Course.objects.get(pk=course_pk)
-            curric = Curriculum.objects.get(pk=curr_pk)
             goal_pk = form['goal'].value()
             goal = Goal.objects.get(pk=goal_pk)
-
-            cg = CourseGoal(Associated_Goal=goal, Associated_Course=course)
+            units = form['units'].value()
+            cg = CourseGoal(Associated_Goal=goal, Associated_Course=course, Untis_Covered=units)
             cg.save()
             return HttpResponseRedirect('/Curriculum/editCurriculum')
 
@@ -717,8 +717,8 @@ def q5(request):
 
     result = set()
     for c in Curriculum.objects.all():
-        person, course_tuple, completed_topics, leftover_goals = q5_ryland_style(c)
-        result.add((c, person, str(course_tuple[0]), str(course_tuple[1]), tuple(completed_topics), tuple(leftover_goals)))
+        person, course_tuple, completed_topics, leftover_goals, incomplete_topics = q5_ryland_style(c)
+        result.add((c, person, str(course_tuple[0]), str(course_tuple[1]), tuple(completed_topics), tuple(leftover_goals), tuple(incomplete_topics)))
 
     return render(request=request, template_name="Queries/q5.html",
                   context={"form": form, "ret": result})

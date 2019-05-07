@@ -1,3 +1,4 @@
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
 class Course(models.Model):
@@ -31,22 +32,25 @@ class Curriculum(models.Model):
     Head = models.ForeignKey(Person, on_delete=models.CASCADE)
     Min_Hours = models.PositiveIntegerField(default=0)
 
-    extensive = 'EX'
-    inclusive = 'IN'
-    basicPlus = 'BP'
-    basic = 'BC'
-    unsatisfactory = 'US'
-    substandard = 'SB'
+    Percent_Level_2 = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])
+    Percent_Level_3 = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])
 
-    topicCategories = (
-        (extensive, 'Extensive'),
-        (inclusive, 'Inclusive'),
-        (basicPlus, 'BasicPlus'),
-        (basic, 'Basic'),
-        (unsatisfactory, 'Unsatisfactory'),
-        (substandard, 'Substandard'),
-    )
-    Topic_Category = models.CharField(max_length=255, choices=topicCategories, default=basic)
+    # extensive = 'EX'
+    # inclusive = 'IN'
+    # basicPlus = 'BP'
+    # basic = 'BC'
+    # unsatisfactory = 'US'
+    # substandard = 'SB'
+    #
+    # topicCategories = (
+    #     (extensive, 'Extensive'),
+    #     (inclusive, 'Inclusive'),
+    #     (basicPlus, 'BasicPlus'),
+    #     (basic, 'Basic'),
+    #     (unsatisfactory, 'Unsatisfactory'),
+    #     (substandard, 'Substandard'),
+    # )
+    # Topic_Category = models.CharField(max_length=255, choices=topicCategories, default=basic)
 
     def __str__(self):
         return self.Cur_name
@@ -136,6 +140,8 @@ class Goal(models.Model):
     Associated_Curriculum = models.ForeignKey(Curriculum, on_delete=models.CASCADE)
     Description = models.CharField(max_length=255)
 
+    Units_For_Completion = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])
+
     class Meta:
         db_table = 'Goal'
 
@@ -189,6 +195,8 @@ class Grade(models.Model):
 class CourseGoal(models.Model):
     Associated_Goal = models.ForeignKey(Goal, on_delete=models.CASCADE)
     Associated_Course = models.ForeignKey(Course, on_delete=models.CASCADE)
+
+    Units_Covered = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])
 
     class Meta:
         db_table = 'CourseGoal'

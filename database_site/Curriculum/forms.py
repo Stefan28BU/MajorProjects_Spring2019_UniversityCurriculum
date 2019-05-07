@@ -23,18 +23,22 @@ class newCurriculumForm(forms.ModelForm):
     class Meta:
         model = Curriculum
 
-        fields = ['Head', 'Cur_name', 'Min_Hours']
+        fields = ['Head', 'Cur_name', 'Min_Hours', 'Percent_Level_2', 'Percent_Level_3']
 
         labels = {
             'Cur_name': 'Curriculum Name',
             'Min_Hours': 'Minimum Hours',
-            'Head': 'Curriculum Head'
+            'Head': 'Curriculum Head',
+            'Percent_Level_2': 'Percent of level 2 topics needed for categorization',
+            'Percent_Level_3': 'Percent of level 2 topics needed for categorization',
         }
         widgets = {
             'Head': forms.Select(attrs={'class': 'selectpicker form-control'}),
 
             'Cur_name': forms.TextInput(attrs={'class': 'form-control'}),
             'Min_Hours': forms.TextInput(attrs={'class': 'form-control'}),
+            'Percent_Level_2': forms.IntegerField(min_value=0, max_value=100),
+            'Percent_Level_3': forms.IntegerField(min_value=0, max_value=100),
         }
 
 
@@ -81,6 +85,9 @@ class editCurriculumForm(forms.Form):
 
     newHours = forms.IntegerField(initial=0, label="Enter New Credit Hours",
                                   widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+    new_percent_2 = forms.IntegerField(min_value=0, max_value=100, label="Percentage of level 2 topics needed")
+    new_percent_3 = forms.IntegerField(min_value=0, max_value=100, label="Percentage of level 3 topics needed")
 
 
 class addCourseToCurricForm(forms.Form):
@@ -171,17 +178,19 @@ class newGoalForm(forms.ModelForm):
     class Meta:
         model = Goal
 
-        fields = ['Associated_Curriculum', 'Description']
+        fields = ['Associated_Curriculum', 'Description', 'Units_For_Completion']
 
         labels = {
             'Associated_Curriculum': 'Curriculum',
-            'Description': 'Description'
+            'Description': 'Description',
+            'Units_For_Completion': 'Units needed to complete'
         }
 
         widgets = {
             'Associated_Curriculum': forms.Select(attrs={'class': 'selectpicker form-control'}),
 
             'Description': forms.TextInput(attrs={'class': 'form-control'}),
+            'Units_For_Completion': forms.IntegerField(min_value=0),
         }
 
 
@@ -430,6 +439,9 @@ class editGoalForm(forms.Form):
     des = forms.CharField(max_length=255, label="Enter New Description",
                           widget=forms.TextInput(attrs={'class': 'form-control'}))
 
+    units = forms.IntegerField(label='Units for Completion', min_value=0)
+
+
     currTupleArray = []
     for c in Curriculum.objects.all():
         currTupleArray.append((c.Cur_name, 'Curriculum: ' + c.Cur_name + ', Head: ' + c.Head.Name + '(' + str(
@@ -480,6 +492,7 @@ class addGoalToCourseForm(forms.Form):
 
         self.fields['goal'] = forms.ChoiceField(choices=choices, label="Goal to add",
                                                 widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
+        self.fields['units'] = forms.IntegerField(label='Untis covered in course', min_value=0)
 
 
 class editSectionForm(forms.Form):
