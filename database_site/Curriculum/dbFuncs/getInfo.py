@@ -112,11 +112,27 @@ def get_info_on_course_no_range(course_name, cur_name):
 		res2.append(grade)
 		print(grade)
 
+	gradeDict = {
+		'A+': 0,
+		'A': 0,
+		'A-': 0,
+		'B+': 0,
+		'B': 0,
+		'B-': 0,
+		'C+': 0,
+		'C': 0,
+		'C-': 0,
+		'D+': 0,
+		'D': 0,
+		'D-': 0,
+		'F': 0,
+		'I': 0,
+		'W': 0,
+	}
+
 	for gList in res2:
 		for g in gList:
-			print('Grade: ' + g.Letter_Grade)
-
-	print('len  ', len(res2))
+			gradeDict[g.Letter_Grade] += g.dist_number
 	# Res2 is List of grades by course section
 	return res2, res
 
