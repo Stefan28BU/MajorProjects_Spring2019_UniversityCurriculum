@@ -292,6 +292,70 @@ class gradeDistForm(forms.Form):
                                 widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
 
 
+class gradeGoalForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        curr_pk = kwargs.pop('curr_pk')
+        course_pk = kwargs.pop('course_pk')
+
+        super(gradeGoalForm, self).__init__(*args, **kwargs)
+
+        # Display Goals associated with course
+
+        course = Course.objects.get(pk=course_pk)
+        course_goals = CourseGoal.objects.filter(Associated_Course=course)
+        goal_choices = set()
+        for cg in course_goals:
+            goal_choices.add((cg.Associated_Goal.pk, cg.Associated_Goal.Description))
+
+
+        self.fields['goal'] = forms.ChoiceField(choices=goal_choices, label="Goal to Grade",
+                                                widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
+
+        AP = 'A+'
+        A = 'A'
+        AM = 'A-'
+        BP = 'B+'
+        B = 'B'
+        BM = 'B-'
+        CP = 'C+'
+        C = 'C'
+        CM = 'C-'
+        DP = 'D+'
+        D = 'D'
+        DM = 'D-'
+        F = 'F'
+        W = 'W'
+        I = 'I'
+
+        grades = (
+            (AP, 'A+'),
+            (A, 'A'),
+            (AM, 'A-'),
+            (BP, 'B+'),
+            (B, 'B'),
+            (BM, 'B-'),
+            (CP, 'C+'),
+            (C, 'C'),
+            (CM, 'C-'),
+            (DP, 'D+'),
+            (D, 'D'),
+            (DM, 'D-'),
+            (F, 'Fail'),
+            (W, 'Withdraw'),
+            (I, 'Incomplete')
+        )
+
+
+        self.fields['grade'] = forms.ChoiceField(choices=grades, label="Level of the topic",
+                                                 widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
+
+        self.fields['count'] = forms.IntegerField(label="Count", min_value=0)
+
+
+
+
+
+
 class newSectionForm(forms.Form):
     TupleArray = []
     for g in Course.objects.all():
@@ -644,3 +708,8 @@ class addTopicToCurricForm(forms.Form):
 
         self.fields['subject_area'] = forms.CharField(label="Enter the subject area")
         self.fields['units'] = forms.IntegerField(label="Units", min_value=0)
+
+
+
+class queryFiveForm(forms.Form):
+    x = 3

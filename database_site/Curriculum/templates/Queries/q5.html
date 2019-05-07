@@ -77,38 +77,55 @@
         </div>
     </div>
     <div class="myModal formCustom">
-        <div> Courses:
-            {% if course_list %}
+        <div> Curricula:
+            {% if ret %}
                 <ul>
-                    {% for course in course_list %}
+                    {% for curric, person, req_courses, opt_courses, curric_topic_ch, left_goals in ret %}
                         <li>
                             <a>
-                                {{ course.Course_Name }}
-                                {{ '(' }}
-                                {{ course.Subject_Code }}
-                                {{ course.Course_Number }}
-                                {{ '), Credit Hours: ' }}
-                                {{ course.Credit_Hours }}
-                                {{ ', Description: ' }}
-                                {{ course.Description }}
+                                {{ curric.Cur_name }}
+                                <ul>
+                                    <li>
+                                        {{ 'Head: ' }}
+                                        {{ person }}
+                                    </li>
+                                    <li>
+                                        {{ 'Courses' }}
+                                        <ul>
+                                            <li>
+                                                {{ 'Required: ' }}
+                                                {{ req_courses }}
+                                            </li>
+                                            <li>
+                                                {{ 'Optional: ' }}
+                                                {{ opt_courses }}
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                    {{ 'Completed Topics:' }}
+                                    {% for topic, ch in curric_topic_ch %}
+                                        <ul>
+                                            <li>
+                                                {{ topic.Name }}
+                                                {{ ' ' }}
+                                                {{ ch }}
+                                            </li>
+                                        </ul>
+                                    {% endfor %}
+                                    </li>
+                                    <li>
+                                        {{ 'Uncompleted Goals' }}
+                                        <ul>
+                                            {% for lg in left_goals %}
+                                            <li>
+                                                {{ lg.Description }}
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                </ul>
 
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <p>
-                    No Course
-                </p>
-            {% endif %}
-        </div>
-        <div> Curriculum:
-            {% if curr_list %}
-                <ul>
-                    {% for curr in curr_list %}
-                        <li>
-                            <a>
-                                {{ curr.Associated_Curriculum.Cur_name }}
                             </a>
                         </li>
                     {% endfor %}
