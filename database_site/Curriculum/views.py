@@ -532,3 +532,26 @@ def q3(request):
     return render(request=request, template_name="Queries/q3.html",
                   context={"form": form, "sec_list": sec_list, "grade_dist": grade_dist})
 
+
+
+def q4(request):
+    sec_list = []
+    grade_dist = []
+    if request.method == 'GET':
+        form = queryFourForm(request.GET)
+
+        if form.is_valid():
+            curr = form['curr'].value()
+
+
+
+
+
+        else:
+            print('Invalid')
+            return HttpResponseRedirect('/Curriculum')
+    else:
+        form = queryFourForm()
+
+    return render(request=request, template_name="Queries/q4.html",
+                  context={"form": form, "sec_list": sec_list, "grade_dist": grade_dist})

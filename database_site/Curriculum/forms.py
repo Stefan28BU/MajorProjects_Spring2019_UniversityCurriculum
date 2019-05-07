@@ -478,7 +478,7 @@ class editSectionForm(forms.Form):
 
     secChoice = tuple(secTupleArray)
 
-    currSection = forms.ChoiceField(choices=secChoice, label="Choose a Curriculum",
+    currSection = forms.ChoiceField(choices=secChoice, label="Choose a Section",
                                     widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
 
     year = forms.IntegerField(initial=0, label="Enter New Year",
@@ -536,6 +536,41 @@ class queryThreeForm(forms.Form):
 
     course = forms.ChoiceField(choices=pChoices, label="Select a Course", required=False,
                                widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
+
+    curTupleArray = []
+    for p in Curriculum.objects.all():
+        curTupleArray.append((p.Cur_name, p.Cur_name))
+    currChoices = tuple(curTupleArray)
+
+    curr = forms.ChoiceField(choices=currChoices, label="Select a Curriculum", required=False,
+                             widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
+
+    spring = 'SP'
+    summer = 'SM'
+    fall = 'FA'
+    winter = 'WI'
+
+    semesters = (
+        (spring, 'Spring'),
+        (summer, 'Summer'),
+        (fall, 'Fall'),
+        (winter, 'Winter')
+    )
+
+    startYear = forms.IntegerField(initial=0, label="From",
+                                   widget=forms.TextInput(attrs={'class': 'form-control'}), required=False)
+
+    startSem = forms.ChoiceField(choices=semesters, label="Choose a Semester",
+                                 widget=forms.Select(attrs={'class': 'selectpicker form-control'}), required=False)
+
+    endYear = forms.IntegerField(initial=0, label="To",
+                                 widget=forms.TextInput(attrs={'class': 'form-control'}), required=False)
+
+    endSem = forms.ChoiceField(choices=semesters, label="Choose a Semester",
+                               widget=forms.Select(attrs={'class': 'selectpicker form-control'}), required=False)
+
+
+class queryFourForm(forms.Form):
 
     curTupleArray = []
     for p in Curriculum.objects.all():
