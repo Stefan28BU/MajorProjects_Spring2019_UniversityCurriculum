@@ -243,63 +243,108 @@ def get_sections_in_a_cur_with_time_range(cur_name, start_semester, start_year, 
 
 
 def q5_ryland_style(curriculum):
-	person = curriculum.Head.Name
-	req_courses = 0
-	opt_courses = 0
-	all_course_currics = CurriculumCourse.objects.filter(Associated_Curriculum=curriculum)
-	all_courses = set()
-	for cc in all_course_currics:
-		all_courses.add(cc.Associated_Course)
-	for c in all_courses:
-		if c.Required:
-			req_courses += 1
-		else:
-			opt_courses += 1
+    person = curriculum.Head.Name
+    req_courses = 0
+    opt_courses = 0
+    all_course_currics = CurriculumCourse.objects.filter(Associated_Curriculum=curriculum)
+    all_courses = set()
+    for cc in all_course_currics:
+        all_courses.add(cc.Associated_Course)
+    for c in all_courses:
+        if c.Required:
+            req_courses += 1
+        else:
+            opt_courses += 1
 
-	curric_topics = CurriculumTopic.objects.filter(Associated_Curriculum=curriculum)
-	curric_ct = CurriculumCT.objects.filters(Associated_Curriculum=curriculum)
+    curric_topics = CurriculumTopic.objects.filter(Associated_Curriculum=curriculum)
+    curric_ct = CurriculumCT.objects.filters(Associated_Curriculum=curriculum)
 
-	topic_cct_list = set()
-	for ct in curric_topics:
-		list_of_cct = set()
-		for c_ct in curric_ct:
-			if c_ct.Associated_CT.Associated_Topic == ct.Associated_Topic:
-				list_of_cct.add(c_ct)
-		topic_cct_list.add((ct, list_of_cct))
+    topic_cct_list = set()
+    for ct in curric_topics:
+        list_of_cct = set()
+        for c_ct in curric_ct:
+            if c_ct.Associated_CT.Associated_Topic == ct.Associated_Topic:
+                list_of_cct.add(c_ct)
+        topic_cct_list.add((ct, list_of_cct))
 
-	completed_topics = set()
-	for tcct in topic_cct_list:
-		u = 0
-		ch = 0
-		for cct in tcct[1]:
-			u += cct.Units
-			ch += cct.Associated_CT.Associated_Course.Credit_Hours
+    completed_topics = set()
+    for tcct in topic_cct_list:
+        u = 0
+        ch = 0
+        for cct in tcct[1]:
+            u += cct.Units
+            ch += cct.Associated_CT.Associated_Course.Credit_Hours
 
-		if u >= tcct[0].Units:
-			completed_topics.add((tcct[0], ch))
+        if u >= tcct[0].Units:
+            completed_topics.add((tcct[0], ch))
 
-	curric_cg = set()
-	curric_g = Goal.objects.filter(Associated_Curriculum=curriculum)
-	for g in curric_g:
-		g_cg = CourseGoal.objects.filter(Associated_Goal=g)
-		for cg in g_cg:
-			curric_cg.add(cg)
+    curric_cg = set()
+    curric_g = Goal.objects.filter(Associated_Curriculum=curriculum)
+    for g in curric_g:
+        g_cg = CourseGoal.objects.filter(Associated_Goal=g)
+        for cg in g_cg:
+            curric_cg.add(cg)
 
-	course_cg = set()
-	for c in all_courses:
-		c_cg = CourseGoal.objects.filter(Associated_Course=c)
-		for cg in c_cg:
-			course_cg.add(cg)
+    course_cg = set()
+    for c in all_courses:
+        c_cg = CourseGoal.objects.filter(Associated_Course=c)
+        for cg in c_cg:
+            course_cg.add(cg)
 
-	leftover_course_goals = curric_cg - course_cg
-	leftover_goals = set()
-	for g in leftover_course_goals:
-		leftover_goals.add(g.Associated_Goal)
+    leftover_course_goals = curric_cg - course_cg
+    leftover_goals = set()
+    for g in leftover_course_goals:
+        leftover_goals.add(g.Associated_Goal)
+
+    # Person is a Person object
+    # req_courses and opt_courses are required and optional
+    # completed_topics is a tuple of (<curriculumTopic>, <creditHoursSpentOnIt>)
+    # leftover goals is a set of Goal objects that are not completed
+    # If it is empty, then it is goal valid, otherwise it is invalid and you can display why
+    return person, (req_courses, opt_courses), completed_topics, leftover_goals
 
 
-	# Person is a Person object
-	# req_courses and opt_courses are required and optional
-	# completed_topics is a tuple of (<curriculumTopic>, <creditHoursSpentOnIt>)
-	# leftover goals is a set of Goal objects that are not completed
-		# If it is empty, then it is goal valid, otherwise it is invalid and you can display why
-	return person, (req_courses, opt_courses), completed_topics, leftover_goals
+def get_sections_in_a_cur_with_time_range_and_course_range(cur_name, start_semester, start_year, end_semester, end_year,
+                                                           binCourse, endCourse):
+    courses = get_courses_in_curricula2(cur_name)
+    course_section_set = set()
+
+    for i in courses:
+        if (int(i.Associated_Course.Course_Number) >= int(binCourse)) and (
+                int(i.Associated_Course.Course_Number) <= int(endCourse)):
+            obj = get_info_on_course_no_range(i.Course_Name, cur_name)
+            course_section_set.add(tuple(obj[1]))
+
+    course_sections = []
+
+    for i in course_section_set:
+        course_sections.append(get_all_sections_with_range(i, start_semester, start_year, end_semester, end_year))
+
+        overallDict = dict()
+
+        for csList in course_sections:
+
+            for cs in csList:
+                gradeDict = {
+                    'A+': 0,
+                    'A': 0,
+                    'A-': 0,
+                    'B+': 0,
+                    'B': 0,
+                    'B-': 0,
+                    'C+': 0,
+                    'C': 0,
+                    'C-': 0,
+                    'D+': 0,
+                    'D': 0,
+                    'D-': 0,
+                    'F': 0,
+                    'I': 0,
+                    'W': 0,
+                }
+
+                for g in Grade.objects.filter(Associated_Course_Section__Section_ID=cs.Section_ID):
+                    gradeDict[g.Letter_Grade] += g.dist_number
+                overallDict[str(cs.pk)] = gradeDict
+
+    return overallDict, course_sections

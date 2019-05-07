@@ -440,7 +440,7 @@ class editSectionForm(forms.Form):
             sem = 'Winter'
 
         secTupleArray.append(
-            (s.Section_ID, 'Section: ' + s.Associated_Course.Course_Name + ' (' + sem + ' ' + str(s.Year) + ')'))
+            (s.Section_ID, s.Associated_Course.Course_Name + ' (' + sem + ' ' + str(s.Year) + '), Section '  + str(s.Section_ID)))
 
     secChoice = tuple(secTupleArray)
 
