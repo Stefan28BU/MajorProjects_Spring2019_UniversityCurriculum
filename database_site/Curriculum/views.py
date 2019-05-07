@@ -478,7 +478,7 @@ def forkCourseManagement(request):
 
     else:
         form = pickCourseToManageForm()
-    return render(request=request, template_name="Edit/pickCurriculumToEdit.html", context={"form": form})
+    return render(request=request, template_name="Edit/course/forkCourseEditPaths.html", context={"form": form})
 
 def gradeGoal(request, curr_pk, course_pk):
     if request.method == 'POST':
@@ -571,6 +571,7 @@ def q3(request):
             curr = form['curr'].value()
 
             q3obj = get_info_on_course_no_range(course, curr)
+
 
             print(q3obj, ' sdadsadasdasdadaddas')
 

@@ -137,7 +137,7 @@ class pickCourseForCurricToEditForm(forms.Form):
             ('goal', "Goals for the Course"),
         )
         self.fields['editType'] = forms.ChoiceField(choices=edit_choices, label="What to edit",
-		                                            widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
+                                                    widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
 
 
 class editCCTForm(forms.Form):
@@ -292,7 +292,6 @@ class gradeDistForm(forms.Form):
                                 widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
 
 
-
 class newSectionForm(forms.Form):
     TupleArray = []
     for g in Course.objects.all():
@@ -328,7 +327,6 @@ class newSectionForm(forms.Form):
 
 
 class editCourseForm(forms.Form):
-
     newName = forms.CharField(max_length=255, label="Enter New Name",
                               widget=forms.TextInput(attrs={'class': 'form-control'}))
     newCode = forms.CharField(max_length=255, label="Enter New Subject Code",
@@ -539,7 +537,6 @@ class queryThreeForm(forms.Form):
 
 
 class queryFourForm(forms.Form):
-
     curTupleArray = []
     for p in Curriculum.objects.all():
         curTupleArray.append((p.Cur_name, p.Cur_name))
@@ -580,7 +577,7 @@ class pickCourseToManageForm(forms.Form):
     cChoices = tuple(cTupleArray)
 
     course = forms.ChoiceField(choices=cChoices, label="Select a Course",
-                             widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
+                               widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
     editChoices = (
         ('edit', 'Edit the general info'),
         ('addTopic', 'Add a Topic'),
@@ -610,5 +607,4 @@ class addTopicToCourseForm(forms.Form):
             choices.add((t.pk, t.Name))
 
         self.fields['topic'] = forms.ChoiceField(choices=choices, label="Topic to add",
-		                                         widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
-
+                                                 widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
