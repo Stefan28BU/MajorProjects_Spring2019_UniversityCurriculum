@@ -64,6 +64,7 @@ class pickCuricToEditForm(forms.Form):
         ('removeCourse', 'Remove a Course'),
         ('addCourse', 'Add a Course'),
         ('editCourses', 'Manage Courses'),
+        ('addTopic', 'Add a Topic to the Curriculum'),
     )
     editMethod = forms.ChoiceField(choices=editChoices, label="What would you like to do",
                                    widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
@@ -574,4 +575,40 @@ class addTopicToCourseForm(forms.Form):
 
         self.fields['topic'] = forms.ChoiceField(choices=choices, label="Topic to add",
 		                                         widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
+
+
+class addTopicToCurricForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        curr_pk = kwargs.pop('curr_pk')
+
+        super(addTopicToCurricForm, self).__init__(*args, **kwargs)
+
+        # Display Goals associated with curriculum, not associated with course
+
+        curric = Curriculum.objects.get(pk=curr_pk)
+
+        all_topics = Topic.objects.all()
+        already_curric_topics = CurriculumTopic.objects.filter(Associated_Curriculum=curric)
+        already_topics = set()
+        for ct in already_curric_topics:
+            already_topics.add(ct.Associated_Topic)
+        topics = set(all_topics) - already_topics
+
+        topic_choices = set()
+        for t in topics:
+            topic_choices.add((t.pk, t.Name))
+
+        self.fields['topic'] = forms.ChoiceField(choices=topic_choices, label="Topic to add",
+		                                         widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
+
+        level_choices = (
+            (1, '1'),
+            (2, '2'),
+            (3, '3'),
+        )
+        self.fields['level'] = forms.ChoiceField(choices=level_choices, label="Level of the topic",
+		                                         widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
+
+        self.fields['subject_area'] = forms.CharField(label="Enter the subject area")
+        self.fields['units'] = forms.IntegerField(label="Units", min_value=0)
 

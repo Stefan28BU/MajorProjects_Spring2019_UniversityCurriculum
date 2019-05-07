@@ -24,6 +24,7 @@ urlpatterns = [
     path('addGoalToCourse/<int:curr_pk>/<int:course_pk>', views.addGoalToCourse, name='addGoalToCourse'),
     path('editSpecificCourse/<int:course_pk>/', views.editCourse, name='addGoalToCourse'),
     path('addTopicToCourse/<int:course_pk>/', views.addTopicToCourse, name='addGoalToCourse'),
+    path('addTopicToCurriculum/<int:curr_pk>/', views.addTopicToCurric, name='addTopicToCurr'),
 
     path('editSection/', views.editSection, name='editSection'),
     path('editTopic/', views.editTopic, name='editTopic'),

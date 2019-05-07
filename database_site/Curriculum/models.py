@@ -90,7 +90,7 @@ class CurriculumTopic(models.Model):
     )
 
     Associated_Curriculum = models.ForeignKey(Curriculum, on_delete=models.CASCADE)
-    Associated_Topic = models.ForeignKey(CourseTopics, on_delete=models.CASCADE)
+    Associated_Topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
     Level = models.PositiveIntegerField(choices=levels, default=lv1)
     Subject_Area = models.CharField(max_length=255)
     Units = models.PositiveIntegerField(default=0)

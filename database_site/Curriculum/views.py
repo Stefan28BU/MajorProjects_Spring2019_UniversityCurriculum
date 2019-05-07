@@ -134,6 +134,8 @@ def pickCuricToEdit(request):
             return HttpResponseRedirect('/Curriculum/addCourseToCurric/' + str(form['curr'].value()))
         elif editMethod == 'editCourses':
             return HttpResponseRedirect('/Curriculum/selectCourseForCurricEdit/' + str(form['curr'].value()))
+        elif editMethod == 'addTopic':
+            return HttpResponseRedirect('/Curriculum/addTopicToCurriculum/' + str(form['curr'].value()))
 
     else:
         form = pickCuricToEditForm()
@@ -478,7 +480,7 @@ def forkCourseManagement(request):
 
     else:
         form = pickCourseToManageForm()
-    return render(request=request, template_name="Edit/pickCurriculumToEdit.html", context={"form": form})
+    return render(request=request, template_name="Edit/course/forkCourseEditPaths.html", context={"form": form})
 
 def gradeGoal(request, curr_pk, course_pk):
     if request.method == 'POST':
@@ -583,3 +585,25 @@ def q3(request):
     return render(request=request, template_name="Queries/q3.html",
                   context={"form": form, "sec_list": sec_list, "grade_dist": grade_dist})
 
+
+def addTopicToCurric(request, curr_pk):
+    if request.method == 'POST':
+        form = addTopicToCurricForm(request.POST, curr_pk=curr_pk)
+
+        if form.is_valid():
+
+            topic_pk = form['topic'].value()
+            topic = Topic.objects.get(pk=topic_pk)
+            curric = Curriculum.objects.get(pk=curr_pk)
+
+            level = form['level'].value()
+            sub_area = form['subject_area'].value()
+            units = form['units'].value()
+
+            ct = CurriculumTopic(Associated_Topic=topic, Associated_Curriculum=curric,
+                                 Level=level, Subject_Area=sub_area, Units=units)
+            ct.save()
+            return HttpResponseRedirect('/Curriculum/editCurriculum/')
+    else:
+        form = addTopicToCurricForm(curr_pk=curr_pk)
+    return render(request=request, template_name="Edit/createCurriculumTopic.html", context={"form": form})
