@@ -496,8 +496,8 @@ def q2(request):
 
             q2obj = get_info_on_course_with_name(course)
 
-            print(q2obj)
-
+            course_list = q2obj[0]
+            curr_list = q2obj[1]
 
         else:
             print('Invalid')
@@ -507,4 +507,28 @@ def q2(request):
 
     return render(request=request, template_name="Queries/q2.html",
                   context={"form": form, "course_list": course_list, "curr_list": curr_list})
+
+
+def q3(request):
+    sec_list = []
+    grade_dist = []
+    if request.method == 'GET':
+        form = queryThreeForm(request.GET)
+
+        if form.is_valid():
+            course = form['course'].value()
+            curr = form['curr'].value()
+
+            q3obj = get_info_on_course_no_range(course, curr)
+
+            print(q3obj, ' sdadsadasdasdadaddas')
+
+        else:
+            print('Invalid')
+            return HttpResponseRedirect('/Curriculum')
+    else:
+        form = queryThreeForm()
+
+    return render(request=request, template_name="Queries/q3.html",
+                  context={"form": form, "sec_list": sec_list, "grade_dist": grade_dist})
 
