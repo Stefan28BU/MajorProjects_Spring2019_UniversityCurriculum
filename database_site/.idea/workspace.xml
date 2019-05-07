@@ -4,10 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/database_site/settings.py" line="68" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="39b86957-530d-4e0f-9df0-5c492219cd0d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Curriculum/dbFuncs/getInfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/Curriculum/dbFuncs/getInfo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Curriculum/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Curriculum/views.py" afterDir="false" />
-    </list>
+    <list default="true" id="39b86957-530d-4e0f-9df0-5c492219cd0d" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,11 +16,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Curriculum/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="157">
-              <caret line="576" column="22" selection-start-line="576" selection-start-column="12" selection-end-line="576" selection-end-column="22" />
+              <caret line="576" column="33" lean-forward="true" selection-start-line="576" selection-start-column="33" selection-end-line="576" selection-end-column="33" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -31,11 +28,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Curriculum/dbFuncs/getInfo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="358">
-              <caret line="130" column="5" lean-forward="true" selection-start-line="130" selection-start-column="5" selection-end-line="130" selection-end-column="5" />
+            <state relative-caret-position="-3053">
+              <caret line="5" column="8" lean-forward="true" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Curriculum/templates/curriculum/gradeDist.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="11" column="26" lean-forward="true" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -55,13 +61,6 @@
             <state relative-caret-position="37">
               <caret line="69" column="10" selection-start-line="69" selection-start-column="10" selection-end-line="69" selection-end-column="10" />
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Curriculum/templates/Edit/course/forkCourseEditPaths.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1058" />
           </provider>
         </entry>
       </file>
@@ -133,10 +132,10 @@
       <find>new go</find>
       <find>grade</find>
       <find>select the</find>
-      <find>Select the Curriculum you would like to edit</find>
       <find>editsectionf</find>
       <find>gradedi</find>
       <find>curriculumCou</find>
+      <find>Select the Curriculum you would like to edit</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -168,8 +167,8 @@
         <option value="$PROJECT_DIR$/Curriculum/templates/Edit/pickCurriculumToEdit.html" />
         <option value="$PROJECT_DIR$/Curriculum/forms.py" />
         <option value="$PROJECT_DIR$/Curriculum/dbFuncs/getInfo.py" />
-        <option value="$PROJECT_DIR$/Curriculum/views.py" />
         <option value="$PROJECT_DIR$/Curriculum/templates/Queries/q3.html" />
+        <option value="$PROJECT_DIR$/Curriculum/views.py" />
       </list>
     </option>
   </component>
@@ -326,7 +325,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65976000" />
+    <option name="totallyTimeSpent" value="66707000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -454,13 +453,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1003">
           <caret line="59" column="84" selection-start-line="59" selection-start-column="84" selection-end-line="59" selection-end-column="84" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Curriculum/templates/curriculum/gradeDist.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="29" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
         </state>
       </provider>
     </entry>
@@ -593,16 +585,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Curriculum/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="576" column="22" selection-start-line="576" selection-start-column="12" selection-end-line="576" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Curriculum/templates/Queries/q3.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="205">
@@ -610,10 +592,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Curriculum/templates/curriculum/gradeDist.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="26" lean-forward="true" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Curriculum/dbFuncs/getInfo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="358">
-          <caret line="130" column="5" lean-forward="true" selection-start-line="130" selection-start-column="5" selection-end-line="130" selection-end-column="5" />
+        <state relative-caret-position="-3053">
+          <caret line="5" column="8" lean-forward="true" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Curriculum/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="576" column="33" lean-forward="true" selection-start-line="576" selection-start-column="33" selection-end-line="576" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
