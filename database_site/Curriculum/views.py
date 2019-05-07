@@ -412,7 +412,8 @@ def forkGoal(request, curr_pk, course_pk):
         if form.is_valid():
             editMethod = form['editMethod'].value()
             if editMethod == 'grade':
-                return HttpResponseRedirect('/Curriculum')
+                return HttpResponseRedirect('/Curriculum/gradeGoal/' + str(curr_pk) + '/'
+                                            + str(course_pk))
             elif editMethod == 'add':
                 return HttpResponseRedirect('/Curriculum/addGoalToCourse/' + str(curr_pk) + '/'
                                             + str(course_pk))
@@ -451,23 +452,32 @@ def addGoalToCourse(request, curr_pk, course_pk):
 
 def gradeGoal(request, curr_pk, course_pk):
     if request.method == 'POST':
-        form = gradeGoal(request.POST, curr_pk=curr_pk, course_pk=course_pk)
+        form = gradeGoalForm(request.POST, curr_pk=curr_pk, course_pk=course_pk)
 
         if form.is_valid():
             course = Course.objects.get(pk=course_pk)
-            curric = Curriculum.objects.get(pk=curr_pk)
             goal_pk = form['goal'].value()
+            grade = form['grade'].value()
+            count = form['count'].value()
+
             goal = Goal.objects.get(pk=goal_pk)
 
-            cg = CourseGoal(Associated_Goal=goal, Associated_Course=course)
-            cg.save()
+            grades = Grade.objects.filter(Associated_Goal=goal, Letter_Grade = grade)
+
+            if grades.count() > 0:
+                grade_obj = Grade.objects.get(pk=grades[0].pk)
+            else:
+                grade_obj = Grade(Associated_Goal=goal, Letter_Grade=grade)
+            grade_obj.dist_number = int(count)
+            grade_obj.save()
+
             return HttpResponseRedirect('/Curriculum/editCurriculum')
 
         else:
             print('Invalid')
             return HttpResponseRedirect('/Curriculum')
     else:
-        form = gradeGoal(curr_pk=curr_pk, course_pk=course_pk)
+        form = gradeGoalForm(curr_pk=curr_pk, course_pk=course_pk)
 
     return render(request=request, template_name="Edit/forkForEditGoalsInCurriculum.html", context={"form": form})
 
@@ -488,28 +498,6 @@ def forkCourseManagement(request):
         form = pickCourseToManageForm()
     return render(request=request, template_name="Edit/course/forkCourseEditPaths.html", context={"form": form})
 
-
-def gradeGoal(request, curr_pk, course_pk):
-    if request.method == 'POST':
-        form = gradeGoal(request.POST, curr_pk=curr_pk, course_pk=course_pk)
-
-        if form.is_valid():
-            course = Course.objects.get(pk=course_pk)
-            curric = Curriculum.objects.get(pk=curr_pk)
-            goal_pk = form['goal'].value()
-            goal = Goal.objects.get(pk=goal_pk)
-
-            cg = CourseGoal(Associated_Goal=goal, Associated_Course=course)
-            cg.save()
-            return HttpResponseRedirect('/Curriculum/editCurriculum')
-
-        else:
-            print('Invalid')
-            return HttpResponseRedirect('/Curriculum')
-    else:
-        form = gradeGoal(curr_pk=curr_pk, course_pk=course_pk)
-
-    return render(request=request, template_name="Edit/forkForEditGoalsInCurriculum.html", context={"form": form})
 
 
 def addTopicToCourse(request, course_pk):
@@ -706,3 +694,19 @@ def q4(request):
     return render(request=request, template_name="Queries/q4.html",
                   context={"form": form, "sec_list": sec_list, "list_list": list_list,
                            "tot_grade_list": tot_grade_list})
+
+
+def q5(request):
+
+    if request.method == 'GET':
+        form = queryFiveForm(request.GET)
+    else:
+        form = queryFiveForm()
+
+    result = set()
+    for c in Curriculum.objects.all():
+        person, course_tuple, completed_topics, leftover_goals = q5_ryland_style(c)
+        result.add((c, person, str(course_tuple[0]), str(course_tuple[1]), tuple(completed_topics), tuple(leftover_goals)))
+
+    return render(request=request, template_name="Queries/q5.html",
+                  context={"form": form, "ret": result})

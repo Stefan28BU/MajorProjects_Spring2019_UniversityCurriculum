@@ -13,6 +13,7 @@ urlpatterns = [
     path('editPerson/', views.editPerson, name='editPerson'),
     path('editCurriculum/', views.pickCuricToEdit, name='editCurriculum'),
     path('gradeDist/', views.gradeDist, name='gradeDist'),
+    path('gradeGoal/<int:curr_pk>/<int:course_pk>/', views.gradeGoal, name='gradeGoal'),
     path('newSection/', views.newSection, name='newSection'),
     path('editCourse/', views.forkCourseManagement, name='editCourse'),
     path('editSpecificCurriculum/<int:curr_id>', views.editCurriculum, name='editSpecificCurriculum'),
@@ -34,5 +35,6 @@ urlpatterns = [
     path('q2/', views.q2, name='q2'),
     path('q3/', views.q3, name='q3'),
     path('q4/', views.q4, name='q4'),
+    path('q5/', views.q5, name='q5'),
 
 ]

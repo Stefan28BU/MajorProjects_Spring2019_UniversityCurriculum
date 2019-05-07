@@ -250,14 +250,13 @@ def q5_ryland_style(curriculum):
     all_courses = set()
     for cc in all_course_currics:
         all_courses.add(cc.Associated_Course)
-    for c in all_courses:
-        if c.Required:
+        if cc.Required:
             req_courses += 1
         else:
             opt_courses += 1
 
     curric_topics = CurriculumTopic.objects.filter(Associated_Curriculum=curriculum)
-    curric_ct = CurriculumCT.objects.filters(Associated_Curriculum=curriculum)
+    curric_ct = CurriculumCT.objects.filter(Associated_Curriculum=curriculum)
 
     topic_cct_list = set()
     for ct in curric_topics:
@@ -265,7 +264,7 @@ def q5_ryland_style(curriculum):
         for c_ct in curric_ct:
             if c_ct.Associated_CT.Associated_Topic == ct.Associated_Topic:
                 list_of_cct.add(c_ct)
-        topic_cct_list.add((ct, list_of_cct))
+        topic_cct_list.add((ct, tuple(list_of_cct)))
 
     completed_topics = set()
     for tcct in topic_cct_list:
@@ -276,7 +275,7 @@ def q5_ryland_style(curriculum):
             ch += cct.Associated_CT.Associated_Course.Credit_Hours
 
         if u >= tcct[0].Units:
-            completed_topics.add((tcct[0], ch))
+            completed_topics.add((tcct[0], str(ch)))
 
     curric_cg = set()
     curric_g = Goal.objects.filter(Associated_Curriculum=curriculum)
