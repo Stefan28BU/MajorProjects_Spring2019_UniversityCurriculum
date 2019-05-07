@@ -309,17 +309,16 @@ def get_sections_in_a_cur_with_time_range_and_course_range(cur_name, start_semes
     course_section_set = set()
 
     for i in courses:
-        if (int(i.Associated_Course.Course_Number) >= int(binCourse)) and (
-                int(i.Associated_Course.Course_Number) <= int(endCourse)):
+        if (int(i.Course_Number) >= int(binCourse)) and (
+                int(i.Course_Number) <= int(endCourse)):
             obj = get_info_on_course_no_range(i.Course_Name, cur_name)
             course_section_set.add(tuple(obj[1]))
 
     course_sections = []
+    overallDict = dict()
 
     for i in course_section_set:
         course_sections.append(get_all_sections_with_range(i, start_semester, start_year, end_semester, end_year))
-
-        overallDict = dict()
 
         for csList in course_sections:
 

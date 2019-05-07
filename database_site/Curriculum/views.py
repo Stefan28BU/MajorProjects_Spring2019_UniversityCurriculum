@@ -646,10 +646,21 @@ def q4(request):
             startYear = form['startYear'].value()
             endYear = form['endYear'].value()
 
-            q4obj = get_sections_in_a_cur_with_time_range(curr, startSem, startYear, endSem, endYear)
+            startC = form['startCoursenum'].value()
+            endC = form['endCoursenum'].value()
 
-            grade_dist = q4obj[0]
-            sec_list = q4obj[1]
+
+            if startC == '' and endC == '':
+                q4obj = get_sections_in_a_cur_with_time_range(curr, startSem, startYear, endSem, endYear)
+
+                grade_dist = q4obj[0]
+                sec_list = q4obj[1]
+
+            else:
+                q4obj = get_sections_in_a_cur_with_time_range_and_course_range(curr, startSem, startYear, endSem, endYear, startC, endC)
+
+                grade_dist = q4obj[0]
+                sec_list = q4obj[1]
 
             for secL in sec_list:
                 for sec in secL:
@@ -658,6 +669,7 @@ def q4(request):
                     for g, count in grade_dist[str(sec.pk)].items():
                         gList.append((g, count))
                     list_list.append(('Without range: ', sec, gList))
+
 
             gradeDict = {
                 'A+': 0,

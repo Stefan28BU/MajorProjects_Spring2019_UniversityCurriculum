@@ -633,6 +633,12 @@ class queryFourForm(forms.Form):
     endSem = forms.ChoiceField(choices=semesters, label="Choose a Semester",required=False,
                                widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
 
+    startCoursenum = forms.IntegerField(initial=0, label="From Course Number", required=False,
+                               widget=forms.TextInput(attrs={'class': 'selectpicker form-control'}))
+
+    endCoursenum = forms.IntegerField(initial=0, label="From Course Number", required=False,
+                                    widget=forms.TextInput(attrs={'class': 'selectpicker form-control'}))
+
 
 class pickCourseToManageForm(forms.Form):
     cTupleArray = []
