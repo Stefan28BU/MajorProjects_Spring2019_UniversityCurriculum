@@ -283,8 +283,7 @@ class gradeDistForm(forms.Form):
         elif s.Semester == winter:
             sem = 'Winter'
 
-        secTupleArray.append(
-            (s.Section_ID, 'Course: ' + s.Associated_Course.Course_Name + ', Section: ' + sem + ' ' + str(s.Year)))
+        secTupleArray.append((s.Section_ID, 'Course: ' + s.Associated_Course.Course_Name + ', Section: ' + sem + ' ' + str(s.Year) + 'Section ID: ' + str(s.Section_ID)))
 
     secChoice = tuple(secTupleArray)
 

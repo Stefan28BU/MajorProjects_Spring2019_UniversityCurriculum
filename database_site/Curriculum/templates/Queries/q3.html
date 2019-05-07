@@ -77,20 +77,46 @@
         </div>
     </div>
     <div class="myModal formCustom">
-        <div> Courses:
-            {% if course_list %}
+        <div> Sections:
+            {% if sec_list %}
                 <ul>
-                    {% for course in course_list %}
+                    {% for section in sec_list %}
                         <li>
                             <a>
-                                {{ course.Course_Name }}
-                                {{ '(' }}
-                                {{ course.Subject_Code }}
-                                {{ course.Course_Number }}
-                                {{ '), Credit Hours: ' }}
-                                {{ course.Credit_Hours }}
-                                {{ ', Description: ' }}
-                                {{ course.Description }}
+                                {{ section.Semester }}
+                                {{ ' ' }}
+                                {{ section.Year }}
+                                {{ ', Section ID: ' }}
+                                {{ section.Section_ID }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>
+                    No Section
+                </p>
+            {% endif %}
+        </div>
+        <div> Grade Distribution:
+            {% if grade_dist %}
+                <ul>
+                    {% for grade in grade_dist %}
+                        <li>
+                            <a>
+                                {{ grade.Associated_Course_Sectoion.Associated_Course.Course_Name }}
+                                {{ ' (' }}
+
+                                {{ grade.Associated_Course_Sectoion.Associated_Course.Subject_Code }}
+                                {{ ' ' }}
+                                {{ grade.Associated_Course_Sectoion.Associated_Course.Course_Number }}
+                                {{ ') ' }}
+
+                                {{ grade.Associated_Course_Section.Semester }}
+                                {{ ' ' }}
+                                {{ grade.Associated_Section.Year }}
+                                {{ ', Section ID: ' }}
+                                {{ grade.Associated_Section.Section_ID }}
 
                             </a>
                         </li>
@@ -98,24 +124,7 @@
                 </ul>
             {% else %}
                 <p>
-                    No Course
-                </p>
-            {% endif %}
-        </div>
-        <div> Curriculum:
-            {% if curr_list %}
-                <ul>
-                    {% for curr in curr_list %}
-                        <li>
-                            <a>
-                                {{ curr.Associated_Curriculum.Cur_name }}
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <p>
-                    No Curriculum
+                    No Grade Distribution
                 </p>
             {% endif %}
         </div>

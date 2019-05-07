@@ -115,8 +115,10 @@ def get_info_on_course_no_range(course_name, cur_name):
 	for gList in res2:
 		for g in gList:
 			print('Grade: ' + g.Letter_Grade)
+
+	print('len  ', len(res2))
 	# Res2 is List of grades by course section
-	return res2
+	return res2, res
 
 
 def get_all_sections_with_range(course_name, start_sem, start_year, end_sem, end_year):
@@ -154,7 +156,7 @@ def get_sections_grades_of_a_course_with_range(course_name, cur_name, start_seme
 	for i in res:
 		res2 = get_sections_grades_of_a_course(i.Associated_Course)
 
-	return res2
+	return res2, res
 
 
 def get_courses_in_a_cur(cur_name):

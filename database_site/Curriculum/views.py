@@ -572,8 +572,8 @@ def q3(request):
 
             q3obj = get_info_on_course_no_range(course, curr)
 
-
-            print(q3obj, ' sdadsadasdasdadaddas')
+            grade_dist = q3obj[0]
+            sec_list = q3obj[1]
 
         else:
             print('Invalid')
