@@ -5,6 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from .models import *
 
 from .forms import *
+from django.contrib import messages
 
 from .dbFuncs.getInfo import *
 
@@ -18,11 +19,12 @@ def newCurriculum(request):
         form = newCurriculumForm(request.POST)
 
         if form.is_valid():
+            messages.add_message(request, messages.INFO, 'Successfully added new curriculum.')
             form.save()
 
         else:
             print('Invalid')
-            return HttpResponseRedirect('/Curriculum')
+            messages.info(request, 'Failed to submit, form is invalid')
     else:
         form = newCurriculumForm()
 
@@ -34,11 +36,12 @@ def newHead(request):
         form = headForm(request.POST)
 
         if form.is_valid():
+            messages.add_message(request, messages.INFO, 'Successfully added new department head.')
             form.save()
 
         else:
             print('Invalid')
-            return HttpResponseRedirect('/Curriculum')
+            messages.info(request, 'Failed to submit, form is invalid')
     else:
         form = headForm()
 
@@ -50,11 +53,12 @@ def newCourse(request):
         form = newCourseForm(request.POST)
 
         if form.is_valid():
+            messages.add_message(request, messages.INFO, 'Successfully added new curriculum.')
             form.save()
 
         else:
             print('Invalid')
-            return HttpResponseRedirect('/Curriculum')
+            messages.info(request, 'Failed to submit, form is invalid')
     else:
         form = newCourseForm()
 
@@ -66,11 +70,12 @@ def newTopic(request):
         form = newTopicForm(request.POST)
 
         if form.is_valid():
+            messages.add_message(request, messages.INFO, 'Successfully added new topic.')
             form.save()
 
         else:
             print('Invalid')
-            return HttpResponseRedirect('/Curriculum')
+            messages.info(request, 'Failed to submit, form is invalid')
     else:
         form = newTopicForm()
 
@@ -82,11 +87,12 @@ def newGoal(request):
         form = newGoalForm(request.POST)
 
         if form.is_valid():
+            messages.add_message(request, messages.INFO, 'Successfully added new goal.')
             form.save()
 
         else:
             print('Invalid')
-            return HttpResponseRedirect('/Curriculum')
+            messages.info(request, 'Failed to submit, form is invalid')
     else:
         form = newGoalForm()
 
@@ -104,6 +110,7 @@ def editPerson(request):
         form = editPersonForm(request.POST)
 
         if form.is_valid():
+            messages.add_message(request, messages.INFO, 'Successfully edited person in charge.')
             temp = Person.objects.get(ID=form['curr'].value())
 
             temp.Name = form['name'].value()
@@ -113,7 +120,7 @@ def editPerson(request):
 
         else:
             print('Invalid')
-            return HttpResponseRedirect('/Curriculum')
+            messages.info(request, 'Failed to submit, form is invalid')
     else:
         form = editPersonForm()
 
@@ -148,6 +155,8 @@ def pickCourseInCurriculumForEditing(request, curr_pk):
         form = pickCourseForCurricToEditForm(request.POST, curr_pk=curr_pk)
 
         if form.is_valid():
+            messages.add_message(request, messages.INFO, 'Successfully edited course in curriculum.')
+
             course_pk = form['courseToEdit'].value()
             editType = form['editType'].value()
             if editType == 'cct':
@@ -158,7 +167,7 @@ def pickCourseInCurriculumForEditing(request, curr_pk):
                                             + str(curr_pk) + '/' + str(course_pk))
         else:
             print('Invalid')
-            return HttpResponseRedirect('/Curriculum')
+            messages.info(request, 'Failed to submit, form is invalid')
     else:
         form = pickCourseForCurricToEditForm(curr_pk=curr_pk)
 
@@ -170,6 +179,8 @@ def editCCT(request, curr_pk, course_pk):
         form = editCCTForm(request.POST, curr_pk=curr_pk, course_pk=course_pk)
 
         if form.is_valid():
+            messages.add_message(request, messages.INFO, 'Successfully edited cct.')
+
             units = form['units'].value()
             topic_pk = form['topic'].value()
 
@@ -185,7 +196,7 @@ def editCCT(request, curr_pk, course_pk):
             return HttpResponseRedirect('/Curriculum/editCurriculum')
         else:
             print('Invalid')
-            return HttpResponseRedirect('/Curriculum')
+            messages.info(request, 'Failed to submit, form is invalid')
     else:
         form = editCCTForm(curr_pk=curr_pk, course_pk=course_pk)
 
@@ -197,6 +208,7 @@ def addCourseToCurriculum(request, curr_pk):
         form = addCourseToCurricForm(request.POST, curr_pk=curr_pk)
 
         if form.is_valid():
+            messages.add_message(request, messages.INFO, 'Successfully added course to curriculum.')
 
             course_pk = form['courseToAdd'].value()  # Get the course Primary Key from the page
             course = Course.objects.get(pk=course_pk)  # Get the course using the primary key
@@ -215,6 +227,10 @@ def addCourseToCurriculum(request, curr_pk):
                                              Required=form['req'].value())
             curric_course.save()
             return HttpResponseRedirect('/Curriculum/editCurriculum/')
+
+        else:
+            messages.info(request, 'Failed to submit, form is invalid')
+
     else:
         form = addCourseToCurricForm(curr_pk=curr_pk)
     return render(request=request, template_name="Edit/addCourseToCurriculum.html", context={"form": form})
@@ -225,6 +241,8 @@ def editCurriculum(request, curr_id):
         form = editCurriculumForm(request.POST)
 
         if form.is_valid():
+            messages.add_message(request, messages.INFO, 'Successfully edited cucciculum.')
+
             temp = Curriculum.objects.get(pk=curr_id)
             tempPerson = Person.objects.get(ID=form['newHead'].value())
 
@@ -238,7 +256,7 @@ def editCurriculum(request, curr_id):
 
         else:
             print('Invalid')
-            return HttpResponseRedirect('/Curriculum')
+            messages.info(request, 'Failed to submit, form is invalid')
     else:
         form = editCurriculumForm()
 
@@ -250,6 +268,8 @@ def gradeDist(request):
         form = gradeDistForm(request.POST)
 
         if form.is_valid():
+            messages.add_message(request, messages.INFO, 'Successfully added grade distribution.')
+
             temp = Grade()
 
             temp.dist_number = form['dist'].value()
@@ -261,7 +281,7 @@ def gradeDist(request):
 
         else:
             print('Invalid')
-            return HttpResponseRedirect('/Curriculum')
+            messages.info(request, 'Failed to submit, form is invalid')
     else:
         form = gradeDistForm()
 
@@ -273,6 +293,8 @@ def newSection(request):
         form = newSectionForm(request.POST)
 
         if form.is_valid():
+            messages.add_message(request, messages.INFO, 'Successfully added new section.')
+
             temp = CourseSection()
 
             temp.Semester = form['seme'].value()
@@ -286,7 +308,7 @@ def newSection(request):
 
         else:
             print('Invalid')
-            return HttpResponseRedirect('/Curriculum')
+            messages.info(request, 'Failed to submit, form is invalid')
     else:
         form = newSectionForm()
 
@@ -298,6 +320,8 @@ def editCourse(request, course_pk):
         form = editCourseForm(request.POST)
 
         if form.is_valid():
+            messages.add_message(request, messages.INFO, 'Successfully edited course.')
+
             temp = Course.objects.get(pk=course_pk)
             temp.Course_Number = form['newNum'].value()
             temp.Credit_Hours = form['newCred'].value()
@@ -308,7 +332,7 @@ def editCourse(request, course_pk):
 
         else:
             print('Invalid')
-            return HttpResponseRedirect('/Curriculum')
+            messages.info(request, 'Failed to submit, form is invalid')
     else:
         form = editCourseForm()
 
@@ -320,6 +344,8 @@ def editTopic(request):
         form = editTopicForm(request.POST)
 
         if form.is_valid():
+            messages.add_message(request, messages.INFO, 'Successfully edited topic.')
+
             temp = Topic.objects.get(ID=form['topic'].value())
             temp.Name = form['name'].value()
 
@@ -327,7 +353,7 @@ def editTopic(request):
 
         else:
             print('Invalid')
-            return HttpResponseRedirect('/Curriculum')
+            messages.info(request, 'Failed to submit, form is invalid')
     else:
         form = editTopicForm()
 
@@ -339,6 +365,8 @@ def editGoal(request):
         form = editGoalForm(request.POST)
 
         if form.is_valid():
+            messages.add_message(request, messages.INFO, 'Successfully edited goal.')
+
             tempGoal = Goal.objects.get(ID=form['goal'].value())
             tempGoal.Description = form['des'].value()
 
@@ -348,7 +376,7 @@ def editGoal(request):
 
         else:
             print('Invalid')
-            return HttpResponseRedirect('/Curriculum')
+            messages.info(request, 'Failed to submit, form is invalid')
     else:
         form = editGoalForm()
 
@@ -362,6 +390,8 @@ def editSection(request):
         form = editSectionForm(request.POST)
 
         if form.is_valid():
+            messages.add_message(request, messages.INFO, 'Successfully edited section.')
+
             tempSec = CourseSection.objects.get(Section_ID=form['currSection'].value())
 
             tempSec.Year = form['year'].value()
@@ -373,7 +403,7 @@ def editSection(request):
 
         else:
             print('Invalid')
-            return HttpResponseRedirect('/Curriculum')
+            messages.info(request, 'Failed to submit, form is invalid')
     else:
         form = editSectionForm()
 
@@ -391,6 +421,8 @@ def q1(request):
         form = queryOneForm(request.GET)
 
         if form.is_valid():
+            messages.add_message(request, messages.INFO, 'Success.')
+
             curricula = form['curr'].value()
 
             course_list = get_courses_in_curricula(curricula)
@@ -398,7 +430,7 @@ def q1(request):
 
         else:
             print('Invalid')
-            return HttpResponseRedirect('/Curriculum')
+            messages.info(request, 'Failed to submit, form is invalid')
     else:
         form = queryOneForm()
 
@@ -411,6 +443,8 @@ def forkGoal(request, curr_pk, course_pk):
         form = forkGoalForm(request.POST)
 
         if form.is_valid():
+            messages.add_message(request, messages.INFO, 'Success.')
+
             editMethod = form['editMethod'].value()
             if editMethod == 'grade':
                 return HttpResponseRedirect('/Curriculum/gradeGoal/' + str(curr_pk) + '/'
@@ -421,7 +455,7 @@ def forkGoal(request, curr_pk, course_pk):
 
         else:
             print('Invalid')
-            return HttpResponseRedirect('/Curriculum')
+            messages.info(request, 'Failed to submit, form is invalid')
     else:
         form = forkGoalForm()
 
@@ -433,6 +467,8 @@ def addGoalToCourse(request, curr_pk, course_pk):
         form = addGoalToCourseForm(request.POST, curr_pk=curr_pk, course_pk=course_pk)
 
         if form.is_valid():
+            messages.add_message(request, messages.INFO, 'Success.')
+
             course = Course.objects.get(pk=course_pk)
             goal_pk = form['goal'].value()
             goal = Goal.objects.get(pk=goal_pk)
@@ -443,7 +479,7 @@ def addGoalToCourse(request, curr_pk, course_pk):
 
         else:
             print('Invalid')
-            return HttpResponseRedirect('/Curriculum')
+            messages.info(request, 'Failed to submit, form is invalid')
     else:
         form = addGoalToCourseForm(curr_pk=curr_pk, course_pk=course_pk)
 
@@ -455,6 +491,8 @@ def gradeGoal(request, curr_pk, course_pk):
         form = gradeGoalForm(request.POST, curr_pk=curr_pk, course_pk=course_pk)
 
         if form.is_valid():
+            messages.add_message(request, messages.INFO, 'Success.')
+
             course = Course.objects.get(pk=course_pk)
             goal_pk = form['goal'].value()
             grade = form['grade'].value()
@@ -475,7 +513,7 @@ def gradeGoal(request, curr_pk, course_pk):
 
         else:
             print('Invalid')
-            return HttpResponseRedirect('/Curriculum')
+            messages.info(request, 'Failed to submit, form is invalid')
     else:
         form = gradeGoalForm(curr_pk=curr_pk, course_pk=course_pk)
 
@@ -505,6 +543,8 @@ def addTopicToCourse(request, course_pk):
         form = addTopicToCourseForm(request.POST, course_pk=course_pk)
 
         if form.is_valid():
+            messages.add_message(request, messages.INFO, 'Success.')
+
             course = Course.objects.get(pk=course_pk)
             topic_pk = form['topic'].value()
 
@@ -526,7 +566,7 @@ def addTopicToCourse(request, course_pk):
 
         else:
             print('Invalid')
-            return HttpResponseRedirect('/Curriculum')
+            messages.info(request, 'Failed to submit, form is invalid')
     else:
         form = addTopicToCourseForm(course_pk=course_pk)
 
@@ -540,6 +580,8 @@ def q2(request):
         form = queryTwoForm(request.GET)
 
         if form.is_valid():
+            messages.add_message(request, messages.INFO, 'Success.')
+
             course = form['course'].value()
 
             q2obj = get_info_on_course_with_name(course)
@@ -549,7 +591,7 @@ def q2(request):
 
         else:
             print('Invalid')
-            return HttpResponseRedirect('/Curriculum')
+            messages.info(request, 'Failed to submit, form is invalid')
     else:
         form = queryTwoForm()
 
@@ -567,6 +609,8 @@ def q3(request):
         form = queryThreeForm(request.GET)
 
         if form.is_valid():
+            messages.add_message(request, messages.INFO, 'Success.')
+
             course = form['course'].value()
             curr = form['curr'].value()
             startSem = form['startSem'].value()
@@ -601,7 +645,7 @@ def q3(request):
 
         else:
             print('Invalid')
-            return HttpResponseRedirect('/Curriculum')
+            messages.info(request, 'Failed to submit, form is invalid')
     else:
         form = queryThreeForm()
 
@@ -614,6 +658,8 @@ def addTopicToCurric(request, curr_pk):
         form = addTopicToCurricForm(request.POST, curr_pk=curr_pk)
 
         if form.is_valid():
+            messages.add_message(request, messages.INFO, 'Success.')
+
             topic_pk = form['topic'].value()
             topic = Topic.objects.get(pk=topic_pk)
             curric = Curriculum.objects.get(pk=curr_pk)
@@ -626,6 +672,10 @@ def addTopicToCurric(request, curr_pk):
                                  Level=level, Subject_Area=sub_area, Units=units)
             ct.save()
             return HttpResponseRedirect('/Curriculum/editCurriculum/')
+
+        else:
+            messages.info(request, 'Failed to submit, form is invalid')
+
     else:
         form = addTopicToCurricForm(curr_pk=curr_pk)
     return render(request=request, template_name="Edit/createCurriculumTopic.html", context={"form": form})
@@ -640,6 +690,8 @@ def q4(request):
         form = queryFourForm(request.GET)
 
         if form.is_valid():
+            messages.add_message(request, messages.INFO, 'Success.')
+
             curr = form['curr'].value()
             startSem = form['startSem'].value()
             endSem = form['endSem'].value()
@@ -699,7 +751,7 @@ def q4(request):
 
         else:
             print('Invalid')
-            return HttpResponseRedirect('/Curriculum')
+            messages.info(request, 'Failed to submit, form is invalid')
     else:
         form = queryFourForm()
 
