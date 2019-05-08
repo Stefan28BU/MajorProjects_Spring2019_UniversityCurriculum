@@ -178,6 +178,7 @@ class editCCTForm(forms.Form):
 class newGoalForm(forms.ModelForm):
     class Meta:
         model = Goal
+        Units_For_Completion = forms.IntegerField(min_value=0, label='Units needed to complete', widget=forms.TextInput(attrs={'class': 'form-control'}))
 
         fields = ['Associated_Curriculum', 'Description', 'Units_For_Completion']
 
@@ -191,7 +192,6 @@ class newGoalForm(forms.ModelForm):
             'Associated_Curriculum': forms.Select(attrs={'class': 'selectpicker form-control'}),
 
             'Description': forms.TextInput(attrs={'class': 'form-control'}),
-            'Units_For_Completion': forms.IntegerField(min_value=0),
         }
 
 
