@@ -136,8 +136,6 @@ def pickCuricToEdit(request):
 
         if editMethod == "edit":
             return HttpResponseRedirect('/Curriculum/editSpecificCurriculum/' + str(form['curr'].value()))
-        elif editMethod == 'removeCourse':
-            return HttpResponseRedirect('/Curriculum/editSpecificCurriculum/' + str(form['curr'].value()))
         elif editMethod == 'addCourse':
             return HttpResponseRedirect('/Curriculum/addCourseToCurric/' + str(form['curr'].value()))
         elif editMethod == 'editCourses':
@@ -189,8 +187,8 @@ def editCCT(request, curr_pk, course_pk):
             topic = Topic.objects.get(pk=topic_pk)
 
             ct = CourseTopics.objects.get(Associated_Course=course, Associated_Topic=topic)
-            cct = CurriculumCT(Associated_CT=ct, Associated_Curriculum=curric)
-            cct.Units = abs(units)
+            cct = CurriculumCT.objects.get(Associated_CT=ct, Associated_Curriculum=curric)
+            cct.Units = abs(int(units))
             cct.save()
 
             return HttpResponseRedirect('/Curriculum/editCurriculum')

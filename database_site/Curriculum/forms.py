@@ -66,7 +66,6 @@ class pickCuricToEditForm(forms.Form):
                              widget=forms.Select(attrs={'class': 'selectpicker form-control'}))
     editChoices = (
         ('edit', 'Edit the general info'),
-        ('removeCourse', 'Remove a Course'),
         ('addCourse', 'Add a Course'),
         ('editCourses', 'Manage Courses'),
         ('addTopic', 'Add a Topic to the Curriculum'),
@@ -114,7 +113,7 @@ class addCourseToCurricForm(forms.Form):
         self.fields['courseToAdd'] = forms.ChoiceField(choices=cChoices, label="Select the course to add",
                                                        widget=forms.Select(
                                                            attrs={'class': 'selectpicker form-control'}))
-        self.fields['req'] = forms.BooleanField(label="Required")
+        self.fields['req'] = forms.BooleanField(label="Required", required=False)
 
 
 # At this point, just have a drop down to pick the course

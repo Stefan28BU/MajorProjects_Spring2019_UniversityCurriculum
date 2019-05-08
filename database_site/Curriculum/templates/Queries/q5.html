@@ -118,11 +118,10 @@
                                         <ul>
                                             {% for topic, ch in good_topic_ch %}
                                                     <li>
-                                                        {{ topic.Name }}
+                                                        {{ topic.Associated_Topic.Name }}
                                                         {{ ' ' }}
                                                         {{ ch }}
                                                     </li>
-
                                             {% endfor %}
                                         </ul>
                                     </li>
@@ -131,7 +130,7 @@
                                         <ul>
                                             {% for topic in bad_topics %}
                                                     <li>
-                                                        {{ topic.Name }}
+                                                        {{ topic.Associated_Topic.Name }}
                                                     </li>
                                             {% endfor %}
                                         </ul>

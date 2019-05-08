@@ -307,7 +307,7 @@ def q5_ryland_style(curriculum):
 				coverage[0] = False
 			elif str(tcct[0].Level) == '2':
 				coverage[1] = False
-				if req_u < float(tcct[0].Untis) * curriculum.Percent_Level_2 / 100.0:
+				if req_u < float(tcct[0].Units) * curriculum.Percent_Level_2 / 100.0:
 					coverage[2] = False
 				elif u < tcct[0].Untis:
 					coverage[3] = False
@@ -337,7 +337,7 @@ def q5_ryland_style(curriculum):
 		u = 0
 		for cg in CourseGoal.objects.filter(Associated_Goal=g):
 			u += cg.Units_Covered
-		if u >= str(g.Units_For_Completion):
+		if u >= int(g.Units_For_Completion):
 			valid_goal.add(g)
 		else:
 			goal_valid = False
