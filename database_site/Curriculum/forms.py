@@ -23,6 +23,9 @@ class newCurriculumForm(forms.ModelForm):
     class Meta:
         model = Curriculum
 
+        Percent_Level_2 = forms.IntegerField(min_value=0, max_value=100, label='Percent of level 2 topics needed for categorization', widget=forms.TextInput(attrs={'class': 'selectpicker form-control'}))
+        Percent_Level_3 = forms.IntegerField(min_value=0, max_value=100, label='Percent of level 3 topics needed for categorization', widget=forms.TextInput(attrs={'class': 'selectpicker form-control'}))
+
         fields = ['Head', 'Cur_name', 'Min_Hours', 'Percent_Level_2', 'Percent_Level_3']
 
         labels = {
@@ -30,15 +33,13 @@ class newCurriculumForm(forms.ModelForm):
             'Min_Hours': 'Minimum Hours',
             'Head': 'Curriculum Head',
             'Percent_Level_2': 'Percent of level 2 topics needed for categorization',
-            'Percent_Level_3': 'Percent of level 2 topics needed for categorization',
+            'Percent_Level_3': 'Percent of level 3 topics needed for categorization',
         }
         widgets = {
             'Head': forms.Select(attrs={'class': 'selectpicker form-control'}),
 
             'Cur_name': forms.TextInput(attrs={'class': 'form-control'}),
             'Min_Hours': forms.TextInput(attrs={'class': 'form-control'}),
-            'Percent_Level_2': forms.IntegerField(min_value=0, max_value=100),
-            'Percent_Level_3': forms.IntegerField(min_value=0, max_value=100),
         }
 
 
@@ -58,7 +59,7 @@ class pickCuricToEditForm(forms.Form):
     cTupleArray = []
     for c in Curriculum.objects.all():
         cTupleArray.append((c.pk, 'Curriculum: ' + c.Cur_name + ', Head: ' + c.Head.Name + '(' + str(
-            c.Head.ID) + '), Minimum Hours: ' + str(c.Min_Hours) + ', Topic Category: ' + c.Topic_Category))
+            c.Head.ID) + '), Minimum Hours: ' + str(c.Min_Hours)))
     cChoices = tuple(cTupleArray)
 
     curr = forms.ChoiceField(choices=cChoices, label="Select a Curriculum",
@@ -445,7 +446,7 @@ class editGoalForm(forms.Form):
     currTupleArray = []
     for c in Curriculum.objects.all():
         currTupleArray.append((c.Cur_name, 'Curriculum: ' + c.Cur_name + ', Head: ' + c.Head.Name + '(' + str(
-            c.Head.ID) + '), Minimum Hours: ' + str(c.Min_Hours) + ', Topic Category: ' + c.Topic_Category))
+            c.Head.ID) + '), Minimum Hours: ' + str(c.Min_Hours)))
 
     currChoice = tuple(currTupleArray)
 

@@ -78,6 +78,13 @@
     <div class="myModal formCustom">
         <form method="post">
             {% csrf_token %}
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
             <h4 class="title">Enter Grade Distribution</h4>
             <div class="form-group">
                 {{ form.as_p }}
