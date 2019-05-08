@@ -770,8 +770,8 @@ def q5(request):
     result = set()
     for c in Curriculum.objects.all():
         person, course_tuple, topic_tuple, goal_tuple, top_cat, goal_validity  = q5_ryland_style(c)
-        result.add((c, person, tuple(course_tuple[0]), tuple(course_tuple[1]), tuple(topic_tuple[0]),
-                    tuple(topic_tuple[1]), tuple(goal_tuple[0]), tuple(goal_tuple[1]), tuple(top_cat), tuple(str(goal_validity))))
+        result.add((c, person, str(course_tuple[0]), str(course_tuple[1]), tuple(topic_tuple[0]),
+                    tuple(topic_tuple[1]), tuple(goal_tuple[0]), tuple(goal_tuple[1]), top_cat, str(goal_validity)))
         # 0 - Curriculum                            -   Curriculum
         # 1 - Person                                -   Person
         # 2 - Required courses                      -   Number
