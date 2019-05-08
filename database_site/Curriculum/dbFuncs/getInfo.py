@@ -258,6 +258,7 @@ def q5_ryland_style(curriculum):
 	curric_topics = CurriculumTopic.objects.filter(Associated_Curriculum=curriculum)
 	curric_ct = CurriculumCT.objects.filter(Associated_Curriculum=curriculum)
 
+	# List of curriculum topics, list of cct's associated with course topic
 	topic_cct_list = set()
 	for ct in curric_topics:
 		list_of_cct = set()
@@ -266,44 +267,93 @@ def q5_ryland_style(curriculum):
 				list_of_cct.add(c_ct)
 		topic_cct_list.add((ct, tuple(list_of_cct)))
 
+
+
+	coverage = [True, True, True, True, True, True]
+	# 0 - 1 not covered
+	# 1 - 2 not completely covered by required
+	# 2 - 2 required don't meet min
+	# 3 - 2 optionals don't complete
+	# 4 - 3 not covered by min
+
+	#   Substandard         !0
+	#   Unsatisfactory      !2
+	#   Basic               !3
+	#   Basic+              !1
+	#   Inclusive           !4
+	#   Exclusive
+
+
+
 	completed_topics = set()
 	incomplete_topics = set()
 	for tcct in topic_cct_list:
 		u = 0
 		ch = 0
+		req_u = 0
 		for cct in tcct[1]:
+			cur_course = CurriculumCourse.objects.get(Associated_Course=cct.Associated_CT.Associated_Course,
+			                                             Associated_Curriculum=curriculum)
+			if cur_course.Required:
+				req_u += cct.Units
 			u += cct.Units
 			ch += cct.Associated_CT.Associated_Course.Credit_Hours
 
-		if u >= tcct[0].Units:
+		if req_u >= int(tcct[0].Units):
 			completed_topics.add((tcct[0], str(ch)))
 		else:
-			incomplete_topics.add((tcct[0]))
+			incomplete_topics.add(tcct[0])
+			if str(tcct[0].Level) == '1':
+				coverage[0] = False
+			elif str(tcct[0].Level) == '2':
+				coverage[1] = False
+				if req_u < float(tcct[0].Untis) * curriculum.Percent_Level_2 / 100.0:
+					coverage[2] = False
+				elif u < tcct[0].Untis:
+					coverage[3] = False
+			elif str(tcct[0].Level) == '3':
+				if u < float(tcct[0].Untis) * curriculum.Percent_Level_3 / 100.0:
+					coverage[4] = False
 
-	curric_cg = set()
-	curric_g = Goal.objects.filter(Associated_Curriculum=curriculum)
-	for g in curric_g:
-		g_cg = CourseGoal.objects.filter(Associated_Goal=g)
-		for cg in g_cg:
-			curric_cg.add(cg)
 
-	course_cg = set()
-	for c in all_courses:
-		c_cg = CourseGoal.objects.filter(Associated_Course=c)
-		for cg in c_cg:
-			course_cg.add(cg)
+	if not coverage[0]:
+		top_cat = 'Substandard'
+	elif not coverage[2]:
+		top_cat = 'Unsatisfactory'
+	elif not coverage[3]:
+		top_cat = 'Basic'
+	elif not coverage[1]:
+		top_cat = 'Basic+'
+	elif not coverage[4]:
+		top_cat = 'Inclusive'
+	else:
+		top_cat = 'Exclusive'
 
-	leftover_course_goals = curric_cg - course_cg
-	leftover_goals = set()
-	for g in leftover_course_goals:
-		leftover_goals.add(g.Associated_Goal)
+
+	valid_goal = set()
+	invalid_goal = set()
+	goal_valid = True
+	for g in Goal.objects.filter(Associated_Curriculum=curriculum):
+		u = 0
+		for cg in CourseGoal.objects.filter(Associated_Goal=g):
+			u += cg.Units_Covered
+		if u >= str(g.Units_For_Completion):
+			valid_goal.add(g)
+		else:
+			goal_valid = False
+			invalid_goal.add(g)
+
 
 	# Person is a Person object
 	# req_courses and opt_courses are required and optional
 	# completed_topics is a tuple of (<curriculumTopic>, <creditHoursSpentOnIt>)
-	# leftover goals is a set of Goal objects that are not completed
-	# If it is empty, then it is goal valid, otherwise it is invalid and you can display why
-	return person, (req_courses, opt_courses), completed_topics, leftover_goals, incomplete_topics
+	# incomplete_topics is a list of topics not fully covered by required courses
+	# valid_goal is a list of goals sufficiently covered
+	# invalid goals is, well, the opposite
+	# top_cat is the topic category, a string
+	# goal_valid is a bool of whether it is goal valid
+	# 6 Returns
+	return person, (req_courses, opt_courses), (completed_topics, incomplete_topics), (valid_goal, invalid_goal), top_cat, goal_valid
 
 
 def get_sections_in_a_cur_with_time_range_and_course_range(cur_name, start_semester, start_year, end_semester, end_year,

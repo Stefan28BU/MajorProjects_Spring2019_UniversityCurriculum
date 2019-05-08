@@ -717,8 +717,20 @@ def q5(request):
 
     result = set()
     for c in Curriculum.objects.all():
-        person, course_tuple, completed_topics, leftover_goals, incomplete_topics = q5_ryland_style(c)
-        result.add((c, person, str(course_tuple[0]), str(course_tuple[1]), tuple(completed_topics), tuple(leftover_goals), tuple(incomplete_topics)))
+        person, course_tuple, topic_tuple, goal_tuple, top_cat, goal_validity  = q5_ryland_style(c)
+        result.add((c, person, tuple(course_tuple[0]), tuple(course_tuple[1]), tuple(topic_tuple[0]),
+                    tuple(topic_tuple[1]), tuple(goal_tuple[0]), tuple(goal_tuple[1]), tuple(top_cat), tuple(str(goal_validity))))
+        # 0 - Curriculum                            -   Curriculum
+        # 1 - Person                                -   Person
+        # 2 - Required courses                      -   Number
+        # 3 - Optional Courses                      -   Number
+        # 4 - Covered topics                        -   (CurriculumTopic, Num)  - list
+        # 5 - Not covered by requirements topics    -   CurriculumTopic         - list
+        # 6 - Valid goals                           -   Goal                    - list
+        # 7 - Invalid Goals                         -   Goal                    - list
+        # 8 - Topic Category                        -   String
+        # 9 - Goal Validity                         -   String
+
 
     return render(request=request, template_name="Queries/q5.html",
                   context={"form": form, "ret": result})

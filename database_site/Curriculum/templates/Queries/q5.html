@@ -83,7 +83,7 @@
         <div> Curricula:
             {% if ret %}
                 <ul>
-                    {% for curric, person, req_courses, opt_courses, curric_topic_ch, left_goals in ret %}
+                    {% for curric, person, req_courses, opt_courses, good_topic_ch, bad_topics, v_goals, i_goals, top_cat, g_v in ret %}
                         <li>
                             <a>
                                 {{ curric.Cur_name }}
@@ -91,6 +91,14 @@
                                     <li>
                                         {{ 'Head: ' }}
                                         {{ person }}
+                                    </li>
+                                    <li>
+                                        {{ 'Goal Valid: ' }}
+                                        {{ g_v }}
+                                    </li>
+                                                   <li>
+                                        {{ 'Topic Category: ' }}
+                                        {{ top_cat }}
                                     </li>
                                     <li>
                                         {{ 'Courses' }}
@@ -106,23 +114,44 @@
                                         </ul>
                                     </li>
                                     <li>
-                                    {{ 'Completed Topics:' }}
-                                    {% for topic, ch in curric_topic_ch %}
+                                    {{ 'Topics Covered by Required Courses:' }}
                                         <ul>
-                                            <li>
-                                                {{ topic.Name }}
-                                                {{ ' ' }}
-                                                {{ ch }}
-                                            </li>
+                                            {% for topic, ch in good_topic_ch %}
+                                                    <li>
+                                                        {{ topic.Name }}
+                                                        {{ ' ' }}
+                                                        {{ ch }}
+                                                    </li>
+
+                                            {% endfor %}
                                         </ul>
-                                    {% endfor %}
                                     </li>
                                     <li>
-                                        {{ 'Uncompleted Goals' }}
+                                    {{ 'Other Topics:' }}
                                         <ul>
-                                            {% for lg in left_goals %}
+                                            {% for topic in bad_topics %}
+                                                    <li>
+                                                        {{ topic.Name }}
+                                                    </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        {{ 'Valid Goals' }}
+                                        <ul>
+                                            {% for g in v_goals %}
                                             <li>
-                                                {{ lg.Description }}
+                                                {{ g.Description }}
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        {{ 'Invalid Goals' }}
+                                        <ul>
+                                            {% for g in i_goals %}
+                                            <li>
+                                                {{ g.Description }}
                                             </li>
                                             {% endfor %}
                                         </ul>
