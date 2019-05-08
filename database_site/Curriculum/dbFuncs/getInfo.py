@@ -312,7 +312,7 @@ def q5_ryland_style(curriculum):
 				elif u < tcct[0].Untis:
 					coverage[3] = False
 			elif str(tcct[0].Level) == '3':
-				if u < float(tcct[0].Untis) * curriculum.Percent_Level_3 / 100.0:
+				if u < float(tcct[0].Units) * curriculum.Percent_Level_3 / 100.0:
 					coverage[4] = False
 
 
