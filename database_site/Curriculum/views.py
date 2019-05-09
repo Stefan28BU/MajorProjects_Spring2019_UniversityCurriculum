@@ -26,24 +26,28 @@ def newCurriculum(request):
             print('Invalid')
             messages.info(request, 'Failed to submit, form is invalid')
     else:
-        form = newCurriculumForm()
+        form = newCurriculumForm(request.GET)
 
     return render(request=request, template_name="curriculum/newCurriculum.html", context={"form": form})
 
 
 def newHead(request):
+    # ins = Person.objects.all()
+    # form = headForm(request.POST or None, instance=ins)
+
     if request.method == 'POST':
         form = headForm(request.POST)
 
         if form.is_valid():
             messages.add_message(request, messages.INFO, 'Successfully added new department head.')
             form.save()
+            # return HttpResponseRedirect('/Curriculum')
 
         else:
             print('Invalid')
             messages.info(request, 'Failed to submit, form is invalid')
     else:
-        form = headForm()
+        form = headForm(request.GET)
 
     return render(request=request, template_name="curriculum/departmentHead.html", context={"form": form})
 
@@ -60,7 +64,7 @@ def newCourse(request):
             print('Invalid')
             messages.info(request, 'Failed to submit, form is invalid')
     else:
-        form = newCourseForm()
+        form = newCourseForm(request.GET)
 
     return render(request=request, template_name="curriculum/newCourse.html", context={"form": form})
 
@@ -77,7 +81,7 @@ def newTopic(request):
             print('Invalid')
             messages.info(request, 'Failed to submit, form is invalid')
     else:
-        form = newTopicForm()
+        form = newTopicForm(request.GET)
 
     return render(request=request, template_name="curriculum/newTopic.html", context={"form": form})
 
@@ -94,7 +98,7 @@ def newGoal(request):
             print('Invalid')
             messages.info(request, 'Failed to submit, form is invalid')
     else:
-        form = newGoalForm()
+        form = newGoalForm(request.GET)
 
     return render(request=request, template_name="curriculum/newGoal.html", context={"form": form})
 
@@ -122,7 +126,7 @@ def editPerson(request):
             print('Invalid')
             messages.info(request, 'Failed to submit, form is invalid')
     else:
-        form = editPersonForm()
+        form = editPersonForm(request.GET)
 
     return render(request=request, template_name="Edit/editPerson.html", context={"form": form})
 
@@ -144,7 +148,7 @@ def pickCuricToEdit(request):
             return HttpResponseRedirect('/Curriculum/addTopicToCurriculum/' + str(form['curr'].value()))
 
     else:
-        form = pickCuricToEditForm()
+        form = pickCuricToEditForm(request.GET)
     return render(request=request, template_name="Edit/pickCurriculumToEdit.html", context={"form": form})
 
 
@@ -256,7 +260,7 @@ def editCurriculum(request, curr_id):
             print('Invalid')
             messages.info(request, 'Failed to submit, form is invalid')
     else:
-        form = editCurriculumForm()
+        form = editCurriculumForm(request.GET)
 
     return render(request=request, template_name="Edit/editCurriculum.html", context={"form": form})
 
@@ -281,7 +285,7 @@ def gradeDist(request):
             print('Invalid')
             messages.info(request, 'Failed to submit, form is invalid')
     else:
-        form = gradeDistForm()
+        form = gradeDistForm(request.GET)
 
     return render(request=request, template_name="curriculum/gradeDist.html", context={"form": form})
 
@@ -308,7 +312,7 @@ def newSection(request):
             print('Invalid')
             messages.info(request, 'Failed to submit, form is invalid')
     else:
-        form = newSectionForm()
+        form = newSectionForm(request.GET)
 
     return render(request=request, template_name="curriculum/newSection.html", context={"form": form})
 
@@ -332,7 +336,7 @@ def editCourse(request, course_pk):
             print('Invalid')
             messages.info(request, 'Failed to submit, form is invalid')
     else:
-        form = editCourseForm()
+        form = editCourseForm(request.GET)
 
     return render(request=request, template_name="Edit/editCourse.html", context={"form": form})
 
@@ -353,7 +357,7 @@ def editTopic(request):
             print('Invalid')
             messages.info(request, 'Failed to submit, form is invalid')
     else:
-        form = editTopicForm()
+        form = editTopicForm(request.GET)
 
     return render(request=request, template_name="Edit/editTopic.html", context={"form": form})
 
@@ -376,7 +380,7 @@ def editGoal(request):
             print('Invalid')
             messages.info(request, 'Failed to submit, form is invalid')
     else:
-        form = editGoalForm()
+        form = editGoalForm(request.GET)
 
     return render(request=request, template_name="Edit/editGoal.html", context={"form": form})
 
@@ -403,7 +407,7 @@ def editSection(request):
             print('Invalid')
             messages.info(request, 'Failed to submit, form is invalid')
     else:
-        form = editSectionForm()
+        form = editSectionForm(request.GET)
 
     return render(request=request, template_name="Edit/editSection.html", context={"form": form})
 
@@ -430,7 +434,7 @@ def q1(request):
             print('Invalid')
             messages.info(request, 'Failed to submit, form is invalid')
     else:
-        form = queryOneForm()
+        form = queryOneForm(request.GET)
 
     return render(request=request, template_name="Queries/q1.html",
                   context={"form": form, "course_list": course_list, "topic_list": topic_list})
@@ -455,7 +459,7 @@ def forkGoal(request, curr_pk, course_pk):
             print('Invalid')
             messages.info(request, 'Failed to submit, form is invalid')
     else:
-        form = forkGoalForm()
+        form = forkGoalForm(request.GET)
 
     return render(request=request, template_name="Edit/forkForEditGoalsInCurriculum.html", context={"form": form})
 
@@ -531,7 +535,7 @@ def forkCourseManagement(request):
             return HttpResponseRedirect('/Curriculum/addTopicToCourse/' + str(form['course'].value()))
 
     else:
-        form = pickCourseToManageForm()
+        form = pickCourseToManageForm(request.GET)
     return render(request=request, template_name="Edit/course/forkCourseEditPaths.html", context={"form": form})
 
 
